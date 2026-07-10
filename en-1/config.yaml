@@ -1,0 +1,43 @@
+niche: "fakta sains dan pengetahuan umum yang mengejutkan (alam semesta, tubuh manusia, sejarah, hewan, teknologi)"
+audience: "orang dewasa Indonesia yang penasaran dan suka belajar hal baru"
+language: id
+
+script:
+  model: llama-3.3-70b-versatile
+  target_seconds: 60
+  words_per_second: 2.5
+
+voice:
+  provider: elevenlabs
+  voice: id-ID-ArdiNeural
+  elevenlabs_voice_id: nPczCjzI2devNBz1zQrb
+  rate: "-12%"
+  pitch: "+0Hz"
+
+captions:
+  whisper_model: base
+  font: "Anton"
+  font_size: 90
+  primary_color: "&H00FFFFFF"
+  outline_color: "&H00000000"
+  outline: 6
+  words_per_caption: 3
+  position_y: 0.55
+
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+
+upload:
+  privacy: "public"
+  category_id: "27"
+  made_for_kids: false
+  channel: "default"   # ganti nama buat channel lain (misal: "channel2", "gaming", dll)
+  default_tags: ["fakta unik", "pengetahuan", "edukasi", "fakta sains", "alam liar", "hewan unik", "fakta menarik", "sains viral", "fakta"]
+
+comments:
+  model: llama-3.1-8b-instant
+  poll_interval_minutes: 180
+  auto_reply: true
+  delete_spam: true

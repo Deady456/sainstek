@@ -1,0 +1,29 @@
+name: Blog Article Poster
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 */3 * * *'
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - name: Decode credentials
+        run: |
+          echo "${{ secrets.CLIENT_SECRET_B64 }}" | base64 -d > client_secret.json
+          echo "${{ secrets.TOKEN_BLOGGER_B64 }}" | base64 -d > token_blogger.json
+      - name: Post new articles to blog
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_API_KEY_2: ${{ secrets.GROQ_API_KEY_2 }}
+          PEXELS_API_KEY: placeholder
+          BLOG_ID: '7364215243667063602'
+        run: python -m src.blog_poster
