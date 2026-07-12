@@ -36,8 +36,3 @@ upload:
   channel: "sainstek"
   default_tags: ["teknologi", "AI", "fakta teknologi", "artificial intelligence", "gadget", "coding", "tech viral", "fakta AI", "ChatGPT", "inovasi", "robot", "sains teknologi", "edukasi tech", "digital", "future tech"]
 
-comments:
-  model: llama-3.1-8b-instant
-  poll_interval_minutes: 180
-  auto_reply: true
-  delete_spam: true

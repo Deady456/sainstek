@@ -62,7 +62,6 @@ Copy-Item .env.example .env      # then edit .env (Groq + Pexels keys)
 | 5. Assemble | `src/assemble.py` | ffmpeg crops/concats clips, overlays the voiceover, and burns in the captions. |
 | 6. Upload | `src/upload.py` | YouTube Data API v3 uploads the Short (immediate or scheduled). |
 | Orchestrator | `src/pipeline.py` | Runs stages 1–6 end to end. |
-| Comments | `src/moderate.py` | Optional: sweeps recent uploads and moderates comments with Groq. |
 
 State (used topics, published log) lives in `state.json` so it never repeats itself.
 
