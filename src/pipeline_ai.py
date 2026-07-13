@@ -1,6 +1,6 @@
 import argparse, re, time
 from datetime import datetime
-from . import script, voice, captions, visuals_ai, assemble_ai, upload, state
+from . import script, voice, captions, visuals_ai, assemble_ai, upload, state, branding
 from .config import CONFIG, OUTPUT_DIR
 
 def slug(s: str) -> str:
@@ -62,6 +62,16 @@ def run_once(publish_at: str | None = None,
     sz = final.stat().st_size / (1024 * 1024)
     _log(f"    final: {final.name} ({sz:.0f} MB, {dur:.0f}s render)")
 
+    _log("Applying branding (watermark)")
+    branded = branding.apply_all(final, work / "branding")
+    if branded != final:
+        final_branded = work / "final.mp4"
+        branded.rename(final_branded)
+        final = final_branded
+    else:
+        final_branded = work / "final.mp4"
+        final.rename(final_branded)
+        final = final_branded
     video_id = None
     if upload_to_youtube:
         _log("7/7 Uploading to YouTube")
