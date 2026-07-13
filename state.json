@@ -1,6 +1,7 @@
 {
   "used_topics": [
-    "teknologi-keamanan-siber"
+    "teknologi-keamanan-siber",
+    "revolusi-robotik"
   ],
   "published": [
     {
@@ -9,6 +10,14 @@
       "title": "Mengungkap Ancaman Cyber di Masa Depan",
       "path": "/home/runner/work/sainstek/sainstek/output/20260710_203443_teknologi-keamanan-siber/final.mp4",
       "video_id": "6VZLjMK10hM",
+      "publish_at": null
+    },
+    {
+      "ts": "20260713_074544",
+      "topic": "revolusi-robotik",
+      "title": "Robot Pekerja: Masa Depan Kerja Manusia?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260713_074544_revolusi-robotik/final.mp4",
+      "video_id": "HTlovk0hd6M",
       "publish_at": null
     }
   ]
