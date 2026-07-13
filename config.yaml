@@ -1,3 +1,41 @@
+niche: "fakta teknologi dan AI yang viral dan mengejutkan (AI terbaru, ChatGPT, coding, gadget, software, cybersecurity, internet, robot, future tech, inovasi digital)"
+audience: "orang dewasa Indonesia yang melek teknologi, pengguna gadget, dan penasaran dengan perkembangan AI"
+language: id
+
+script:
+  model: llama-3.3-70b-versatile
+  target_seconds: 60
+  words_per_second: 2.5
+
+voice:
+  provider: elevenlabs
+  voice: id-ID-ArdiNeural
+  elevenlabs_voice_id: nPczCjzI2devNBz1zQrb
+  rate: "-12%"
+  pitch: "+0Hz"
+
+captions:
+  whisper_model: base
+  font: "Anton"
+  font_size: 90
+  primary_color: "&H00FFFFFF"
+  outline_color: "&H00000000"
+  outline: 6
+  words_per_caption: 3
+  position_y: 0.55
+
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+
+upload:
+  privacy: "public"
+  category_id: "27"
+  made_for_kids: false
+  channel: "sainstek"
+  default_tags: ["teknologi", "AI", "fakta teknologi", "artificial intelligence", "gadget", "coding", "tech viral", "fakta AI", "ChatGPT", "inovasi", "robot", "sains teknologi", "edukasi tech", "digital", "future tech"]
+
 
 branding:
   enabled: true
