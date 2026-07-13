@@ -10,7 +10,7 @@ script:
 voice:
   provider: elevenlabs
   voice: id-ID-ArdiNeural
-  elevenlabs_voice_id: nPczCjzI2devNBz1zQrb
+  elevenlabs_voice_id: 21m00Tcm4TlvDq8ikWAM
   rate: "-12%"
   pitch: "+0Hz"
 
