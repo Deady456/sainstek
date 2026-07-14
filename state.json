@@ -2,7 +2,8 @@
   "used_topics": [
     "teknologi-keamanan-siber",
     "revolusi-robotik",
-    "metaverse-dan-komputasi-kuantum"
+    "metaverse-dan-komputasi-kuantum",
+    "kecerdasan-buatan-dalam-kesehatan"
   ],
   "published": [
     {
@@ -27,6 +28,14 @@
       "title": "Metaverse dan Komputasi Kuantum Membuat Dunia Berubah",
       "path": "/home/runner/work/sainstek/sainstek/output/20260714_035650_metaverse-dan-komputasi-kuantum/final.mp4",
       "video_id": "ABZOjH6xEGY",
+      "publish_at": null
+    },
+    {
+      "ts": "20260714_104032",
+      "topic": "kecerdasan-buatan-dalam-kesehatan",
+      "title": "Teknologi AI Untuk Mendiagnosis Penyakit Lebih Cepat",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260714_104032_kecerdasan-buatan-dalam-kesehatan/final.mp4",
+      "video_id": "cRyvHuIfrU0",
       "publish_at": null
     }
   ]
