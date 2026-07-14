@@ -1,7 +1,8 @@
 {
   "used_topics": [
     "teknologi-keamanan-siber",
-    "revolusi-robotik"
+    "revolusi-robotik",
+    "metaverse-dan-komputasi-kuantum"
   ],
   "published": [
     {
@@ -18,6 +19,14 @@
       "title": "Robot Pekerja: Masa Depan Kerja Manusia?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260713_074544_revolusi-robotik/final.mp4",
       "video_id": "HTlovk0hd6M",
+      "publish_at": null
+    },
+    {
+      "ts": "20260714_035650",
+      "topic": "metaverse-dan-komputasi-kuantum",
+      "title": "Metaverse dan Komputasi Kuantum Membuat Dunia Berubah",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260714_035650_metaverse-dan-komputasi-kuantum/final.mp4",
+      "video_id": "ABZOjH6xEGY",
       "publish_at": null
     }
   ]
