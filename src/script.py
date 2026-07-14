@@ -47,9 +47,9 @@ def _system_prompt():
         return f"""Anda adalah penulis skrip YouTube Shorts.
 
 Aturan:
-- Skrip harus {ts} detik, ~{tw} kata total ({tw//ts} kata per detik).
+- Skrip harus {ts} detik, ~{tw} kata total ({tw//ts} kata per detik). PASTIKAN MEMENUHI TARGET KATA INI!
 - Mulai dengan HOOK 1 kalimat yang bikin penasaran dalam <3 detik, gaya semi-formal. Jangan pakai "Halo guys", "Hai", atau perkenalan.
-- Isi: informasi relevan sesuai niche yang diminta. Berikan fakta, angka, data, atau berita terbaru yang akurat.
+- Isi: Berikan 5-7 fakta, angka, data, atau berita terbaru yang sangat akurat. Penjelasan harus sangat padat, mendalam, dan komprehensif agar durasi video mencapai {ts} detik.
 - Akhiri dengan CTA 1 kalimat semi-formal ajakan subscribe/ikuti.
 - Gunakan bahasa Indonesia semi-formal: rapi dan informatif, tapi tetap enak didengar. Hindari bahasa terlalu santai atau terlalu kaku. Jangan pakai emoji atau format khusus.
 - Setiap scene punya visual_query 2-4 kata benda bahasa Inggris untuk cari video stok di Pexels yang relevan dengan niche.
@@ -60,9 +60,9 @@ Kembalikan ONLY valid JSON, tanpa teks lain. Skema:
         return f"""You write viral YouTube Shorts scripts for a faceless educational facts channel.
 
 Hard rules:
-- The script must run ~{target_seconds} seconds spoken at ~{target_words} words total.
+- The script must run ~{target_seconds} seconds spoken at ~{target_words} words total. YOU MUST HIT THIS WORD COUNT!
 - Start with a strong 1-sentence HOOK that creates curiosity in <3 seconds.
-- Body: 4-6 surprising, accurate, verifiable facts.
+- Body: 6-8 surprising, accurate, verifiable facts. Explanations must be highly detailed and dense to hit the ~{target_seconds} seconds mark.
 - End with a 1-sentence CTA.
 - Plain spoken English. No emojis.
 - Each scene's visual_query is 2-4 English nouns (e.g. "octopus swimming ocean").
@@ -140,10 +140,9 @@ def generate():
     target_words = int(s_cfg["target_seconds"] * s_cfg["words_per_second"])
     min_words = int(target_words * 0.75)
 
+    warning_msg = ""
     for attempt in range(4):
-        user_msg = base_msg
-        if attempt > 0:
-            user_msg += f"\n\nPERINGATAN: judul sebelumnya sudah ada. BUAT JUDUL LAIN yang benar-benar berbeda dan belum pernah dipublikasikan."
+        user_msg = base_msg + warning_msg
 
         print(f"    calling {LLM_PROVIDER}/{LLM_MODEL} (attempt {attempt+1})...")
         data = _call_and_extract([
@@ -163,11 +162,13 @@ def generate():
 
         if wc < min_words:
             print(f"    WARNING: script too short ({wc} words, need {min_words}), retrying...")
+            warning_msg = f"\n\nPERINGATAN: Skrip sebelumnya terlalu pendek ({wc} kata). Hasilkan skrip yang jauh lebih panjang, minimal {min_words} kata! Tambahkan lebih banyak fakta, detail, dan penjelasan yang padat."
             continue
 
         title = data.get("title", "")
         if _is_duplicate_title(title, published):
             print(f"    DUPLICATE: title already published, retrying...")
+            warning_msg = f"\n\nPERINGATAN: Judul '{title}' sudah pernah dibuat. BUAT JUDUL DAN TOPIK LAIN yang benar-benar berbeda!"
             continue
 
         print(f"    title: {data['title']}")
