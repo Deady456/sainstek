@@ -9,10 +9,21 @@ script:
 
 voice:
   provider: elevenlabs
+  elevenlabs_model: eleven_multilingual_v2
+  variety:
+    enabled: true
+    voices:
+      - edge_id: "id-ID-ArdiNeural"
+        elevenlabs_id: "21m00Tcm4TlvDq8ikWAM"
+        name: "Ardi"
+        gender: "male"
+      - edge_id: "id-ID-JakaNeural"
+        elevenlabs_id: "ErXwobaYiN019PkySvjV"
+        name: "Jaka"
+        gender: "male"
+    strategy: "round_robin"
   voice: id-ID-ArdiNeural
   elevenlabs_voice_id: 21m00Tcm4TlvDq8ikWAM
-  rate: "-12%"
-  pitch: "+0Hz"
 
 captions:
   whisper_model: base
