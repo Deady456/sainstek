@@ -44,7 +44,15 @@ def run_once(publish_at: str | None = None,
         image_paths.append(img_path)
 
     _log("5/7 Writing caption file")
-    ass_path = captions.write_ass(words, work / "captions.ass",
+    from .config import CONFIG as CFG
+    hook_text = data.get("thumbnail_text", "")
+    hook_cfg = CFG.get("hook_text", {})
+    if hook_text and hook_cfg.get("enabled", False):
+        captions_words = words[len(hook_text.split()):]
+    else:
+        captions_words = words
+
+    ass_path = captions.write_ass(captions_words, work / "captions.ass",
                                   CONFIG["video"]["width"], CONFIG["video"]["height"])
 
     _log("6/7 Assembling slideshow video with ffmpeg")
