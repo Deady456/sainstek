@@ -56,3 +56,12 @@ branding:
     position: "center"
     opacity: 0.6
     size: 300
+hook_text:
+  enabled: true
+  font: "Anton"
+  font_size: 80
+  color: "white"
+  outline_color: "&H00000000"
+  outline: 4
+  position: "center"
+  duration: 3
