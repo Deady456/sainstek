@@ -43,6 +43,8 @@ def build(
     scenes: list[dict],
     out_path: Path,
     work_dir: Path,
+    hook_text: str = "",
+    has_hook: bool = False,
 ) -> Path:
     v = CONFIG["video"]
     w, h, fps = v["width"], v["height"], v["fps"]
@@ -56,6 +58,22 @@ def build(
         return f"z='if(eq(on,1),{zs},min({ze},zoom+{inc:.6f}))':d={n}:s={w}x{h}:fps={fps}"
 
     durations = _scene_durations(words, scenes)
+    
+    # Ensure hook stays on screen for at least 3 seconds
+    if has_hook and len(durations) > 1:
+        target_hook_dur = 3.0
+        if durations[0] < target_hook_dur:
+            deficit = target_hook_dur - durations[0]
+            durations[0] = target_hook_dur
+            for i in range(1, len(durations)):
+                if deficit <= 0:
+                    break
+                can_borrow = durations[i] - 1.0 # leave at least 1.0s for other scenes
+                if can_borrow > 0:
+                    borrow = min(deficit, can_borrow)
+                    durations[i] -= borrow
+                    deficit -= borrow
+                    
     audio_dur = probe_duration(voice_audio)
     total_video = sum(durations)
     if total_video < audio_dur:
@@ -103,10 +121,30 @@ def build(
 
     ass_arg = str(captions_ass).replace("\\", "/").replace(":", "\\:")
     fonts_arg = str(ROOT / "assets" / "fonts").replace("\\", "/").replace(":", "\\:")
+
+    # Build video filter chain: optional hook_text drawtext + subtitles
+    vf_parts = []
+    hook_cfg = CONFIG.get("hook_text", {})
+    if hook_text and hook_cfg.get("enabled", False):
+        ht_font = str(ROOT / "assets" / "fonts" / "Anton-Regular.ttf").replace("\\", "/").replace(":", "\\:")
+        ht_size = hook_cfg.get("font_size", 80)
+        ht_duration = hook_cfg.get("duration", 3)
+        safe_text = hook_text.replace("'", "\u2019").replace(":", "\\:").replace("%", "%%")
+        vf_parts.append(
+            f"drawtext=fontfile='{ht_font}':text='{safe_text}'"
+            f":fontsize={ht_size}:fontcolor=white"
+            f":borderw=4:bordercolor=black"
+            f":x=(w-tw)/2"
+            f":y=(h-th)/2"
+            f":enable='between(t\\,0\\,{ht_duration})'"
+        )
+    vf_parts.append(f"subtitles='{ass_arg}':fontsdir='{fonts_arg}'")
+    vf_chain = ",".join(vf_parts)
+
     _run([
         "ffmpeg", "-y",
         "-i", str(combined), "-i", str(voice_audio),
-        "-vf", f"subtitles='{ass_arg}':fontsdir='{fonts_arg}'",
+        "-vf", vf_chain,
         "-c:v", "libx264", "-preset", "medium", "-crf", "20",
         "-c:a", "aac", "-b:a", "192k", "-pix_fmt", "yuv420p",
         "-movflags", "+faststart", "-shortest",

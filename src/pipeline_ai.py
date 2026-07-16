@@ -26,28 +26,35 @@ def run_once(publish_at: str | None = None,
     _log("3/7 Transcribing for word-level captions (Faster-Whisper)")
     _log("    loading model (first run downloads)...")
     t0 = time.time()
-    words = captions.transcribe_words(voice_mp3)
+    words = captions.transcribe_words(voice_mp3, original_text=data["full_text"])
     _log(f"    {len(words)} words in {time.time()-t0:.1f}s")
 
     _log("4/7 Generating AI images via Pollinations")
     image_dir = work / "images"
     image_dir.mkdir(parents=True, exist_ok=True)
     image_paths = []
+    
+    # We get hook_text earlier so we can pass it to the first scene
+    hook_text = data.get("thumbnail_text", "")
+    hook_cfg = CONFIG.get("hook_text", {})
+    if not hook_cfg.get("enabled", False):
+        hook_text = ""
+        
     for i, scene in enumerate(data["scenes"]):
         prompt = scene.get("visual_query", "abstract background")
         rich_prompt = f"{prompt}, cinematic, detailed, 4K"
         img_path = image_dir / f"scene_{i:02d}.jpg"
         _log(f"    scene {i+1}/{len(data['scenes'])}: \"{prompt}\"")
         t1 = time.time()
-        visuals_ai.generate(rich_prompt, img_path)
+        
+        scene_hook = hook_text if i == 0 else ""
+        visuals_ai.generate(rich_prompt, img_path, hook_text=scene_hook)
+        
         _log(f"      done in {time.time()-t1:.0f}s")
         image_paths.append(img_path)
 
     _log("5/7 Writing caption file")
-    from .config import CONFIG as CFG
-    hook_text = data.get("thumbnail_text", "")
-    hook_cfg = CFG.get("hook_text", {})
-    if hook_text and hook_cfg.get("enabled", False):
+    if hook_text:
         captions_words = words[len(hook_text.split()):]
     else:
         captions_words = words
@@ -65,8 +72,7 @@ def run_once(publish_at: str | None = None,
         scenes=data["scenes"],
         out_path=work / "final.mp4",
         work_dir=work / "ffmpeg",
-    
-        hook_text=data.get("thumbnail_text", data.get("title", "")),
+        hook_text="",  # Text is already burned into the image by Pillow
     )
     dur = time.time() - t0
     sz = final.stat().st_size / (1024 * 1024)
@@ -76,11 +82,11 @@ def run_once(publish_at: str | None = None,
     branded = branding.apply_all(final, work / "branding")
     if branded != final:
         final_branded = work / "final.mp4"
-        branded.rename(final_branded)
+        branded.replace(final_branded)
         final = final_branded
     else:
         final_branded = work / "final.mp4"
-        final.rename(final_branded)
+        final.replace(final_branded)
         final = final_branded
     video_id = None
     if upload_to_youtube:
@@ -103,7 +109,6 @@ def run_once(publish_at: str | None = None,
         "video_id": video_id,
         "publish_at": publish_at,
     })
-
     return {"video_id": video_id, "path": str(final), "topic": data["topic"]}
 
 def main():
