@@ -5,7 +5,8 @@
     "metaverse-dan-komputasi-kuantum",
     "kecerdasan-buatan-dalam-kesehatan",
     "teknologi-sintesis-suarapendekatan-ai",
-    "teknologi-generative-ai"
+    "teknologi-generative-ai",
+    "teknologi-extended-reality"
   ],
   "published": [
     {
@@ -54,6 +55,14 @@
       "title": "5 Fakta Mengejutkan Tentang Generative AI",
       "path": "/home/runner/work/sainstek/sainstek/output/20260715_164834_teknologi-generative-ai/final.mp4",
       "video_id": "UjcUAZ1FBRU",
+      "publish_at": null
+    },
+    {
+      "ts": "20260716_102942",
+      "topic": "teknologi-extended-reality",
+      "title": "Mengejutkan! Teknologi Extended Reality Mengubah Dunia",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260716_102942_teknologi-extended-reality/final.mp4",
+      "video_id": "TNNj5hC4I8Q",
       "publish_at": null
     }
   ]
