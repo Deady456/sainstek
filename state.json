@@ -6,7 +6,8 @@
     "kecerdasan-buatan-dalam-kesehatan",
     "teknologi-sintesis-suarapendekatan-ai",
     "teknologi-generative-ai",
-    "teknologi-extended-reality"
+    "teknologi-extended-reality",
+    "teknologi-human-computer-interaction"
   ],
   "published": [
     {
@@ -63,6 +64,14 @@
       "title": "Mengejutkan! Teknologi Extended Reality Mengubah Dunia",
       "path": "/home/runner/work/sainstek/sainstek/output/20260716_102942_teknologi-extended-reality/final.mp4",
       "video_id": "TNNj5hC4I8Q",
+      "publish_at": null
+    },
+    {
+      "ts": "20260716_105225",
+      "topic": "teknologi-human-computer-interaction",
+      "title": "Teknologi HCI Masa Depan: Menghubungkan Otak dan Komputer",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260716_105225_teknologi-human-computer-interaction/final.mp4",
+      "video_id": "1wPU0xS6rgs",
       "publish_at": null
     }
   ]
