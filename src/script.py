@@ -55,7 +55,7 @@ Aturan:
 - Setiap scene punya visual_query 2-4 kata benda bahasa Inggris untuk cari video stok di Pexels yang relevan dengan niche.
 
 Kembalikan ONLY valid JSON, tanpa teks lain. Skema:
-{{"topic": "slug topik sesuai niche", "title": "Judul YouTube max 95 chars, minimal 40 karakter, bikin penasaran dan engaging, jangan terlalu pendek", "description": "3-4 kalimat deskripsi menarik dengan 5-8 hashtag relevan", "tags": ["10-15 tag huruf kecil yang relevan"], "scenes": [{{"text": "kalimat narasi bahasa Indonesia", "visual_query": "2-4 kata benda Inggris"}}]}}"""
+{{"topic": "slug topik sesuai niche", "title": "Judul YouTube max 95 chars, minimal 40 karakter, bikin penasaran dan engaging, jangan terlalu pendek", "thumbnail_text": "Teks super pendek (3-5 kata, HURUF KAPITAL) untuk ditampilkan besar di layar 3 detik pertama sebagai hook/thumbnail", "description": "3-4 kalimat deskripsi menarik dengan 5-8 hashtag relevan", "tags": ["10-15 tag huruf kecil yang relevan"], "scenes": [{{"text": "kalimat narasi bahasa Indonesia", "visual_query": "2-4 kata benda Inggris"}}]}}"""
     else:
         return f"""You write viral YouTube Shorts scripts for a faceless educational facts channel.
 
@@ -68,7 +68,7 @@ Hard rules:
 - Each scene's visual_query is 2-4 English nouns (e.g. "octopus swimming ocean").
 
 Return ONLY valid JSON. Schema:
-{{"topic": "short slug", "title": "title max 95 chars, min 40 chars, curiosity-driven and engaging", "description": "3-4 sentences with 5-8 relevant hashtags", "tags": ["10-15 lowercase relevant tags"], "scenes": [{{"text": "spoken sentence", "visual_query": "nouns"}}]}}"""
+{{"topic": "short slug", "title": "title max 95 chars, min 40 chars, curiosity-driven and engaging", "thumbnail_text": "Very short text (3-5 words, ALL CAPS) to display large on screen for the first 3 seconds as a hook/thumbnail", "description": "3-4 sentences with 5-8 relevant hashtags", "tags": ["10-15 lowercase relevant tags"], "scenes": [{{"text": "spoken sentence", "visual_query": "nouns"}}]}}"""
 
 
 def _extract_json(text: str) -> dict:
@@ -149,6 +149,11 @@ def generate():
             {"role": "system", "content": _system_prompt()},
             {"role": "user", "content": user_msg},
         ])
+
+        hook_text = data.get("thumbnail_text", "").strip()
+        if hook_text and data.get("scenes"):
+            first_vq = data["scenes"][0].get("visual_query", "abstract background")
+            data["scenes"].insert(0, {"text": hook_text, "visual_query": first_vq})
 
         for i, sc in enumerate(data["scenes"]):
             if "visual_query" not in sc or not sc["visual_query"]:
