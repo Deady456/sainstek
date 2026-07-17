@@ -96,7 +96,7 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
         from . import visuals_ai
         thumbnail_img = work / "thumbnail.jpg"
         hook_text_ai = data.get("thumbnail_text", data["title"])
-        visuals_ai.generate(prompt=hook_text_ai, out_path=thumbnail_img)
+        visuals_ai.generate(prompt=hook_text_ai, out_path=thumbnail_img, hook_text=hook_text_ai)
     except Exception as e:
         _log(f"    Failed to generate thumbnail: {e}")
         thumbnail_img = None
