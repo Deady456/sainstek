@@ -8,7 +8,8 @@
     "teknologi-generative-ai",
     "teknologi-extended-reality",
     "teknologi-human-computer-interaction",
-    "teknologi-swarm-intelligence"
+    "teknologi-swarm-intelligence",
+    "teknologi-kecerdasan-buatan-dalam-transportasi"
   ],
   "published": [
     {
@@ -81,6 +82,14 @@
       "title": "Teknologi Swarm Intelligence: Masa Depan Kerja Sama AI?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260717_025533_teknologi-swarm-intelligence/final.mp4",
       "video_id": "ud9o_pjl_BY",
+      "publish_at": null
+    },
+    {
+      "ts": "20260717_182402",
+      "topic": "teknologi-kecerdasan-buatan-dalam-transportasi",
+      "title": "Revolutioner Teknologi Transportasi Masa Depan Dengan Kecerdasan Buatan",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260717_182402_teknologi-kecerdasan-buatan-dalam-transportasi/final.mp4",
+      "video_id": "X-GULlR7zTY",
       "publish_at": null
     }
   ]
