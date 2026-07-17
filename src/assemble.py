@@ -1,4 +1,4 @@
-﻿import json
+import json
 import subprocess
 from pathlib import Path
 from .config import CONFIG, ROOT
@@ -139,8 +139,10 @@ def build(
 
     durations = _scene_durations(words, scenes)
 
+    hook_cfg = CONFIG.get("hook_text", {})
+    thumb_dur = float(hook_cfg.get("duration", 3.0)) if hook_cfg.get("enabled", False) else 2.0
     if thumbnail_img and thumbnail_img.exists() and len(durations) > 0:
-        deficit = 2.0
+        deficit = thumb_dur
         for i in range(len(durations)):
             if deficit <= 0: break
             can_borrow = durations[i] - 1.0 # leave at least 1s
@@ -178,12 +180,13 @@ def build(
                 f"zoompan=z='if(eq(on,1),1.0,min(1.06,zoom+0.0005))':d={int(2.0*fps)}:s={w}x{h}:fps={fps}"
             ),
             "-c:v", "libx264", "-preset", "fast", "-crf", "22",
-            "-pix_fmt", "yuv420p", "-t", "2.0",
+            "-pix_fmt", "yuv420p", "-t", f"{thumb_dur:.1f}",
             str(thumb_out)
-        ], "thumbnail prep (2s)")
+        ], f"thumbnail prep ({thumb_dur:.1f}s)")
         prepped.append(thumb_out)
-        durations.insert(0, 2.0)
-    for i, (src, dur) in enumerate(zip(scene_videos, durations)):
+        durations.insert(0, thumb_dur)
+    dur_offset = 1 if thumbnail_img and thumbnail_img.exists() else 0
+    for i, (src, dur) in enumerate(zip(scene_videos, durations[dur_offset:])):
         out = work_dir / f"prep_{i:02d}.mp4"
         _prep_scene_clip(src, dur, out, w, h, fps)
         prepped.append(out)
@@ -305,5 +308,6 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         str(out_path),
     ], "final render (video+audio+captions)")
     return out_path
+
 
 
