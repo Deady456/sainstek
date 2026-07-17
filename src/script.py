@@ -9,64 +9,175 @@ from . import state
 _key_idx = 0
 _client = OpenAI(api_key=LLM_API_KEYS[_key_idx], base_url=LLM_BASE_URL)
 
+# ============================================================
+# Format-specific prompts
+# ============================================================
+
+FORMAT_PROMPTS = {
+    "list": "Format: LIST - Berikan fakta-fakta dalam format daftar numerik (1., 2., 3., dst). Setiap fakta harus singkat dan memukau.",
+    "story": "Format: STORY - Ceritakan fakta sebagai mini story/kisah pendek yang engaging. Buat seolah-olah menceritakan sebuah petualangan.",
+    "comparison": "Format: COMPARISON - Bandingkan dua hal yang menarik (misal: manusia vs hewan, Bumi vs planet lain). Highlight perbedaan yang mengejutkan.",
+    "myth_busting": "Format: MYTH BUSTING - Mulai dengan mitos yang umum dipercaya, lalu bongkar dengan fakta ilmiah yang mengejutkan.",
+}
+
+# ============================================================
+# SEO Optimization
+# ============================================================
+
+def _optimize_title(title: str, format_type: str) -> str:
+    """Optimize title for SEO and engagement."""
+    seo_cfg = CONFIG.get("script", {}).get("seo", {})
+    if not seo_cfg.get("enabled", False):
+        return title
+
+    # Ensure minimum length
+    min_len = seo_cfg.get("min_title_length", 40)
+    max_len = seo_cfg.get("max_title_length", 95)
+
+    if len(title) < min_len:
+        # Add curiosity words
+        curiosity_words = ["yang", "ini", "ternyata", "mengapa", "bagaimana", "fakta"]
+        if not any(w in title.lower() for w in curiosity_words):
+            title = f"Fakta: {title}"
+
+    # Ensure max length
+    if len(title) > max_len:
+        title = title[:max_len - 3] + "..."
+
+    return title
+
+
 def _call_llm(model, max_tokens, response_format, messages, retries=5):
     global _key_idx, _client
-    for attempt in range(retries):
-        try:
-            return _client.chat.completions.create(
-                model=model, max_tokens=max_tokens,
-                response_format=response_format, messages=messages,
-            )
-        except RateLimitError as e:
-            if _key_idx < len(LLM_API_KEYS) - 1:
-                _key_idx += 1
-                _client = OpenAI(api_key=LLM_API_KEYS[_key_idx], base_url=LLM_BASE_URL)
-                print(f"  Rate limited, switching to key {_key_idx+1}/{len(LLM_API_KEYS)}")
-                continue
-            if attempt < retries - 1:
-                _wait = 2 ** attempt
-                print(f"  Rate limited (retry {attempt+1}/{retries} in {_wait}s): {e}")
-                time.sleep(_wait)
-            else:
-                raise
-        except Exception as e:
-            if attempt < retries - 1:
-                _wait = 2 ** attempt
-                print(f"  LLM error (retry {attempt+1}/{retries} in {_wait}s): {e}")
-                time.sleep(_wait)
-            else:
-                raise
+    import requests
+    
+    if LLM_PROVIDER == "gemini":
+        contents = []
+        sys_text = ""
+        for m in messages:
+            if m["role"] == "system":
+                sys_text = m["content"]
+            elif m["role"] == "user":
+                contents.append({"role": "user", "parts": [{"text": m["content"]}]})
+            elif m["role"] == "assistant":
+                contents.append({"role": "model", "parts": [{"text": m["content"]}]})
+                
+        # Fix model name just in case it has models/ prefix
+        actual_model = "gemini-2.5-flash"
+        
+        # Try different API keys on rate limit
+        for attempt in range(retries):
+            try:
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{actual_model}:generateContent?key={LLM_API_KEYS[_key_idx]}"
+                payload = {
+                    "contents": contents,
+                    "systemInstruction": {"parts": [{"text": sys_text}]},
+                    "generationConfig": {
+                        "maxOutputTokens": 8192, # Override to avoid truncation
+                    }
+                }
+                if response_format and response_format.get("type") == "json_object":
+                    payload["generationConfig"]["responseMimeType"] = "application/json"
+                    
+                resp = requests.post(url, json=payload, headers={"Content-Type": "application/json"})
+                
+                if resp.status_code == 200:
+                    data = resp.json()
+                    text = data["candidates"][0]["content"]["parts"][0]["text"]
+                    class DummyMsg: content = text
+                    class DummyChoice: message = DummyMsg()
+                    class DummyResp: choices = [DummyChoice()]
+                    return DummyResp()
+                elif resp.status_code == 429:
+                    if _key_idx < len(LLM_API_KEYS) - 1:
+                        _key_idx += 1
+                        print(f"  Rate limited, switching to key {_key_idx+1}/{len(LLM_API_KEYS)}")
+                        continue
+                    else:
+                        _wait = 2 ** attempt
+                        print(f"  Rate limited (retry {attempt+1}/{retries} in {_wait}s): {resp.text}")
+                        time.sleep(_wait)
+                else:
+                    _wait = 2 ** attempt
+                    print(f"  LLM error HTTP {resp.status_code} (retry {attempt+1}/{retries} in {_wait}s): {resp.text}")
+                    time.sleep(_wait)
+            except Exception as e:
+                if attempt < retries - 1:
+                    _wait = 2 ** attempt
+                    print(f"  LLM error (retry {attempt+1}/{retries} in {_wait}s): {e}")
+                    time.sleep(_wait)
+                else:
+                    raise Exception(f"Gemini API failed: {e}")
+        raise Exception("Failed after retries")
+    else:
+        for attempt in range(retries):
+            try:
+                return _client.chat.completions.create(
+                    model=model, max_tokens=max_tokens,
+                    response_format=response_format, messages=messages,
+                )
+            except RateLimitError as e:
+                if _key_idx < len(LLM_API_KEYS) - 1:
+                    _key_idx += 1
+                    print(f"  Rate limited, switching to Groq key {_key_idx+1}/{len(LLM_API_KEYS)}")
+                    _client = OpenAI(api_key=LLM_API_KEYS[_key_idx], base_url=LLM_BASE_URL)
+                    continue
+                
+                if attempt < retries - 1:
+                    _wait = 2 ** attempt
+                    print(f"  Rate limited (retry {attempt+1}/{retries} in {_wait}s): {e}")
+                    time.sleep(_wait)
+                else:
+                    raise
+            except Exception as e:
+                if _key_idx < len(LLM_API_KEYS) - 1:
+                    _key_idx += 1
+                    print(f"  Auth/error, switching to Groq key {_key_idx+1}/{len(LLM_API_KEYS)}")
+                    _client = OpenAI(api_key=LLM_API_KEYS[_key_idx], base_url=LLM_BASE_URL)
+                    continue
+                if attempt < retries - 1:
+                    _wait = 2 ** attempt
+                    print(f"  LLM error (retry {attempt+1}/{retries} in {_wait}s): {e}")
+                    time.sleep(_wait)
+                else:
+                    raise
 
-def _system_prompt():
+
+def _system_prompt(content_format: str = None) -> str:
     s = CONFIG["script"]
     lang = CONFIG.get("language", "en")
     target_words = int(s["target_seconds"] * s["words_per_second"])
+
+    # Add format instruction if specified
+    format_instruction = ""
+    if content_format and content_format in FORMAT_PROMPTS:
+        format_instruction = f"\n\n{FORMAT_PROMPTS[content_format]}"
 
     if lang == "id":
         ts, tw = s["target_seconds"], target_words
         return f"""Anda adalah penulis skrip YouTube Shorts.
 
 Aturan:
-- Skrip harus {ts} detik, ~{tw} kata total ({tw//ts} kata per detik). PASTIKAN MEMENUHI TARGET KATA INI!
+- Skrip harus {ts} detik, ~{tw} kata total ({tw//ts} kata per detik).
 - Mulai dengan HOOK 1 kalimat yang bikin penasaran dalam <3 detik, gaya semi-formal. Jangan pakai "Halo guys", "Hai", atau perkenalan.
-- Isi: Berikan 5-7 fakta, angka, data, atau berita terbaru yang sangat akurat. Penjelasan harus sangat padat, mendalam, dan komprehensif agar durasi video mencapai {ts} detik.
+- Isi: informasi relevan sesuai niche yang diminta. Berikan fakta, angka, data, atau berita terbaru yang akurat.
 - Akhiri dengan CTA 1 kalimat semi-formal ajakan subscribe/ikuti.
 - Gunakan bahasa Indonesia semi-formal: rapi dan informatif, tapi tetap enak didengar. Hindari bahasa terlalu santai atau terlalu kaku. Jangan pakai emoji atau format khusus.
 - Setiap scene punya visual_query 2-4 kata benda bahasa Inggris untuk cari video stok di Pexels yang relevan dengan niche.
-
+{format_instruction}
 Kembalikan ONLY valid JSON, tanpa teks lain. Skema:
 {{"topic": "slug topik sesuai niche", "title": "Judul YouTube max 95 chars, minimal 40 karakter, bikin penasaran dan engaging, jangan terlalu pendek", "thumbnail_text": "Teks super pendek (3-5 kata, HURUF KAPITAL) untuk ditampilkan besar di layar 3 detik pertama sebagai hook/thumbnail", "description": "3-4 kalimat deskripsi menarik dengan 5-8 hashtag relevan", "tags": ["10-15 tag huruf kecil yang relevan"], "scenes": [{{"text": "kalimat narasi bahasa Indonesia", "visual_query": "2-4 kata benda Inggris"}}]}}"""
     else:
         return f"""You write viral YouTube Shorts scripts for a faceless educational facts channel.
 
 Hard rules:
-- The script must run ~{target_seconds} seconds spoken at ~{target_words} words total. YOU MUST HIT THIS WORD COUNT!
+- The script must run ~{target_seconds} seconds spoken at ~{target_words} words total.
 - Start with a strong 1-sentence HOOK that creates curiosity in <3 seconds.
-- Body: 6-8 surprising, accurate, verifiable facts. Explanations must be highly detailed and dense to hit the ~{target_seconds} seconds mark.
+- Body: 4-6 surprising, accurate, verifiable facts.
 - End with a 1-sentence CTA.
 - Plain spoken English. No emojis.
 - Each scene's visual_query is 2-4 English nouns (e.g. "octopus swimming ocean").
-
+{format_instruction}
 Return ONLY valid JSON. Schema:
 {{"topic": "short slug", "title": "title max 95 chars, min 40 chars, curiosity-driven and engaging", "thumbnail_text": "Very short text (3-5 words, ALL CAPS) to display large on screen for the first 3 seconds as a hook/thumbnail", "description": "3-4 sentences with 5-8 relevant hashtags", "tags": ["10-15 lowercase relevant tags"], "scenes": [{{"text": "spoken sentence", "visual_query": "nouns"}}]}}"""
 
@@ -113,7 +224,13 @@ def _call_and_extract(messages) -> dict:
     return _extract_json(raw)
 
 
-def generate():
+def generate(content_format: str = None) -> dict:
+    """
+    Generate script content.
+
+    Args:
+        content_format: Optional format type (list, story, comparison, myth_busting)
+    """
     lang = CONFIG.get("language", "en")
 
     s = state.load()
@@ -121,32 +238,38 @@ def generate():
     used_str = ", ".join(used[-30:]) if used else "(none yet)"
     published = s.get("published", [])
 
+    # Get format description
+    format_desc = ""
+    if content_format and content_format in FORMAT_PROMPTS:
+        format_desc = f"\nFormat: {FORMAT_PROMPTS[content_format]}"
+
     if lang == "id":
         base_msg = (
             f"Niche: {CONFIG['niche']}\n"
             f"Audience: {CONFIG['audience']}\n"
             f"Topik yang sudah pernah dibuat: {used_str}\n"
-            f"Buat SATU Short dengan topik yang BENAR-BENAR BARU. DILARANG menggunakan topik yang sudah pernah dibuat. Judul dan isi harus orisinal dan tidak mirip dengan yang sudah ada."
+            f"Buat SATU Short dengan topik yang BENAR-BENAR BARU. DILARANG menggunakan topik yang sudah pernah dibuat. Judul dan isi harus orisinal dan tidak mirip dengan yang sudah ada.{format_desc}"
         )
     else:
         base_msg = (
             f"Niche: {CONFIG['niche']}\n"
             f"Audience: {CONFIG['audience']}\n"
             f"Previously used topics: {used_str}\n"
-            f"Generate ONE completely NEW Short. DO NOT use any of the previously used topics. Title and content must be original and not similar to what has been done before."
+            f"Generate ONE completely NEW Short. DO NOT use any of the previously used topics. Title and content must be original and not similar to what has been done before.{format_desc}"
         )
 
     s_cfg = CONFIG["script"]
     target_words = int(s_cfg["target_seconds"] * s_cfg["words_per_second"])
     min_words = int(target_words * 0.75)
 
-    warning_msg = ""
     for attempt in range(4):
-        user_msg = base_msg + warning_msg
+        user_msg = base_msg
+        if attempt > 0:
+            user_msg += f"\n\nPERINGATAN: judul sebelumnya sudah ada. BUAT JUDUL LAIN yang benar-benar berbeda dan belum pernah dipublikasikan."
 
-        print(f"    calling {LLM_PROVIDER}/{LLM_MODEL} (attempt {attempt+1})...")
+        print(f"    calling {LLM_PROVIDER}/{LLM_MODEL} (attempt {attempt+1}, format: {content_format or 'default'})...")
         data = _call_and_extract([
-            {"role": "system", "content": _system_prompt()},
+            {"role": "system", "content": _system_prompt(content_format)},
             {"role": "user", "content": user_msg},
         ])
 
@@ -167,17 +290,20 @@ def generate():
 
         if wc < min_words:
             print(f"    WARNING: script too short ({wc} words, need {min_words}), retrying...")
-            warning_msg = f"\n\nPERINGATAN: Skrip sebelumnya terlalu pendek ({wc} kata). Hasilkan skrip yang jauh lebih panjang, minimal {min_words} kata! Tambahkan lebih banyak fakta, detail, dan penjelasan yang padat."
             continue
 
         title = data.get("title", "")
         if _is_duplicate_title(title, published):
             print(f"    DUPLICATE: title already published, retrying...")
-            warning_msg = f"\n\nPERINGATAN: Judul '{title}' sudah pernah dibuat. BUAT JUDUL DAN TOPIK LAIN yang benar-benar berbeda!"
             continue
+
+        # Optimize title for SEO
+        data["title"] = _optimize_title(title, content_format)
+        data["format"] = content_format
 
         print(f"    title: {data['title']}")
         return data
 
     print("    WARNING: could not generate unique/long enough script after 4 attempts, publishing anyway")
     return data
+
