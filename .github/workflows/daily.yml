@@ -68,6 +68,7 @@ jobs:
             echo "state.json unchanged"
           else
             git commit -m "auto: update state.json"
+            git pull --rebase
             git push
           fi
 
@@ -78,5 +79,6 @@ jobs:
           else
             git add token_sainstek.json
             git commit -m "auto: refresh sainstek token"
+            git pull --rebase
             git push
           fi
