@@ -1,4 +1,4 @@
-import json
+﻿import json
 import subprocess
 from pathlib import Path
 from .config import CONFIG, ROOT
@@ -131,12 +131,23 @@ def build(
     work_dir: Path,
     videos_per_scene: int = 1,
     hook_text: str = "",
+    thumbnail_img: Path = None,
 ) -> Path:
     v = CONFIG["video"]
     w, h, fps = v["width"], v["height"], v["fps"]
     work_dir.mkdir(parents=True, exist_ok=True)
 
     durations = _scene_durations(words, scenes)
+
+    if thumbnail_img and thumbnail_img.exists() and len(durations) > 0:
+        deficit = 2.0
+        for i in range(len(durations)):
+            if deficit <= 0: break
+            can_borrow = durations[i] - 1.0 # leave at least 1s
+            if can_borrow > 0:
+                borrow = min(deficit, can_borrow)
+                durations[i] -= borrow
+                deficit -= borrow
 
     # Expand durations when multiple clips per scene
     if videos_per_scene > 1:
@@ -155,6 +166,23 @@ def build(
         print(f"    last scene extended +{extra:.1f}s to match audio")
 
     prepped = []
+    
+    if thumbnail_img and thumbnail_img.exists():
+        thumb_out = work_dir / "prep_thumb.mp4"
+        _run([
+            "ffmpeg", "-y", "-loop", "1", "-i", str(thumbnail_img),
+            "-vf", (
+                f"scale={w}:{h}:flags=lanczos:force_original_aspect_ratio=increase,"
+                f"crop={w}:{h},"
+                f"unsharp=5:5:0.6:3:3:0.3,"
+                f"zoompan=z='if(eq(on,1),1.0,min(1.06,zoom+0.0005))':d={int(2.0*fps)}:s={w}x{h}:fps={fps}"
+            ),
+            "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+            "-pix_fmt", "yuv420p", "-t", "2.0",
+            str(thumb_out)
+        ], "thumbnail prep (2s)")
+        prepped.append(thumb_out)
+        durations.insert(0, 2.0)
     for i, (src, dur) in enumerate(zip(scene_videos, durations)):
         out = work_dir / f"prep_{i:02d}.mp4"
         _prep_scene_clip(src, dur, out, w, h, fps)
@@ -277,4 +305,5 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         str(out_path),
     ], "final render (video+audio+captions)")
     return out_path
+
 

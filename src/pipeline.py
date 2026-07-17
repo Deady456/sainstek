@@ -1,8 +1,8 @@
-import argparse
+﻿import argparse
 import re
 import time
 from datetime import datetime
-from . import script, voice, captions, visuals, assemble, upload, state, branding
+from . import script, voice, captions, visuals, assemble, upload, state, visuals_ai, branding
 from .config import OUTPUT_DIR
 
 
@@ -62,6 +62,7 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True) -> d
         work_dir=work / "ffmpeg",
         videos_per_scene=2,
         hook_text=data.get("thumbnail_text", data["title"]),
+        thumbnail_img=thumbnail_img,
     )
     dur = time.time() - t0
     sz = final.stat().st_size / (1024 * 1024)
@@ -113,3 +114,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
