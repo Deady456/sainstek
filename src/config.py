@@ -20,7 +20,8 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 STATE_FILE = ROOT / "state.json"
 
 PEXELS_API_KEY = os.environ["PEXELS_API_KEY"]
-LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "groq")
+_cfg_model = CONFIG.get("script", {}).get("model", "")
+LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "gemini" if "gemini" in _cfg_model.lower() else "groq")
 
 if LLM_PROVIDER == "gemini":
     LLM_API_KEY = os.environ["GEMINI_API_KEY"]
