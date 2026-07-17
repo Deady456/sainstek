@@ -26,7 +26,7 @@ def run_once(publish_at: str | None = None,
     _log("3/7 Transcribing for word-level captions (Faster-Whisper)")
     _log("    loading model (first run downloads)...")
     t0 = time.time()
-    words = captions.transcribe_words(voice_mp3, original_text=data["full_text"])
+    words = captions.transcribe_words(voice_mp3)
     _log(f"    {len(words)} words in {time.time()-t0:.1f}s")
 
     _log("4/7 Generating AI images via Pollinations")
