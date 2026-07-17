@@ -33,6 +33,14 @@ def _synth_elevenlabs(text: str, out_path: Path, v: dict, api_key: str) -> None:
                 f.write(chunk)
 
 
+
+def _speed_up(audio_path: Path, rate: float = 1.15):
+    import subprocess
+    tmp = audio_path.with_suffix(".tmp.mp3")
+    subprocess.run(["ffmpeg", "-y", "-i", str(audio_path), "-filter:a", f"atempo={rate}", str(tmp)], capture_output=True)
+    tmp.replace(audio_path)
+
+
 def synth(text: str, out_path: Path) -> Path:
     v = CONFIG["voice"]
     provider = v.get("provider", "elevenlabs")

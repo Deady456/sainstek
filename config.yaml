@@ -4,7 +4,7 @@ language: id
 
 script:
   model: llama-3.3-70b-versatile
-  target_seconds: 60
+  target_seconds: 80
   words_per_second: 2.5
 
 voice:
@@ -28,11 +28,11 @@ voice:
 captions:
   whisper_model: base
   font: "Anton"
-  font_size: 65
-  primary_color: "&H00FFFFFF"
+  font_size: 90
+  primary_color: "&H0000FFFF"
   outline_color: "&H00000000"
   outline: 6
-  words_per_caption: 3
+  words_per_caption: 1
   position_y: 0.55
 
 video:
@@ -59,7 +59,7 @@ branding:
 hook_text:
   enabled: true
   font: "Anton"
-  font_size: 80
+  font_size: 90
   color: "white"
   outline_color: "&H00000000"
   outline: 4

@@ -60,6 +60,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         start = _fmt_ts(chunk[0]["start"])
         end = _fmt_ts(chunk[-1]["end"])
         text = " ".join(w["word"].strip() for w in chunk).upper()
+        if chunk_size == 1:
+            text = f"{{\\fscx120\\fscy120\\t(0,150,\\fscx100\\fscy100)}}{text}"
         lines.append(f"Dialogue: 0,{start},{end},Default,,0,0,0,,{text}")
 
     out_path.write_text(header + "\n".join(lines), encoding="utf-8")
