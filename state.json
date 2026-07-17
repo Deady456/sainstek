@@ -7,7 +7,8 @@
     "teknologi-sintesis-suarapendekatan-ai",
     "teknologi-generative-ai",
     "teknologi-extended-reality",
-    "teknologi-human-computer-interaction"
+    "teknologi-human-computer-interaction",
+    "teknologi-swarm-intelligence"
   ],
   "published": [
     {
@@ -72,6 +73,14 @@
       "title": "Teknologi HCI Masa Depan: Menghubungkan Otak dan Komputer",
       "path": "/home/runner/work/sainstek/sainstek/output/20260716_105225_teknologi-human-computer-interaction/final.mp4",
       "video_id": "1wPU0xS6rgs",
+      "publish_at": null
+    },
+    {
+      "ts": "20260717_025533",
+      "topic": "teknologi-swarm-intelligence",
+      "title": "Teknologi Swarm Intelligence: Masa Depan Kerja Sama AI?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260717_025533_teknologi-swarm-intelligence/final.mp4",
+      "video_id": "ud9o_pjl_BY",
       "publish_at": null
     }
   ]
