@@ -34,7 +34,7 @@ def _fmt_ts(t: float) -> str:
     return f"{h:01d}:{m:02d}:{s:05.2f}"
 
 
-def write_ass(words: list[dict], out_path: Path, video_w: int, video_h: int) -> Path:
+def write_ass(words: list[dict], out_path: Path, video_w: int, video_h: int, offset: float = 0.0) -> Path:
     c = CONFIG["captions"]
     chunk_size = c["words_per_caption"]
     margin_v = int(video_h * (1 - c["position_y"]))
@@ -57,8 +57,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     lines = []
     for i in range(0, len(words), chunk_size):
         chunk = words[i:i + chunk_size]
-        start = _fmt_ts(chunk[0]["start"])
-        end = _fmt_ts(chunk[-1]["end"])
+        start = _fmt_ts(chunk[0]["start"] + offset)
+        end = _fmt_ts(chunk[-1]["end"] + offset)
         text = " ".join(w["word"].strip() for w in chunk).upper()
         if chunk_size == 1:
             text = f"{{\\fscx120\\fscy120\\t(0,150,\\fscx100\\fscy100)}}{text}"
