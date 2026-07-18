@@ -155,21 +155,28 @@ def _apply_hook_text(img_path: Path, hook_text: str, width: int, height: int):
         if current_line:
             lines.append(" ".join(current_line))
             
-        y = int(height * 0.2)
         line_spacing = 45
-        
+
+        # Measure each line height to vertically center the block
+        line_heights = []
         for line in lines:
-            tw = draw.textlength(line, font=chosen_font) if hasattr(draw, "textlength") else chosen_font.getsize(line)[0]
-            x = (width - tw) // 2
-            
             if hasattr(draw, "textbbox"):
                 bbox = draw.textbbox((0, 0), line, font=chosen_font)
-                line_height = bbox[3] - bbox[1]
+                lh = bbox[3] - bbox[1]
             else:
-                line_height = chosen_font.getsize(line)[1]
-                
+                lh = chosen_font.getsize(line)[1]
+            line_heights.append(lh)
+
+        total_h = sum(line_heights) + line_spacing * (len(lines) - 1)
+        y = (height - total_h) // 2
+
+        for i, line in enumerate(lines):
+            tw = draw.textlength(line, font=chosen_font) if hasattr(draw, "textlength") else chosen_font.getsize(line)[0]
+            x = (width - tw) // 2
+            line_height = line_heights[i]
+
             draw_text_with_outline(
-                draw, x, y, line, chosen_font, 
+                draw, x, y, line, chosen_font,
                 text_color=random_color,
                 outline_color=(0, 0, 0, 255),
                 shadow_color=(0, 0, 0, 150)
