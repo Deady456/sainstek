@@ -116,7 +116,6 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
         out_path=work / "final_raw.mp4",
         work_dir=work / "ffmpeg",
         videos_per_scene=2,
-        hook_text=data.get("thumbnail_text", data["title"]),
         thumbnail_img=thumbnail_img,
     )
     dur = time.time() - t0
