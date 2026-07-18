@@ -78,35 +78,15 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     # ============================================================
     _log("5/8 Writing caption file")
     from .config import CONFIG as CFG
-    hook_text = data.get("thumbnail_text", "")
-    hook_cfg = CFG.get("hook_text", {})
-    if hook_text and hook_cfg.get("enabled", False):
-        # Find hook text end index by matching words against first scene.
-        # Limit look-ahead per word so a single unmatched word cannot consume
-        # the rest of the transcript (which would erase all captions).
-        scene0_text = data.get("scenes", [{}])[0].get("text", hook_text)
-        s0_words = [w.strip(".,!?;:\"'") for w in scene0_text.split()]
-        cursor = 0
-        for hw in s0_words:
-            found = False
-            for look in range(cursor, min(cursor + 4, len(words))):
-                ww = words[look]["word"].strip().lower().strip(".,!?;:\"'")
-                if ww == hw.lower():
-                    cursor = look + 1
-                    found = True
-                    break
-            if not found:
-                cursor = min(cursor + 1, len(words))
-        captions_words = words[cursor:]
-    else:
-        captions_words = words
-
-    # Offset caption timestamps by thumbnail (hook) duration so they sync
-    # with the video timeline (thumbnail plays first, then content scenes).
+    # Skip the hook portion (first thumb_dur seconds, shown as the thumbnail)
+    # so captions stay synced to the audio. The video plays the thumbnail for
+    # thumb_dur seconds, then content scenes begin at the same audio position
+    # where these captions start -> perfect sync, no double offset.
     _hook_cfg = CFG.get("hook_text", {})
     thumb_dur = float(_hook_cfg.get("duration", 3.0)) if _hook_cfg.get("enabled", False) else 2.0
+    captions_words = [w for w in words if w["start"] >= thumb_dur]
     ass_path = captions.write_ass(captions_words, work / "captions.ass",
-                                  CFG["video"]["width"], CFG["video"]["height"], offset=thumb_dur)
+                                  CFG["video"]["width"], CFG["video"]["height"], offset=0.0)
 
     # ============================================================
     # Step 5.5: Generate AI Thumbnail Hook
