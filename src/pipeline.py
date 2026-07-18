@@ -81,7 +81,18 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     hook_text = data.get("thumbnail_text", "")
     hook_cfg = CFG.get("hook_text", {})
     if hook_text and hook_cfg.get("enabled", False):
-        captions_words = words[len(hook_text.split()):]
+        # Find hook text end index by matching words against first scene
+        scene0_text = data.get("scenes", [{}])[0].get("text", hook_text)
+        s0_words = [w.strip(".,!?;:\"'") for w in scene0_text.split()]
+        cursor = 0
+        for hw in s0_words:
+            while cursor < len(words):
+                ww = words[cursor]["word"].strip().lower().strip(".,!?;:\"'")
+                if ww == hw.lower():
+                    cursor += 1
+                    break
+                cursor += 1
+        captions_words = words[cursor:]
     else:
         captions_words = words
 
