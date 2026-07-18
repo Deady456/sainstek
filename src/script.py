@@ -110,37 +110,32 @@ def _call_llm(model, max_tokens, response_format, messages, retries=5):
                     raise Exception(f"Gemini API failed: {e}")
         raise Exception("Failed after retries")
     else:
-        for attempt in range(retries):
-            try:
-                return _client.chat.completions.create(
-                    model=model, max_tokens=max_tokens,
-                    response_format=response_format, messages=messages,
-                )
-            except RateLimitError as e:
-                if _key_idx < len(LLM_API_KEYS) - 1:
-                    _key_idx += 1
-                    print(f"  Rate limited, switching to Groq key {_key_idx+1}/{len(LLM_API_KEYS)}")
-                    _client = OpenAI(api_key=LLM_API_KEYS[_key_idx], base_url=LLM_BASE_URL)
-                    continue
-                
-                if attempt < retries - 1:
-                    _wait = 2 ** attempt
-                    print(f"  Rate limited (retry {attempt+1}/{retries} in {_wait}s): {e}")
-                    time.sleep(_wait)
-                else:
-                    raise
-            except Exception as e:
-                if _key_idx < len(LLM_API_KEYS) - 1:
-                    _key_idx += 1
-                    print(f"  Auth/error, switching to Groq key {_key_idx+1}/{len(LLM_API_KEYS)}")
-                    _client = OpenAI(api_key=LLM_API_KEYS[_key_idx], base_url=LLM_BASE_URL)
-                    continue
-                if attempt < retries - 1:
-                    _wait = 2 ** attempt
-                    print(f"  LLM error (retry {attempt+1}/{retries} in {_wait}s): {e}")
-                    time.sleep(_wait)
-                else:
-                    raise
+        while _key_idx < len(LLM_API_KEYS):
+            _client = OpenAI(api_key=LLM_API_KEYS[_key_idx], base_url=LLM_BASE_URL)
+            for attempt in range(retries):
+                try:
+                    return _client.chat.completions.create(
+                        model=model, max_tokens=max_tokens,
+                        response_format=response_format, messages=messages,
+                    )
+                except RateLimitError as e:
+                    if attempt < retries - 1:
+                        _wait = 2 ** attempt
+                        print(f"  Rate limited (retry {attempt+1}/{retries} in {_wait}s): {e}")
+                        time.sleep(_wait)
+                    else:
+                        break
+                except Exception as e:
+                    if attempt < retries - 1:
+                        _wait = 2 ** attempt
+                        print(f"  LLM error (retry {attempt+1}/{retries} in {_wait}s): {e}")
+                        time.sleep(_wait)
+                    else:
+                        break
+            _key_idx += 1
+            if _key_idx >= len(LLM_API_KEYS):
+                raise Exception("All Groq API keys exhausted")
+            print(f"  Switching to next Groq key {_key_idx+1}/{len(LLM_API_KEYS)}")
 
 
 def _system_prompt(content_format: str = None) -> str:
@@ -306,4 +301,5 @@ def generate(content_format: str = None) -> dict:
 
     print("    WARNING: could not generate unique/long enough script after 4 attempts, publishing anyway")
     return data
+
 
