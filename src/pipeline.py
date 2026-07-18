@@ -81,17 +81,22 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     hook_text = data.get("thumbnail_text", "")
     hook_cfg = CFG.get("hook_text", {})
     if hook_text and hook_cfg.get("enabled", False):
-        # Find hook text end index by matching words against first scene
+        # Find hook text end index by matching words against first scene.
+        # Limit look-ahead per word so a single unmatched word cannot consume
+        # the rest of the transcript (which would erase all captions).
         scene0_text = data.get("scenes", [{}])[0].get("text", hook_text)
         s0_words = [w.strip(".,!?;:\"'") for w in scene0_text.split()]
         cursor = 0
         for hw in s0_words:
-            while cursor < len(words):
-                ww = words[cursor]["word"].strip().lower().strip(".,!?;:\"'")
+            found = False
+            for look in range(cursor, min(cursor + 4, len(words))):
+                ww = words[look]["word"].strip().lower().strip(".,!?;:\"'")
                 if ww == hw.lower():
-                    cursor += 1
+                    cursor = look + 1
+                    found = True
                     break
-                cursor += 1
+            if not found:
+                cursor = min(cursor + 1, len(words))
         captions_words = words[cursor:]
     else:
         captions_words = words
