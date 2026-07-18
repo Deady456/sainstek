@@ -96,8 +96,12 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     else:
         captions_words = words
 
+    # Offset caption timestamps by thumbnail (hook) duration so they sync
+    # with the video timeline (thumbnail plays first, then content scenes).
+    _hook_cfg = CFG.get("hook_text", {})
+    thumb_dur = float(_hook_cfg.get("duration", 3.0)) if _hook_cfg.get("enabled", False) else 2.0
     ass_path = captions.write_ass(captions_words, work / "captions.ass",
-                                  CFG["video"]["width"], CFG["video"]["height"])
+                                  CFG["video"]["width"], CFG["video"]["height"], offset=thumb_dur)
 
     # ============================================================
     # Step 5.5: Generate AI Thumbnail Hook
