@@ -12,7 +12,8 @@
     "teknologi-kecerdasan-buatan-dalam-transportasi",
     "teknologi-neurointerface",
     "teknologi-explainable-ai",
-    "teknologi-kecerdasan-buatan-dalam-ekonomi"
+    "teknologi-kecerdasan-buatan-dalam-ekonomi",
+    "teknologi-ai-dalam-pendidikan"
   ],
   "published": [
     {
@@ -117,6 +118,14 @@
       "title": "Bagaimana AI Membentuk Ekonomi Digital Masa Depan?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260718_233639_teknologi-kecerdasan-buatan-dalam-ekonomi/final.mp4",
       "video_id": "qB_eR52domw",
+      "publish_at": null
+    },
+    {
+      "ts": "20260719_075728",
+      "topic": "teknologi-ai-dalam-pendidikan",
+      "title": "Revoluti Pendidikan: Bagaimana AI Membentuk Masa Depan Belajar",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260719_075728_teknologi-ai-dalam-pendidikan/final.mp4",
+      "video_id": "-xnUlAJs3QU",
       "publish_at": null
     }
   ]
