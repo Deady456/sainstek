@@ -296,17 +296,29 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
         hook_ass_arg = str(hook_ass).replace("\\", "/").replace(":", "\\:")
         vf_parts.append(f"subtitles='{hook_ass_arg}':fontsdir='{fonts_arg}'")
-    vf_parts.append(f"subtitles='{ass_arg}':fontsdir='{fonts_arg}'")
+    # vf_parts.append(f"subtitles='{ass_arg}':fontsdir='{fonts_arg}'")
     vf_chain = ",".join(vf_parts)
 
-    _run([
-        "ffmpeg", "-y", "-i", str(silent), "-i", str(voice_audio),
-        "-vf", vf_chain,
+    bg_music = ROOT / "assets" / "bg.mp3"
+    cmd = ["ffmpeg", "-y", "-i", str(silent), "-i", str(voice_audio)]
+    if bg_music.exists():
+        cmd.extend(["-stream_loop", "-1", "-i", str(bg_music)])
+        audio_filter = "[1:a]volume=1.0[v];[2:a]volume=0.05[bg];[v][bg]amix=inputs=2:duration=first:dropout_transition=2[a]"
+        if vf_chain:
+            cmd.extend(["-filter_complex", f"[0:v]{vf_chain}[vout];{audio_filter}", "-map", "[vout]", "-map", "[a]"])
+        else:
+            cmd.extend(["-filter_complex", audio_filter, "-map", "0:v", "-map", "[a]"])
+    else:
+        if vf_chain:
+            cmd.extend(["-vf", vf_chain])
+        
+    cmd.extend([
         "-c:v", "libx264", "-preset", "medium", "-crf", "20",
         "-c:a", "aac", "-b:a", "192k", "-pix_fmt", "yuv420p",
         "-movflags", "+faststart",
         str(out_path),
-    ], "final render (video+audio+captions)")
+    ])
+    _run(cmd, "final render (video+audio+no_captions)")
     return out_path
 
 
