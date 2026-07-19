@@ -83,10 +83,10 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     # thumb_dur seconds, then content scenes begin at the same audio position
     # where these captions start -> perfect sync, no double offset.
     _hook_cfg = CFG.get("hook_text", {})
-    thumb_dur = float(_hook_cfg.get("duration", 3.0)) if _hook_cfg.get("enabled", False) else 2.0
-    captions_words = [w for w in words if w["start"] >= thumb_dur]
+    hook_word_count = len(scenes[0]["text"].split()) if scenes else 0
+    captions_words = words[hook_word_count:]
     ass_path = captions.write_ass(captions_words, work / "captions.ass",
-                                  CFG["video"]["width"], CFG["video"]["height"], offset=0.0)
+                                  CFG["video"]["width"], CFG["video"]["height"], offset=-0.3)
 
     # ============================================================
     # Step 5.5: Thumbnail image disabled - hook shown as popup overlay
