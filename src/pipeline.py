@@ -89,17 +89,10 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
                                   CFG["video"]["width"], CFG["video"]["height"], offset=0.0)
 
     # ============================================================
-    # Step 5.5: Generate AI Thumbnail Hook
+    # Step 5.5: Thumbnail image disabled - hook shown as popup overlay
     # ============================================================
-    _log("5.5/8 Generating AI thumbnail with Pollinations")
-    try:
-        from . import visuals_ai
-        thumbnail_img = work / "thumbnail.jpg"
-        hook_text_ai = data.get("thumbnail_text", data["title"])
-        visuals_ai.generate(prompt=hook_text_ai, out_path=thumbnail_img, hook_text=hook_text_ai)
-    except Exception as e:
-        _log(f"    Failed to generate thumbnail: {e}")
-        thumbnail_img = None
+    _log("5.5/8 Thumbnail image disabled; hook will be popup overlay")
+    thumbnail_img = None
 
     # ============================================================
     # Step 6: Assemble video
@@ -116,6 +109,7 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
         out_path=work / "final_raw.mp4",
         work_dir=work / "ffmpeg",
         videos_per_scene=2,
+        hook_text=data.get("thumbnail_text", ""),
         thumbnail_img=thumbnail_img,
     )
     dur = time.time() - t0
