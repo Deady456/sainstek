@@ -66,5 +66,10 @@ def synth(text: str, out_path: Path) -> Path:
             print(f"    no elevenlabs keys set, falling back to edge-tts")
 
     _synth_edge(text, out_path, v)
+    if not out_path.exists() or out_path.stat().st_size < 1024:
+        raise RuntimeError(
+            f"edge-tts produced invalid audio ({out_path.stat().st_size if out_path.exists() else 0} bytes). "
+            "All voice providers failed."
+        )
     print(f"    done in {time.time()-t0:.1f}s (edge-tts)")
     return out_path

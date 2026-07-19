@@ -55,6 +55,8 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     # ============================================================
     _log("2/8 Synthesizing voiceover")
     voice_mp3 = voice.synth(data["full_text"], work / "voice.mp3")
+    if not voice_mp3.exists() or voice_mp3.stat().st_size < 1024:
+        raise RuntimeError(f"Voice synthesis failed: {voice_mp3} is {voice_mp3.stat().st_size if voice_mp3.exists() else 0} bytes")
     _log(f"    voice saved ({voice_mp3.stat().st_size/1024:.0f} KB)")
 
     # ============================================================
@@ -110,7 +112,7 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
         work_dir=work / "ffmpeg",
         videos_per_scene=2,
         hook_text=data.get("thumbnail_text", ""),
-        thumbnail_img=thumbnail_img,
+        thumbnail_img=None,
     )
     dur = time.time() - t0
     sz = final.stat().st_size / (1024 * 1024)
