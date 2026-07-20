@@ -39,6 +39,8 @@ def search_vertical(query: str, min_duration: float = 3.0, result_index: int = 0
             if matches:
                 idx = min(result_index, len(matches) - 1)
                 return matches[idx]
+            else:
+                return None
         except Exception as e:
             print(f"      Pexels API error with key {attempt_key[:5]}... : {e}")
             continue
@@ -66,6 +68,12 @@ def _fetch_single_clip(i: int, j: int, q: str, varied_q: str, out_dir: Path) -> 
     url = search_vertical(varied_q, result_index=j)
     if url is None:
         url = search_vertical(q, result_index=j)
+    
+    if url is None:
+        # Try simplified query (first word of the query)
+        simple_q = q.replace(',', ' ').split()[0] if q else "abstract"
+        url = search_vertical(simple_q, result_index=j)
+        
     if url is None:
         url = search_vertical("abstract background")
     
