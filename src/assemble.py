@@ -141,15 +141,7 @@ def build(
 
     hook_cfg = CONFIG.get("hook_text", {})
     thumb_dur = float(hook_cfg.get("duration", 3.0)) if hook_cfg.get("enabled", False) else 2.0
-    if thumbnail_img and thumbnail_img.exists() and len(durations) > 0:
-        deficit = thumb_dur
-        for i in range(len(durations)):
-            if deficit <= 0: break
-            can_borrow = durations[i] - 1.0 # leave at least 1s
-            if can_borrow > 0:
-                borrow = min(deficit, can_borrow)
-                durations[i] -= borrow
-                deficit -= borrow
+    # Removed thumbnail freeze frame borrowing for Rule 4
 
     # Expand durations when multiple clips per scene
     if videos_per_scene > 1:
@@ -169,24 +161,8 @@ def build(
 
     prepped = []
     
-    if thumbnail_img and thumbnail_img.exists():
-        thumb_out = work_dir / "prep_thumb.mp4"
-        _run([
-            "ffmpeg", "-y", "-loop", "1", "-i", str(thumbnail_img),
-            "-vf", (
-                f"scale={w}:{h}:flags=lanczos:force_original_aspect_ratio=increase,"
-                f"crop={w}:{h},"
-                f"unsharp=5:5:0.6:3:3:0.3,"
-                f"zoompan=z='if(eq(on,1),1.0,min(1.06,zoom+0.0005))':d={int(2.0*fps)}:s={w}x{h}:fps={fps}"
-            ),
-            "-c:v", "libx264", "-preset", "fast", "-crf", "22",
-            "-pix_fmt", "yuv420p", "-t", f"{thumb_dur:.1f}",
-            str(thumb_out)
-        ], f"thumbnail prep ({thumb_dur:.1f}s)")
-        prepped.append(thumb_out)
-        durations.insert(0, thumb_dur)
-    dur_offset = 1 if thumbnail_img and thumbnail_img.exists() else 0
-    for i, (src, dur) in enumerate(zip(scene_videos, durations[dur_offset:])):
+    # Removed thumbnail freeze frame prepending for Rule 4
+    for i, (src, dur) in enumerate(zip(scene_videos, durations)):
         out = work_dir / f"prep_{i:02d}.mp4"
         _prep_scene_clip(src, dur, out, w, h, fps)
         prepped.append(out)
@@ -296,7 +272,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
         hook_ass_arg = str(hook_ass).replace("\\", "/").replace(":", "\\:")
         vf_parts.append(f"subtitles='{hook_ass_arg}':fontsdir='{fonts_arg}'")
-    # vf_parts.append(f"subtitles='{ass_arg}':fontsdir='{fonts_arg}'")
+    vf_parts.append(f"subtitles='{ass_arg}':fontsdir='{fonts_arg}'")
     vf_chain = ",".join(vf_parts)
 
     bg_music = ROOT / "assets" / "bg.mp3"
@@ -318,7 +294,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         "-movflags", "+faststart",
         str(out_path),
     ])
-    _run(cmd, "final render (video+audio+no_captions)")
+    _run(cmd, "final render (video+audio+captions)")
     return out_path
 
 

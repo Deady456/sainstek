@@ -138,7 +138,7 @@ def build(
             f":y=(h-th)/2"
             f":enable='between(t\\,0\\,{ht_duration})'"
         )
-    # vf_parts.append(f"subtitles='{ass_arg}':fontsdir='{fonts_arg}'")
+    vf_parts.append(f"subtitles='{ass_arg}':fontsdir='{fonts_arg}'")
     vf_chain = ",".join(vf_parts)
 
     bg_music = ROOT / "assets" / "bg.mp3"
@@ -160,5 +160,5 @@ def build(
         "-movflags", "+faststart", "-shortest",
         str(out_path),
     ])
-    _run(cmd, "final render (video+audio+no_captions)")
+    _run(cmd, "final render (video+audio+captions)")
     return out_path
