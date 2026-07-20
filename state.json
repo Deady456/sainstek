@@ -13,7 +13,8 @@
     "teknologi-neurointerface",
     "teknologi-explainable-ai",
     "teknologi-kecerdasan-buatan-dalam-ekonomi",
-    "teknologi-ai-dalam-pendidikan"
+    "teknologi-ai-dalam-pendidikan",
+    "teknologi-kecerdasan-buatan-dalam-konservasi-lingkungan"
   ],
   "published": [
     {
@@ -126,6 +127,14 @@
       "title": "Revoluti Pendidikan: Bagaimana AI Membentuk Masa Depan Belajar",
       "path": "/home/runner/work/sainstek/sainstek/output/20260719_075728_teknologi-ai-dalam-pendidikan/final.mp4",
       "video_id": "-xnUlAJs3QU",
+      "publish_at": null
+    },
+    {
+      "ts": "20260720_164728",
+      "topic": "teknologi-kecerdasan-buatan-dalam-konservasi-lingkungan",
+      "title": "Bagaimana AI Mengubah Konservasi Lingkungan?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260720_164728_teknologi-kecerdasan-buatan-dalam-konservasi-lingkungan/final.mp4",
+      "video_id": "1uG4eXsYlFM",
       "publish_at": null
     }
   ]
