@@ -15,31 +15,33 @@ _VARIATIONS = [
 
 
 def search_vertical(query: str, min_duration: float = 3.0, result_index: int = 0) -> str | None:
-    try:
-        r = requests.get(
-            API,
-            headers={"Authorization": random.choice(PEXELS_API_KEYS)},
-            params={"query": query, "orientation": "portrait", "per_page": 15, "size": "medium"},
-            timeout=30,
-        )
-        r.raise_for_status()
-    except Exception as e:
-        print(f"      Pexels API error: {e}")
-        return None
-    videos = r.json().get("videos", [])
-    matches = []
-    for v in videos:
-        if v.get("duration", 0) < min_duration:
+    for attempt_key in PEXELS_API_KEYS:
+        try:
+            r = requests.get(
+                API,
+                headers={"Authorization": attempt_key},
+                params={"query": query, "orientation": "portrait", "per_page": 15, "size": "medium"},
+                timeout=30,
+            )
+            r.raise_for_status()
+            videos = r.json().get("videos", [])
+            matches = []
+            for v in videos:
+                if v.get("duration", 0) < min_duration:
+                    continue
+                files = [f for f in v["video_files"] if f.get("width", 0) >= 1080 and f.get("height", 0) > f.get("width", 0)]
+                if not files:
+                    continue
+                files.sort(key=lambda f: f.get("height", 0))
+                matches.append(files[0]["link"])
+            
+            if matches:
+                idx = min(result_index, len(matches) - 1)
+                return matches[idx]
+        except Exception as e:
+            print(f"      Pexels API error with key {attempt_key[:5]}... : {e}")
             continue
-        files = [f for f in v["video_files"] if f.get("width", 0) >= 1080 and f.get("height", 0) > f.get("width", 0)]
-        if not files:
-            continue
-        files.sort(key=lambda f: f.get("height", 0))
-        matches.append(files[0]["link"])
-    if not matches:
-        return None
-    idx = min(result_index, len(matches) - 1)
-    return matches[idx]
+    return None
 
 
 def download(url: str, out_path: Path) -> Path:
