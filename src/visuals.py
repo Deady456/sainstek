@@ -15,13 +15,17 @@ _VARIATIONS = [
 
 
 def search_vertical(query: str, min_duration: float = 3.0, result_index: int = 0) -> str | None:
-    r = requests.get(
-        API,
-        headers={"Authorization": random.choice(PEXELS_API_KEYS)},
-        params={"query": query, "orientation": "portrait", "per_page": 15, "size": "medium"},
-        timeout=30,
-    )
-    r.raise_for_status()
+    try:
+        r = requests.get(
+            API,
+            headers={"Authorization": random.choice(PEXELS_API_KEYS)},
+            params={"query": query, "orientation": "portrait", "per_page": 15, "size": "medium"},
+            timeout=30,
+        )
+        r.raise_for_status()
+    except Exception as e:
+        print(f"      Pexels API error: {e}")
+        return None
     videos = r.json().get("videos", [])
     matches = []
     for v in videos:

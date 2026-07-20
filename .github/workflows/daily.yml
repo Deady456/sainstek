@@ -46,7 +46,7 @@ jobs:
           secrets = json.loads(os.environ['ALL_SECRETS'])
           with open('.env', 'w') as f:
               for k, v in secrets.items():
-                  if k.startswith('GROQ_API_KEY') or k in ['PEXELS_API_KEY', 'ELEVENLABS_API_KEYS']:
+                  if k.startswith('GROQ_API_KEY') or k.startswith('PEXELS_API_KEY') or k in ['ELEVENLABS_API_KEYS']:
                       v_escaped = v.replace('\n', '\\n')
                       f.write(f'{k}=\"{v_escaped}\"\n')
           "
