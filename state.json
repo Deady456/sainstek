@@ -15,7 +15,8 @@
     "teknologi-kecerdasan-buatan-dalam-ekonomi",
     "teknologi-ai-dalam-pendidikan",
     "teknologi-kecerdasan-buatan-dalam-konservasi-lingkungan",
-    "teknologi-autonomous-drone"
+    "teknologi-autonomous-drone",
+    "teknologi-ai-dalam-musik"
   ],
   "published": [
     {
@@ -144,6 +145,14 @@
       "title": "Teknologi Drone Otonom, Kecerdasan Buatan di Langit",
       "path": "/home/runner/work/sainstek/sainstek/output/20260720_232707_teknologi-autonomous-drone/final.mp4",
       "video_id": "oABKjbAxCPw",
+      "publish_at": null
+    },
+    {
+      "ts": "20260722_084320",
+      "topic": "teknologi-ai-dalam-musik",
+      "title": "Bagaimana AI Membuat Musik Baru?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260722_084320_teknologi-ai-dalam-musik/final.mp4",
+      "video_id": "JPCDxayJD48",
       "publish_at": null
     }
   ]
