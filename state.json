@@ -18,7 +18,8 @@
     "teknologi-autonomous-drone",
     "teknologi-ai-dalam-musik",
     "teknologi-ai-dalam-restorasi-karya-seni",
-    "teknologi-ai-dalam-forensik"
+    "teknologi-ai-dalam-forensik",
+    "teknologi-ai-dalam-pertanian-presisi"
   ],
   "published": [
     {
@@ -171,6 +172,14 @@
       "title": "Bagaimana AI Membantu Mengungkap Kasus Kriminal",
       "path": "/home/runner/work/sainstek/sainstek/output/20260722_150311_teknologi-ai-dalam-forensik/final.mp4",
       "video_id": "NmFjjCcQbCQ",
+      "publish_at": null
+    },
+    {
+      "ts": "20260722_230508",
+      "topic": "teknologi-ai-dalam-pertanian-presisi",
+      "title": "Revolusi Pertanian Dengan Teknologi AI: Meningkatkan Hasil Tanam",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260722_230508_teknologi-ai-dalam-pertanian-presisi/final.mp4",
+      "video_id": "fz5NKqYxpg0",
       "publish_at": null
     }
   ]
