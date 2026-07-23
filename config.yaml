@@ -17,7 +17,7 @@ voice:
         elevenlabs_id: "VR6AewLTigWG4xSOukaG"
         name: "Arnold"
         gender: "male"
-      - edge_id: "id-ID-JakaNeural"
+      - edge_id: "id-ID-ArdiNeural"
         elevenlabs_id: "ErXwobaYiN019PkySvjV"
         name: "Jaka"
         gender: "male"

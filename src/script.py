@@ -3,7 +3,7 @@ import re
 import time
 from datetime import datetime
 from openai import OpenAI, RateLimitError
-from .config import LLM_API_KEYS, LLM_BASE_URL, LLM_MODEL, LLM_PROVIDER, CONFIG
+from .config import LLM_API_KEYS, GROQ_API_KEYS, LLM_BASE_URL, LLM_MODEL, LLM_PROVIDER, CONFIG
 from . import state
 
 _key_idx = 0
@@ -63,7 +63,7 @@ def _call_llm(model, max_tokens, response_format, messages, retries=5):
                 contents.append({"role": "model", "parts": [{"text": m["content"]}]})
                 
         # Fix model name just in case it has models/ prefix
-        actual_model = "gemini-2.5-flash"
+        actual_model = model.replace("models/", "")
         
         # Try different API keys on rate limit
         for attempt in range(retries):
@@ -94,9 +94,8 @@ def _call_llm(model, max_tokens, response_format, messages, retries=5):
                         print(f"  Rate limited, switching to key {_key_idx+1}/{len(LLM_API_KEYS)}")
                         continue
                     else:
-                        _wait = 2 ** attempt
-                        print(f"  Rate limited (retry {attempt+1}/{retries} in {_wait}s): {resp.text}")
-                        time.sleep(_wait)
+                        print("  Rate limited, all Gemini keys exhausted. Falling back to Groq...")
+                        break
                 else:
                     _wait = 2 ** attempt
                     print(f"  LLM error HTTP {resp.status_code} (retry {attempt+1}/{retries} in {_wait}s): {resp.text}")
@@ -107,8 +106,39 @@ def _call_llm(model, max_tokens, response_format, messages, retries=5):
                     print(f"  LLM error (retry {attempt+1}/{retries} in {_wait}s): {e}")
                     time.sleep(_wait)
                 else:
-                    raise Exception(f"Gemini API failed: {e}")
-        raise Exception("Failed after retries")
+                    print(f"  Gemini API failed: {e}. Falling back to Groq...")
+                    break
+        
+        # If we reach here in Gemini provider without returning, we fallback to Groq
+        print("  Falling back to Groq API...")
+        _groq_idx = 0
+        while _groq_idx < len(GROQ_API_KEYS):
+            _client = OpenAI(api_key=GROQ_API_KEYS[_groq_idx], base_url="https://api.groq.com/openai/v1")
+            groq_model = "llama-3.3-70b-versatile"
+            for attempt in range(retries):
+                try:
+                    return _client.chat.completions.create(
+                        model=groq_model, max_tokens=max_tokens,
+                        response_format=response_format, messages=messages,
+                    )
+                except RateLimitError as e:
+                    if attempt < retries - 1:
+                        _wait = 2 ** attempt
+                        print(f"  Rate limited (retry {attempt+1}/{retries} in {_wait}s): {e}")
+                        time.sleep(_wait)
+                    else:
+                        break
+                except Exception as e:
+                    if attempt < retries - 1:
+                        _wait = 2 ** attempt
+                        print(f"  LLM error (retry {attempt+1}/{retries} in {_wait}s): {e}")
+                        time.sleep(_wait)
+                    else:
+                        break
+            _groq_idx += 1
+            if _groq_idx >= len(GROQ_API_KEYS):
+                raise Exception("All Groq API keys exhausted after Gemini fallback")
+            print(f"  Switching to next Groq key {_groq_idx+1}/{len(GROQ_API_KEYS)}")
     else:
         while _key_idx < len(LLM_API_KEYS):
             _client = OpenAI(api_key=LLM_API_KEYS[_key_idx], base_url=LLM_BASE_URL)
