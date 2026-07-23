@@ -21,7 +21,8 @@
     "teknologi-ai-dalam-forensik",
     "teknologi-ai-dalam-pertanian-presisi",
     "teknologi-ai-dalam-geomorfologi",
-    "teknologi-kecerdasan-buatan-dalam-archaeology"
+    "teknologi-kecerdasan-buatan-dalam-archaeology",
+    "teknologi-kecerdasan-buatan-dalam-olimpiade"
   ],
   "published": [
     {
@@ -198,6 +199,14 @@
       "title": "Mengungkap Masa Lalu dengan AI: Revolusi Arkeologi Digital",
       "path": "/home/runner/work/sainstek/sainstek/output/20260723_090136_teknologi-kecerdasan-buatan-dalam-archaeology/final.mp4",
       "video_id": "m-WzRulhRuc",
+      "publish_at": null
+    },
+    {
+      "ts": "20260723_150719",
+      "topic": "teknologi-kecerdasan-buatan-dalam-olimpiade",
+      "title": "AI Mengubah Wajah Olimpiade: Inilah Fakta Menariknya",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260723_150719_teknologi-kecerdasan-buatan-dalam-olimpiade/final.mp4",
+      "video_id": "HbJ-wWWqYqE",
       "publish_at": null
     }
   ]
