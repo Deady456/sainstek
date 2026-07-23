@@ -19,7 +19,8 @@
     "teknologi-ai-dalam-musik",
     "teknologi-ai-dalam-restorasi-karya-seni",
     "teknologi-ai-dalam-forensik",
-    "teknologi-ai-dalam-pertanian-presisi"
+    "teknologi-ai-dalam-pertanian-presisi",
+    "teknologi-ai-dalam-geomorfologi"
   ],
   "published": [
     {
@@ -180,6 +181,14 @@
       "title": "Revolusi Pertanian Dengan Teknologi AI: Meningkatkan Hasil Tanam",
       "path": "/home/runner/work/sainstek/sainstek/output/20260722_230508_teknologi-ai-dalam-pertanian-presisi/final.mp4",
       "video_id": "fz5NKqYxpg0",
+      "publish_at": null
+    },
+    {
+      "ts": "20260723_070612",
+      "topic": "teknologi-ai-dalam-geomorfologi",
+      "title": "Bagaimana AI Mengungkap Rahasia Bentuk Bumi?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260723_070612_teknologi-ai-dalam-geomorfologi/final.mp4",
+      "video_id": "Ca-LPNz43Lg",
       "publish_at": null
     }
   ]
