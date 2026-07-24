@@ -23,7 +23,8 @@
     "teknologi-ai-dalam-geomorfologi",
     "teknologi-kecerdasan-buatan-dalam-archaeology",
     "teknologi-kecerdasan-buatan-dalam-olimpiade",
-    "teknologi-ai-dalam-digitisasi-warisan-budaya"
+    "teknologi-ai-dalam-digitisasi-warisan-budaya",
+    "teknologi-ai-dalam-asisten-virtual"
   ],
   "published": [
     {
@@ -216,6 +217,14 @@
       "title": "Bagaimana AI Menghidupkan Kembali Warisan Budaya Yang Hilang?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260723_230315_teknologi-ai-dalam-digitisasi-warisan-budaya/final.mp4",
       "video_id": "MNyU67qCWWU",
+      "publish_at": null
+    },
+    {
+      "ts": "20260724_070458",
+      "topic": "teknologi-ai-dalam-asisten-virtual",
+      "title": "Inilah Masa Depan Asisten Virtual Dengan AI Yang Luar Biasa",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260724_070458_teknologi-ai-dalam-asisten-virtual/final.mp4",
+      "video_id": "s0lLNpojlmc",
       "publish_at": null
     }
   ]
