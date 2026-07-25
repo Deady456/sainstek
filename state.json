@@ -26,7 +26,8 @@
     "teknologi-ai-dalam-digitisasi-warisan-budaya",
     "teknologi-ai-dalam-asisten-virtual",
     "teknologi-ai-dalam-pengembangan-bahan-baru",
-    "teknologi-kecerdasan-buatan-dalam-psiologi"
+    "teknologi-kecerdasan-buatan-dalam-psiologi",
+    "teknologi-ai-dalam-simulasi-bencana"
   ],
   "published": [
     {
@@ -243,6 +244,14 @@
       "title": "Bagaimana AI Mengubah Psikologi Modern",
       "path": "/home/runner/work/sainstek/sainstek/output/20260724_230530_teknologi-kecerdasan-buatan-dalam-psiologi/final.mp4",
       "video_id": "i-8SEFpZEaw",
+      "publish_at": null
+    },
+    {
+      "ts": "20260725_070436",
+      "topic": "teknologi-ai-dalam-simulasi-bencana",
+      "title": "Bagaimana AI Mengubah Simulasi Bencana Alam?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260725_070436_teknologi-ai-dalam-simulasi-bencana/final.mp4",
+      "video_id": "b8iUs7rl_qI",
       "publish_at": null
     }
   ]
