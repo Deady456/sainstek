@@ -91,12 +91,10 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
                                   CFG["video"]["width"], CFG["video"]["height"], offset=-0.3)
 
     # ============================================================
-    # Step 5.5: Generate Thumbnail for end of video
+    # Step 5.5: Thumbnail image disabled - hook shown as popup overlay
     # ============================================================
-    _log("5.5/8 Generating thumbnail image")
-    from . import thumbnail
-    thumbnail_img = work / "thumbnail.jpg"
-    thumbnail.generate(data["title"], thumbnail_img)
+    _log("5.5/8 Thumbnail image disabled; hook will be popup overlay")
+    thumbnail_img = None
 
     # ============================================================
     # Step 6: Assemble video
