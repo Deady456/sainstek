@@ -1,4 +1,4 @@
-import asyncio
+﻿import asyncio
 import os
 import time
 from pathlib import Path
@@ -50,7 +50,8 @@ def synth(text: str, out_path: Path) -> Path:
 
     if provider == "elevenlabs":
         keys_str = os.environ.get("ELEVENLABS_API_KEYS", "")
-        keys = [k.strip() for k in keys_str.split(",") if k.strip()]
+        import re
+        keys = [k.strip() for k in re.split(r',|\n|\\n', keys_str) if k.strip()]
 
         if keys:
             for i, api_key in enumerate(keys):
@@ -73,3 +74,4 @@ def synth(text: str, out_path: Path) -> Path:
         )
     print(f"    done in {time.time()-t0:.1f}s (edge-tts)")
     return out_path
+
