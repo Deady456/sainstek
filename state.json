@@ -31,7 +31,8 @@
     "teknologi-ai-dalam-pengembangan-senyawa-obat",
     "teknologi-kecerdasan-buatan-dalam-arkeoastronomi",
     "teknologi-ai-dalam-geofisika",
-    "teknologi-ai-dalam-rekayasa-biomaterial"
+    "teknologi-ai-dalam-rekayasa-biomaterial",
+    "teknologi-kecerdasan-buatan-dalam-teknik-forensik-siber"
   ],
   "published": [
     {
@@ -288,6 +289,14 @@
       "title": "Teknologi AI Ubah Biomaterial Menjadi Solusi Berkelanjutan",
       "path": "/home/runner/work/sainstek/sainstek/output/20260726_234555_teknologi-ai-dalam-rekayasa-biomaterial/final.mp4",
       "video_id": "FFlUwuBg7tM",
+      "publish_at": null
+    },
+    {
+      "ts": "20260727_070440",
+      "topic": "teknologi-kecerdasan-buatan-dalam-teknik-forensik-siber",
+      "title": "Mengungkap Misteri Cybercrime dengan AI",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260727_070440_teknologi-kecerdasan-buatan-dalam-teknik-forensik-siber/final.mp4",
+      "video_id": "pTWwPhGxqEE",
       "publish_at": null
     }
   ]
