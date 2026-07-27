@@ -33,7 +33,8 @@
     "teknologi-ai-dalam-geofisika",
     "teknologi-ai-dalam-rekayasa-biomaterial",
     "teknologi-kecerdasan-buatan-dalam-teknik-forensik-siber",
-    "teknologi-ai-dalam-pengembangan-otomasi-rumah-tangga"
+    "teknologi-ai-dalam-pengembangan-otomasi-rumah-tangga",
+    "teknologi-ai-dalam-pengembangan-kota-berkelanjutan"
   ],
   "published": [
     {
@@ -306,6 +307,14 @@
       "title": "Mengintip Masa Depan Rumah Tangga Pintar dengan AI",
       "path": "/home/runner/work/sainstek/sainstek/output/20260727_150337_teknologi-ai-dalam-pengembangan-otomasi-rumah-tangga/final.mp4",
       "video_id": "qQmja9k_iOo",
+      "publish_at": null
+    },
+    {
+      "ts": "20260727_230417",
+      "topic": "teknologi-ai-dalam-pengembangan-kota-berkelanjutan",
+      "title": "Mengungkap Masa Depan Kota dengan Teknologi AI",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260727_230417_teknologi-ai-dalam-pengembangan-kota-berkelanjutan/final.mp4",
+      "video_id": "XkmGHW3A8ys",
       "publish_at": null
     }
   ]
