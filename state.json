@@ -32,7 +32,8 @@
     "teknologi-kecerdasan-buatan-dalam-arkeoastronomi",
     "teknologi-ai-dalam-geofisika",
     "teknologi-ai-dalam-rekayasa-biomaterial",
-    "teknologi-kecerdasan-buatan-dalam-teknik-forensik-siber"
+    "teknologi-kecerdasan-buatan-dalam-teknik-forensik-siber",
+    "teknologi-ai-dalam-pengembangan-otomasi-rumah-tangga"
   ],
   "published": [
     {
@@ -297,6 +298,14 @@
       "title": "Mengungkap Misteri Cybercrime dengan AI",
       "path": "/home/runner/work/sainstek/sainstek/output/20260727_070440_teknologi-kecerdasan-buatan-dalam-teknik-forensik-siber/final.mp4",
       "video_id": "pTWwPhGxqEE",
+      "publish_at": null
+    },
+    {
+      "ts": "20260727_150337",
+      "topic": "teknologi-ai-dalam-pengembangan-otomasi-rumah-tangga",
+      "title": "Mengintip Masa Depan Rumah Tangga Pintar dengan AI",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260727_150337_teknologi-ai-dalam-pengembangan-otomasi-rumah-tangga/final.mp4",
+      "video_id": "qQmja9k_iOo",
       "publish_at": null
     }
   ]
