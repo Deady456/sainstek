@@ -36,7 +36,8 @@
     "teknologi-ai-dalam-pengembangan-otomasi-rumah-tangga",
     "teknologi-ai-dalam-pengembangan-kota-berkelanjutan",
     "teknologi-ai-dalam-pengembangan-biomimikri",
-    "teknologi-ai-dalam-pengembangan-bioskop-virtual"
+    "teknologi-ai-dalam-pengembangan-bioskop-virtual",
+    "teknologi-ai-dalam-pengembangan-teknologi-nano"
   ],
   "published": [
     {
@@ -333,6 +334,14 @@
       "title": "Teknologi AI Membuat Bioskop Virtual, Apa yang Membuatnya Unik?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260728_150500_teknologi-ai-dalam-pengembangan-bioskop-virtual/final.mp4",
       "video_id": "fwutW6YWQaA",
+      "publish_at": null
+    },
+    {
+      "ts": "20260728_230353",
+      "topic": "teknologi-ai-dalam-pengembangan-teknologi-nano",
+      "title": "Teknologi Nano: Bagaimana AI Membantu Membuat Benda Lebih Kecil?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260728_230353_teknologi-ai-dalam-pengembangan-teknologi-nano/final.mp4",
+      "video_id": "Q7qS_CNXGW0",
       "publish_at": null
     }
   ]
