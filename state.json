@@ -35,7 +35,8 @@
     "teknologi-kecerdasan-buatan-dalam-teknik-forensik-siber",
     "teknologi-ai-dalam-pengembangan-otomasi-rumah-tangga",
     "teknologi-ai-dalam-pengembangan-kota-berkelanjutan",
-    "teknologi-ai-dalam-pengembangan-biomimikri"
+    "teknologi-ai-dalam-pengembangan-biomimikri",
+    "teknologi-ai-dalam-pengembangan-bioskop-virtual"
   ],
   "published": [
     {
@@ -324,6 +325,14 @@
       "title": "Biomimikri: Teknologi AI yang Meniru Alam untuk Masa Depan",
       "path": "/home/runner/work/sainstek/sainstek/output/20260728_070242_teknologi-ai-dalam-pengembangan-biomimikri/final.mp4",
       "video_id": "JMrO7Z73cgk",
+      "publish_at": null
+    },
+    {
+      "ts": "20260728_150500",
+      "topic": "teknologi-ai-dalam-pengembangan-bioskop-virtual",
+      "title": "Teknologi AI Membuat Bioskop Virtual, Apa yang Membuatnya Unik?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260728_150500_teknologi-ai-dalam-pengembangan-bioskop-virtual/final.mp4",
+      "video_id": "fwutW6YWQaA",
       "publish_at": null
     }
   ]
