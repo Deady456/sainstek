@@ -38,7 +38,8 @@
     "teknologi-ai-dalam-pengembangan-biomimikri",
     "teknologi-ai-dalam-pengembangan-bioskop-virtual",
     "teknologi-ai-dalam-pengembangan-teknologi-nano",
-    "teknologi-ai-dalam-rekonstruksi-sejarah"
+    "teknologi-ai-dalam-rekonstruksi-sejarah",
+    "teknologi-kecerdasan-buatan-dalam-pengembangan-permainan-virtual-reality"
   ],
   "published": [
     {
@@ -351,6 +352,14 @@
       "title": "Mengungkap Masa Lalu dengan AI: Rekonstruksi Sejarah Menggunakan Teknologi Canggih",
       "path": "/home/runner/work/sainstek/sainstek/output/20260729_070304_teknologi-ai-dalam-rekonstruksi-sejarah/final.mp4",
       "video_id": "5dgGOLvipzQ",
+      "publish_at": null
+    },
+    {
+      "ts": "20260729_150511",
+      "topic": "teknologi-kecerdasan-buatan-dalam-pengembangan-permainan-virtual-reality",
+      "title": "Teknologi AI Membuat Permainan VR Lebih Realistis",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260729_150511_teknologi-kecerdasan-buatan-dalam-pengembangan-permainan-vir/final.mp4",
+      "video_id": "JPqaegrqWc0",
       "publish_at": null
     }
   ]
