@@ -42,7 +42,8 @@
     "teknologi-kecerdasan-buatan-dalam-pengembangan-permainan-virtual-reality",
     "teknologi-ai-dalam-pengembangan-bahan-terbaru",
     "teknologi-ai-dalam-pengembangan-teknologi-kriogenik",
-    "teknologi-ai-dalam-pengembangan-biosensor"
+    "teknologi-ai-dalam-pengembangan-biosensor",
+    "teknologi-ai-dalam-pengembangan-protesis-cerdas"
   ],
   "published": [
     {
@@ -387,6 +388,14 @@
       "title": "Revolusi Kesehatan: Bagaimana AI Mengubah Biosensor?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260730_150523_teknologi-ai-dalam-pengembangan-biosensor/final.mp4",
       "video_id": "1PkbeLZpx08",
+      "publish_at": null
+    },
+    {
+      "ts": "20260730_230512",
+      "topic": "teknologi-ai-dalam-pengembangan-protesis-cerdas",
+      "title": "Protesis Cerdas dengan AI: Membuka Era Baru dalam Teknologi Bantu",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260730_230512_teknologi-ai-dalam-pengembangan-protesis-cerdas/final.mp4",
+      "video_id": "iPqfnwHUxao",
       "publish_at": null
     }
   ]
