@@ -44,7 +44,8 @@
     "teknologi-ai-dalam-pengembangan-teknologi-kriogenik",
     "teknologi-ai-dalam-pengembangan-biosensor",
     "teknologi-ai-dalam-pengembangan-protesis-cerdas",
-    "teknologi-ai-dalam-pengembangan-sistem-keamanan-pribadi"
+    "teknologi-ai-dalam-pengembangan-sistem-keamanan-pribadi",
+    "teknologi-ai-dalam-pengembangan-neurointerface"
   ],
   "published": [
     {
@@ -405,6 +406,14 @@
       "title": "AI Membuat Sistem Keamanan Pribadi Lebih Canggih",
       "path": "/home/runner/work/sainstek/sainstek/output/20260731_070459_teknologi-ai-dalam-pengembangan-sistem-keamanan-pribadi/final.mp4",
       "video_id": "gLsZmOhy3Jc",
+      "publish_at": null
+    },
+    {
+      "ts": "20260731_150527",
+      "topic": "teknologi-ai-dalam-pengembangan-neurointerface",
+      "title": "Mengejutkan! AI Bisa Membaca Pikiran Manusia Sekarang",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260731_150527_teknologi-ai-dalam-pengembangan-neurointerface/final.mp4",
+      "video_id": "-hVqKQSTQVQ",
       "publish_at": null
     }
   ]
