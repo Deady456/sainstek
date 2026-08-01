@@ -65,7 +65,7 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     _log("3/8 Transcribing for word-level captions (Faster-Whisper)")
     _log("    loading model (first run downloads)...")
     t0 = time.time()
-    words = captions.transcribe_words(voice_mp3, original_text=data["full_text"])
+    words = captions.transcribe_words(voice_mp3)
     _log(f"    {len(words)} words in {time.time()-t0:.1f}s")
 
     # ============================================================
@@ -85,8 +85,11 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     # thumb_dur seconds, then content scenes begin at the same audio position
     # where these captions start -> perfect sync, no double offset.
     _hook_cfg = CFG.get("hook_text", {})
-    hook_word_count = len(data["scenes"][0]["text"].split()) if data.get("scenes") else 0
-    captions_words = []
+    hook_text = data.get("thumbnail_text", "")
+    if hook_text and _hook_cfg.get("enabled", False):
+        captions_words = words[len(hook_text.split()):]
+    else:
+        captions_words = words
     ass_path = captions.write_ass(captions_words, work / "captions.ass",
                                   CFG["video"]["width"], CFG["video"]["height"], offset=-0.3)
 

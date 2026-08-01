@@ -26,6 +26,8 @@ for k, v in os.environ.items():
         import re
         _pexels_keys.extend([x.strip().strip('\"').strip('\'') for x in re.split(r',|\n|\\n', v) if x.strip()])
 PEXELS_API_KEYS = _pexels_keys if _pexels_keys else ["dummy_key"]
+import random
+random.shuffle(PEXELS_API_KEYS)
 _cfg_model = CONFIG.get("script", {}).get("model", "")
 LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "gemini" if "gemini" in _cfg_model.lower() else "groq")
 _gkeys = []
