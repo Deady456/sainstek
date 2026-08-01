@@ -57,7 +57,7 @@ jobs:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           ELEVENLABS_API_KEYS: ${{ secrets.ELEVENLABS_API_KEYS }}
         run: |
-          python -m src.pipeline || python -m src.pipeline_ai
+          python -m src.pipeline
 
       - name: Commit state.json
         run: |
