@@ -47,7 +47,8 @@
     "teknologi-ai-dalam-pengembangan-sistem-keamanan-pribadi",
     "teknologi-ai-dalam-pengembangan-neurointerface",
     "teknologi-ai-dalam-pengembangan-eksoskeleton",
-    "teknologi-ai-dalam-pengembangan-komunikasi-antar-lintas-dimensi"
+    "teknologi-ai-dalam-pengembangan-komunikasi-antar-lintas-dimensi",
+    "teknologi-ai-dalam-pengembangan-konten-pribadi"
   ],
   "published": [
     {
@@ -432,6 +433,14 @@
       "title": "Teknologi AI Membuat Komunikasi Antar Dimensi Lebih Dekat",
       "path": "/home/runner/work/sainstek/sainstek/output/20260801_070415_teknologi-ai-dalam-pengembangan-komunikasi-antar-lintas-dime/final.mp4",
       "video_id": "MHtdzTGo0m8",
+      "publish_at": null
+    },
+    {
+      "ts": "20260801_150433",
+      "topic": "teknologi-ai-dalam-pengembangan-konten-pribadi",
+      "title": "Bagaimana AI Membuat Konten Pribadi Lebih Personal?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260801_150433_teknologi-ai-dalam-pengembangan-konten-pribadi/final.mp4",
+      "video_id": "lCGEN7cROmc",
       "publish_at": null
     }
   ]
