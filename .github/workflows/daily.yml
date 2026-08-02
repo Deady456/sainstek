@@ -41,15 +41,15 @@ jobs:
         env:
           ALL_SECRETS: ${{ toJson(secrets) }}
         run: |
-          python -c "
+          python -c '
           import os, json
-          secrets = json.loads(os.environ['ALL_SECRETS'])
-          with open('.env', 'w') as f:
+          secrets = json.loads(os.environ["ALL_SECRETS"])
+          with open(".env", "w") as f:
               for k, v in secrets.items():
-                  if k.startswith('GROQ_API_KEY') or k.startswith('PEXELS_API_KEY') or k in ['ELEVENLABS_API_KEYS']:
-                      v_escaped = v.replace('\n', '\\n')
-                      f.write(f'{k}=\"{v_escaped}\"\n')
-          "
+                  if k.startswith("GROQ_API_KEY") or k.startswith("PEXELS_API_KEY") or k in ["ELEVENLABS_API_KEYS"]:
+                      v_escaped = v.replace("\n", "\\n")
+                      f.write(f"{k}=\"{v_escaped}\"\n")
+          '
 
       - name: Run pipeline
         env:
