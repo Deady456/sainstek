@@ -1,6 +1,6 @@
 import socket
 import requests
-from .config import PEXELS_API_KEY
+from .config import PEXELS_API_KEYS
 
 PEXELS_TEST_URL = "https://api.pexels.com/videos/search?query=test&orientation=portrait&per_page=1&size=medium"
 
@@ -13,7 +13,8 @@ def check_internet() -> bool:
 
 def check_pexels() -> bool:
     try:
-        r = requests.get(PEXELS_TEST_URL, headers={"Authorization": PEXELS_API_KEY}, timeout=15)
+        key = PEXELS_API_KEYS[0] if PEXELS_API_KEYS else ""
+        r = requests.get(PEXELS_TEST_URL, headers={"Authorization": key}, timeout=15)
         return r.status_code == 200
     except Exception:
         return False
