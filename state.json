@@ -48,7 +48,8 @@
     "teknologi-ai-dalam-pengembangan-neurointerface",
     "teknologi-ai-dalam-pengembangan-eksoskeleton",
     "teknologi-ai-dalam-pengembangan-komunikasi-antar-lintas-dimensi",
-    "teknologi-ai-dalam-pengembangan-konten-pribadi"
+    "teknologi-ai-dalam-pengembangan-konten-pribadi",
+    "teknologi-ai-dalam-pengembangan-metaverse"
   ],
   "published": [
     {
@@ -442,6 +443,16 @@
       "path": "/home/runner/work/sainstek/sainstek/output/20260801_150433_teknologi-ai-dalam-pengembangan-konten-pribadi/final.mp4",
       "video_id": "lCGEN7cROmc",
       "publish_at": null
+    },
+    {
+      "ts": "20260803_004725",
+      "topic": "teknologi-ai-dalam-pengembangan-metaverse",
+      "title": "Revolusi Metaverse: Bagaimana AI Membentuk Masa Depan Dunia Maya",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260803_004725_teknologi-ai-dalam-pengembangan-metaverse/final.mp4",
+      "video_id": "uzjL3qQyXv0",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ]
 }
