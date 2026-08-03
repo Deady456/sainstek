@@ -24,7 +24,7 @@ def run_test():
     voice.synth(full_text, voice_mp3)
     
     print("2/5 Transcribing (Mendapatkan timing kata)...")
-    words = captions.transcribe_words(voice_mp3, original_text=full_text)
+    words = captions.transcribe_words(voice_mp3)
     
     # Memotong kata-kata hook agar tidak muncul di subtitle biasa
     hook_word_count = len(hook_text.split())
