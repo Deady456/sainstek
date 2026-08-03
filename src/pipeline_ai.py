@@ -47,7 +47,7 @@ def run_once(publish_at: str | None = None,
         _log(f"    scene {i+1}/{len(data['scenes'])}: \"{prompt}\"")
         t1 = time.time()
         
-        scene_hook = hook_text if i == 0 else ""
+        scene_hook = "" # Removed static freeze frame hook (Rule 4)
         visuals_ai.generate(rich_prompt, img_path, hook_text=scene_hook)
         
         _log(f"      done in {time.time()-t1:.0f}s")
@@ -72,7 +72,8 @@ def run_once(publish_at: str | None = None,
         scenes=data["scenes"],
         out_path=work / "final.mp4",
         work_dir=work / "ffmpeg",
-        hook_text="",  # Text is already burned into the image by Pillow
+        hook_text=hook_text,  # Dynamic animated popup overlay (Rule 4)
+        has_hook=bool(hook_text),
     )
     dur = time.time() - t0
     sz = final.stat().st_size / (1024 * 1024)
