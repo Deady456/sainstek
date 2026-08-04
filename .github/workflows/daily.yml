@@ -71,16 +71,3 @@ jobs:
             git pull --rebase
             git push
           fi
-
-      - name: Commit refreshed token (if changed)
-        run: |
-          if [ ! -f token_default.json ]; then
-            echo "Token file not found, skipping"
-          elif git diff --quiet token_default.json 2>/dev/null; then
-            echo "Token unchanged"
-          else
-            git add token_default.json
-            git commit -m "auto: refresh YouTube token"
-            git pull --rebase
-            git push
-          fi
