@@ -1,3 +1,4 @@
+import os
 import json
 import shutil
 import subprocess
@@ -70,7 +71,7 @@ def build(
         f"--props=public/job_temp/props.json"
     ]
     
-    result = subprocess.run(cmd, cwd=vanta_dir, capture_output=True, text=True, shell=True)
+    result = subprocess.run(cmd, cwd=vanta_dir, capture_output=True, text=True, shell=(os.name == 'nt'))
     
     if result.returncode != 0:
         print("Vanta Render Failed!")

@@ -2,7 +2,7 @@ import argparse
 import re
 import time
 from datetime import datetime
-from . import script, voice, captions, visuals, assemble, upload, state, visuals_ai
+from . import script, voice, captions, visuals, assemble, assemble_vanta, upload, state, visuals_ai
 from . import branding, review
 from .config import CONFIG, OUTPUT_DIR
 
@@ -102,10 +102,10 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     # ============================================================
     # Step 6: Assemble video
     # ============================================================
-    _log("6/8 Assembling final video with ffmpeg")
+    _log("6/8 Assembling final video with Vanta (Remotion)")
     _log("    processing scenes (scale/crop/loop)...")
     t0 = time.time()
-    final = assemble.build(
+    final = assemble_vanta.build(
         scene_videos=scene_videos,
         voice_audio=voice_mp3,
         captions_ass=ass_path,
