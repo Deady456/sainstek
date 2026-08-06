@@ -1,0 +1,13 @@
+{
+  "judul": "Fakta Unik Dunia",
+  "background_color": "#111122",
+  "captions": [
+    {"kata": "Fakta", "startFrame": 0, "endFrame": 20},
+    {"kata": "pertama,", "startFrame": 20, "endFrame": 40},
+    {"kata": "Bumi", "startFrame": 40, "endFrame": 60},
+    {"kata": "itu", "startFrame": 60, "endFrame": 80},
+    {"kata": "tidak", "startFrame": 80, "endFrame": 100},
+    {"kata": "bulat", "startFrame": 100, "endFrame": 120},
+    {"kata": "sempurna!", "startFrame": 120, "endFrame": 150}
+  ]
+}

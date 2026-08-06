@@ -32,6 +32,15 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
+      - name: Setup Node.js (For Vanta Remotion)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Vanta dependencies
+        working-directory: ./vanta
+        run: npm ci || npm install
+
       - name: Decode YouTube credentials
         run: |
           echo "${{ secrets.CLIENT_SECRET_B64 }}" | base64 -d > client_secret.json
