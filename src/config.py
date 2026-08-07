@@ -53,5 +53,11 @@ elif LLM_PROVIDER == "groq":
     LLM_API_KEY = LLM_API_KEYS[0]
     LLM_BASE_URL = "https://api.groq.com/openai/v1"
     LLM_MODEL = CONFIG.get("script", {}).get("model", "llama-3.3-70b-versatile")
+elif LLM_PROVIDER == "omniroute":
+    _omni = os.environ.get("OMNIROUTE_API_KEY", "dummy")
+    LLM_API_KEYS = [_omni]
+    LLM_API_KEY = LLM_API_KEYS[0]
+    LLM_BASE_URL = "https://relative-girls-precipitation-chan.trycloudflare.com/v1"
+    LLM_MODEL = CONFIG.get("script", {}).get("model", "gemini-2.5-flash")
 else:
     raise ValueError(f"Unknown LLM_PROVIDER: {LLM_PROVIDER}")
