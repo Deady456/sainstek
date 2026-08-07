@@ -63,11 +63,11 @@ def build(
     # Ensure out_path's parent exists
     out_path.parent.mkdir(parents=True, exist_ok=True)
     
+    raw_vanta = out_path.with_name(out_path.stem + "_vanta" + out_path.suffix)
     cmd = [
         "npx", "remotion", "render",
         "src/index.ts",
         "FacelessVideo",
-        raw_vanta = out_path.with_name(out_path.stem + "_vanta" + out_path.suffix)
         str(raw_vanta.absolute()),
         f"--props=public/job_temp/props.json"
     ]
