@@ -77,6 +77,6 @@ jobs:
             echo "state.json unchanged"
           else
             git commit -m "auto: update state.json"
-            git pull --rebase
+            git pull --rebase --autostash
             git push
           fi

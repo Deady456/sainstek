@@ -67,7 +67,8 @@ def build(
         "npx", "remotion", "render",
         "src/index.ts",
         "FacelessVideo",
-        str(out_path.absolute()),
+        raw_vanta = out_path.with_name(out_path.stem + "_vanta" + out_path.suffix)
+        str(raw_vanta.absolute()),
         f"--props=public/job_temp/props.json"
     ]
     
@@ -79,5 +80,34 @@ def build(
         print(result.stderr)
         raise RuntimeError("Vanta Render Failed")
         
-    print(f"    [Vanta] Render complete: {out_path.name}")
+    print(f"    [Vanta] Render complete: {raw_vanta.name}")
+    
+    # Mix background music
+    ROOT = Path(__file__).resolve().parent.parent
+    bg_music = ROOT / "assets" / "bg.mp3"
+    
+    if bg_music.exists():
+        print("    [Vanta] Adding background music (15%)...")
+        audio_filter = "[0:a]volume=1.0[v];[1:a]volume=0.15[bg];[v][bg]amix=inputs=2:duration=first:dropout_transition=2[a]"
+        mix_cmd = [
+            "ffmpeg", "-y",
+            "-i", str(raw_vanta),
+            "-stream_loop", "-1",
+            "-i", str(bg_music),
+            "-filter_complex", audio_filter,
+            "-map", "0:v", "-map", "[a]",
+            "-c:v", "copy",
+            "-c:a", "aac", "-b:a", "192k",
+            str(out_path)
+        ]
+        mix_result = subprocess.run(mix_cmd, capture_output=True, text=True)
+        if mix_result.returncode != 0:
+            print("FFmpeg Mix Failed!")
+            print(mix_result.stderr)
+            raise RuntimeError("FFmpeg Mix Failed")
+        raw_vanta.unlink(missing_ok=True)
+    else:
+        print("    [Vanta] No bg.mp3 found, skipping mix.")
+        raw_vanta.rename(out_path)
+        
     return out_path
