@@ -54,9 +54,12 @@ elif LLM_PROVIDER == "groq":
     LLM_BASE_URL = "https://api.groq.com/openai/v1"
     LLM_MODEL = CONFIG.get("script", {}).get("model", "llama-3.3-70b-versatile")
 elif LLM_PROVIDER == "omniroute":
-    _omni = (os.environ.get("OMNIROUTE_API_KEY", "") or "dummy")
-    LLM_API_KEYS = [_omni]
-    LLM_API_KEY = LLM_API_KEYS[0]
+    _model = CONFIG.get("script", {}).get("model", "")
+    if "llama" in _model.lower() or "mixtral" in _model.lower() or "gemma" in _model.lower():
+        LLM_API_KEYS = GROQ_API_KEYS
+    else:
+        LLM_API_KEYS = GEMINI_API_KEYS
+    LLM_API_KEY = LLM_API_KEYS[0] if LLM_API_KEYS else "dummy"
     LLM_BASE_URL = "https://vocalize-turmoil-gizmo.ngrok-free.dev/v1"
     LLM_MODEL = CONFIG.get("script", {}).get("model", "gemini-2.5-flash")
 else:
