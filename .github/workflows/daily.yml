@@ -139,8 +139,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: generated-video
-          path: |
-            output/
-            *.mp4
+          name: final-video-mp4
+          path: output/**/final.mp4
           retention-days: 7
