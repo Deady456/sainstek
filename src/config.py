@@ -63,12 +63,9 @@ elif LLM_PROVIDER == "omniroute":
     _model = CONFIG.get("script", {}).get("model", "")
     LLM_API_KEYS = OMNIROUTE_API_KEYS
     LLM_API_KEY = LLM_API_KEYS[0] if LLM_API_KEYS else "dummy"
-    LLM_BASE_URL = "https://openrouter.ai/api/v1"
+    LLM_BASE_URL = "https://vocalize-turmoil-gizmo.ngrok-free.dev/v1"
     
-    # Prefix model with 'meta-llama/' if it's a llama model so OpenRouter understands it
-    if _model == "llama-3.3-70b-versatile":
-        LLM_MODEL = "meta-llama/llama-3.3-70b-instruct"
-    else:
-        LLM_MODEL = _model if _model else "meta-llama/llama-3.3-70b-instruct"
+    # We will use the model exactly as defined in config.yaml
+    LLM_MODEL = _model if _model else "llama-3.3-70b-versatile"
 else:
     raise ValueError(f"Unknown LLM_PROVIDER: {LLM_PROVIDER}")
