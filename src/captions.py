@@ -36,8 +36,22 @@ def _fmt_ts(t: float) -> str:
 
 def write_ass(words: list[dict], out_path: Path, video_w: int, video_h: int, offset: float = 0.0) -> Path:
     c = CONFIG["captions"]
-    chunk_size = c["words_per_caption"]
-    margin_v = int(video_h * (1 - c["position_y"]))
+    chunk_size = c.get("words_per_caption", 3)
+    font_size = c.get("font_size", 110)
+    margin_v = int(video_h * (1 - c.get("position_y", 0.5)))
+    
+    channel = CONFIG.get("upload", {}).get("channel", "default")
+    channel_pill_colors = {
+        "animewebai": "&H00E22B8A&",   # Neon Purple
+        "sainstek": "&H00FF8800&",     # Electric Blue
+        "kisahnyata": "&H003C14DC&",   # Crimson Red
+        "misteriasia": "&H000000B2&",  # Dark Red
+        "whatif": "&H000066FF&",       # Amber Orange
+        "lofisleep": "&H00808000&",    # Soft Teal
+        "serenitymind": "&H0054082E&", # Deep Indigo
+        "default": "&H000000CC&",      # Red Accent
+    }
+    accent_pill = channel_pill_colors.get(channel, "&H000000CC&")
 
     header = f"""[Script Info]
 ScriptType: v4.00+
@@ -48,21 +62,40 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,{c['font']},{c['font_size']},{c['primary_color']},&H00FFFFFF,{c['outline_color']},&H00000000,-1,0,0,0,100,100,0,0,1,{c['outline']},2,2,40,40,{margin_v},1
+Style: Default,{c['font']},{font_size},{c['primary_color']},&H00FFFFFF,{c['outline_color']},&H00000000,-1,0,0,0,100,100,0,0,1,{c['outline']},2,2,40,40,{margin_v},1
+Style: HookPill,{c['font']},{font_size},&H00FFFFFF&,&H00FFFFFF&,{accent_pill},&H00000000,-1,0,0,0,100,100,0,0,3,14,0,2,40,40,{margin_v},1
+Style: DarkPill,{c['font']},{font_size},&H00FFFFFF&,&H00FFFFFF&,&H00000000&,&H00000000,-1,0,0,0,100,100,0,0,3,14,0,2,40,40,{margin_v},1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
 
     lines = []
+    # Hook duration (first 3.0 seconds use channel Pill Box styling)
+    hook_end_time = 3.0
+
     for i in range(0, len(words), chunk_size):
         chunk = words[i:i + chunk_size]
-        start = _fmt_ts(chunk[0]["start"] + offset)
-        end = _fmt_ts(chunk[-1]["end"] + offset)
+        start_sec = chunk[0]["start"] + offset
+        end_sec = chunk[-1]["end"] + offset
+        start = _fmt_ts(start_sec)
+        end = _fmt_ts(end_sec)
         text = " ".join(w["word"].strip() for w in chunk).upper()
-        if chunk_size == 1:
-            text = f"{{\\fscx120\\fscy120\\t(0,150,\\fscx100\\fscy100)}}{text}"
-        lines.append(f"Dialogue: 0,{start},{end},Default,,0,0,0,,{text}")
 
-    out_path.write_text(header + "\n".join(lines), encoding="utf-8")
+        # Apply Hook Pill Box for the first 3 seconds
+        if start_sec < hook_end_time:
+            style_name = "HookPill" if i == 0 else "DarkPill"
+            # Add dynamic popup animation for hook text
+            text_fmt = f"{{scx125scy125	(0,150,scx100scy100)}}{text}"
+        else:
+            style_name = "Default"
+            if chunk_size == 1:
+                text_fmt = f"{{scx120scy120	(0,150,scx100scy100)}}{text}"
+            else:
+                text_fmt = text
+
+        lines.append(f"Dialogue: 0,{start},{end},{style_name},,0,0,0,,{text_fmt}")
+
+    out_path.write_text(header + "
+".join(lines), encoding="utf-8")
     return out_path
