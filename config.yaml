@@ -3,7 +3,7 @@ audience: "orang dewasa Indonesia yang melek teknologi, pengguna gadget, dan pen
 language: id
 
 script:
-  model: llama-3.3-70b-versatile
+  model: nvidia/openai/gpt-oss-20b
   target_seconds: 80
   words_per_second: 2.5
 

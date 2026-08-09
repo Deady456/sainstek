@@ -63,7 +63,7 @@ elif LLM_PROVIDER == "omniroute":
     _model = CONFIG.get("script", {}).get("model", "")
     LLM_API_KEYS = OMNIROUTE_API_KEYS
     LLM_API_KEY = LLM_API_KEYS[0] if LLM_API_KEYS else "dummy"
-    LLM_BASE_URL = "http://3.27.37.246:20130/v1"
+    LLM_BASE_URL = "https://vocalize-turmoil-gizmo.ngrok-free.dev/v1"
     
     # We will use the model exactly as defined in config.yaml
     LLM_MODEL = _model if _model else "llama-3.3-70b-versatile"
