@@ -176,3 +176,6 @@ def fetch_all(scenes: list[dict], out_dir: Path) -> list[Path]:
             if (i, j) in results:
                 paths.append(results[(i, j)])
     return paths
+
+
+fetch_for_scenes = fetch_all
