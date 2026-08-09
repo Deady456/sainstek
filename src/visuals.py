@@ -126,13 +126,13 @@ def _fetch_single_clip(i: int, j: int, q: str, varied_q: str, out_dir: Path) -> 
             ai_generate = None
             
         img_path = out_dir / f"scene_{i:02d}_{j:02d}.jpg"
-        rich_prompt = f"{q}, 4k resolution, cinematic, vertical"
+        rich_prompt = f"photorealistic 8k photo of {q}, shot on 35mm lens, cinematic lighting, vertical"
         
         if ai_generate:
             ai_generate(rich_prompt, img_path)
         else:
             # Fallback direct Pollinations image download
-            poll_url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(rich_prompt)}?width=1080&height=1920&nologo=true"
+            poll_url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(rich_prompt)}?model=flux&width=1080&height=1920&nologo=true"
             r = requests.get(poll_url, timeout=30)
             with open(img_path, "wb") as f:
                 f.write(r.content)
