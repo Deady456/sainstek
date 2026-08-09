@@ -94,6 +94,5 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
         lines.append(f"Dialogue: 0,{start},{end},{style_name},,0,0,0,,{text_fmt}")
 
-    out_path.write_text(header + "
-".join(lines), encoding="utf-8")
+    out_path.write_text(header + chr(10).join(lines), encoding="utf-8")
     return out_path
