@@ -55,7 +55,8 @@
     "teknologi-ai-dalam-pengembangan-kota-hantu",
     "teknologi-ai-dalam-pengembangan-teknologi-penipuan-siber",
     "teknologi-ai-dalam-pengembangan-teknologi-penyeimbang-ekosistem",
-    "teknologi-ai-dalam-pengembangan-teknologi-swarm-intelligence"
+    "teknologi-ai-dalam-pengembangan-teknologi-swarm-intelligence",
+    "teknologi-ai-dalam-pengembangan-teknologi-augmented-audio"
   ],
   "published": [
     {
@@ -516,6 +517,16 @@
       "title": "Teknologi AI Terbaru: Mengendalikan Swarm Robot!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260809_115839_teknologi-ai-dalam-pengembangan-teknologi-swarm-intelligence/final.mp4",
       "video_id": "WZuVuYZFty4",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260809_123151",
+      "topic": "teknologi-ai-dalam-pengembangan-teknologi-augmented-audio",
+      "title": "Teknologi AI Membuat Musik Dengan Emosi Manusia",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260809_123151_teknologi-ai-dalam-pengembangan-teknologi-augmented-audio/final.mp4",
+      "video_id": "by1vF8Myhyo",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
