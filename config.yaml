@@ -3,7 +3,7 @@ audience: "orang dewasa Indonesia yang melek teknologi, pengguna gadget, dan pen
 language: id
 
 script:
-  model: gemini/gemini-1.5-flash
+  model: gemini/gemini-3.5-flash
   target_seconds: 80
   words_per_second: 2.5
 
