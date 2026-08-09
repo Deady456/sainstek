@@ -99,21 +99,16 @@ jobs:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           ELEVENLABS_API_KEYS: ${{ secrets.ELEVENLABS_API_KEYS }}
         run: |
-          MAX_ATTEMPTS=3
+          MAX_ATTEMPTS=2
           for attempt in $(seq 1 $MAX_ATTEMPTS); do
             echo "=== Pipeline attempt $attempt/$MAX_ATTEMPTS ==="
             if python -m src.pipeline; then
               echo "Pipeline succeeded on attempt $attempt"
               exit 0
             fi
-            echo "Pipeline failed on attempt $attempt, trying AI fallback..."
-            if python -m src.pipeline_ai; then
-              echo "AI pipeline succeeded on attempt $attempt"
-              exit 0
-            fi
             if [ "$attempt" -lt "$MAX_ATTEMPTS" ]; then
               WAIT=$((attempt * 30))
-              echo "All pipelines failed. Waiting ${WAIT}s before retry..."
+              echo "Pipeline failed. Waiting ${WAIT}s before retry..."
               sleep $WAIT
             fi
           done
