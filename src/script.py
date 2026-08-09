@@ -164,8 +164,8 @@ def _call_llm(model, max_tokens, response_format, messages, retries=5):
                         break
             _key_idx += 1
             if _key_idx >= len(LLM_API_KEYS):
-                raise Exception("All Groq API keys exhausted")
-            print(f"  Switching to next Groq key {_key_idx+1}/{len(LLM_API_KEYS)}")
+                raise Exception(f"All API keys exhausted for {LLM_PROVIDER}")
+            print(f"  Switching to next API key {_key_idx+1}/{len(LLM_API_KEYS)}")
 
 
 def _system_prompt(content_format: str = None) -> str:
@@ -237,16 +237,26 @@ def _is_duplicate_title(title: str, published: list) -> bool:
     return False
 
 
-def _call_and_extract(messages) -> dict:
-    t0 = time.time()
-    resp = _call_llm(
-        model=LLM_MODEL, max_tokens=2000,
-        response_format={"type": "json_object"},
-        messages=messages,
-    )
-    raw = resp.choices[0].message.content
-    print(f"    LLM responded in {time.time()-t0:.1f}s ({len(raw)} chars)")
-    return _extract_json(raw)
+def _call_and_extract(messages, max_retries=5) -> dict:
+    for attempt in range(1, max_retries + 1):
+        try:
+            t0 = time.time()
+            resp = _call_llm(
+                model=LLM_MODEL, max_tokens=2000,
+                response_format={"type": "json_object"},
+                messages=messages,
+            )
+            raw = resp.choices[0].message.content
+            print(f"    LLM responded in {time.time()-t0:.1f}s ({len(raw)} chars)")
+            return _extract_json(raw)
+        except Exception as e:
+            if "All Groq API keys exhausted" in str(e):
+                raise
+            delay = 2 ** (attempt - 1)
+            print(f"  LLM error (retry {attempt}/{max_retries} in {delay}s): {e}")
+            if attempt == max_retries:
+                raise
+            time.sleep(delay)
 
 
 def generate(content_format: str = None) -> dict:
