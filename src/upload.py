@@ -15,7 +15,10 @@ CLIENT_SECRET = ROOT / "client_secret.json"
 
 def _token_path() -> Path:
     channel = CONFIG.get("upload", {}).get("channel", "default")
-    return ROOT / f"token_{channel}.json"
+    tpath = ROOT / f"token_{channel}.json"
+    if not tpath.exists() and (ROOT / "token_default.json").exists():
+        return ROOT / "token_default.json"
+    return tpath
 
 
 def get_service():
