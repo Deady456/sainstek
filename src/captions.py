@@ -46,6 +46,7 @@ def write_ass(words: list[dict], out_path: Path, video_w: int, video_h: int, off
         "sainstek": "&H00FF8800&",     # Electric Blue
         "kisahnyata": "&H003C14DC&",   # Crimson Red
         "misteriasia": "&H000000B2&",  # Dark Red
+        "kasusmisteri": "&H003C14DC&", # Crimson Red
         "whatif": "&H000066FF&",       # Amber Orange
         "lofisleep": "&H00808000&",    # Soft Teal
         "serenitymind": "&H0054082E&", # Deep Indigo
@@ -71,7 +72,6 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
 
     lines = []
-    # Hook duration (first 3.0 seconds use channel Pill Box styling)
     hook_end_time = 3.0
 
     for i in range(0, len(words), chunk_size):
@@ -82,15 +82,13 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         end = _fmt_ts(end_sec)
         text = " ".join(w["word"].strip() for w in chunk).upper()
 
-        # Apply Hook Pill Box for the first 3 seconds
         if start_sec < hook_end_time:
             style_name = "HookPill" if i == 0 else "DarkPill"
-            # Add dynamic popup animation for hook text
-            text_fmt = f"{{scx125scy125	(0,150,scx100scy100)}}{text}"
+            text_fmt = "{scx125scy125	(0,150,scx100scy100)}" + text
         else:
             style_name = "Default"
             if chunk_size == 1:
-                text_fmt = f"{{scx120scy120	(0,150,scx100scy100)}}{text}"
+                text_fmt = "{scx120scy120	(0,150,scx100scy100)}" + text
             else:
                 text_fmt = text
 
