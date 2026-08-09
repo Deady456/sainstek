@@ -56,12 +56,12 @@ jobs:
         working-directory: ./vanta
         run: npm ci || npm install
 
-      - name: Decode YouTube credentials
+            - name: Decode YouTube credentials
         run: |
-          echo "${{ secrets.CLIENT_SECRET_B64 }}" | base64 -d > client_secret.json
-          echo "${{ secrets.TOKEN_B64 }}" | base64 -d > token_default.json
+          if [ -n "${{ secrets.CLIENT_SECRET_B64 }}" ]; then echo "${{ secrets.CLIENT_SECRET_B64 }}" | base64 -d > client_secret.json || true; fi
+          if [ -n "${{ secrets.TOKEN_B64 }}" ]; then echo "${{ secrets.TOKEN_B64 }}" | base64 -d > token_default.json || true; fi
 
-      - name: Set TikTok Cookies
+- name: Set TikTok Cookies
         if: env.TIKTOK_COOKIES != ''
         env:
           TIKTOK_COOKIES: ${{ secrets.TIKTOK_COOKIES }}
