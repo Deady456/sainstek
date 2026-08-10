@@ -57,7 +57,8 @@
     "teknologi-ai-dalam-pengembangan-teknologi-penyeimbang-ekosistem",
     "teknologi-ai-dalam-pengembangan-teknologi-swarm-intelligence",
     "teknologi-ai-dalam-pengembangan-teknologi-augmented-audio",
-    "teknologi-ai-dalam-pengembangan-identitas-digital"
+    "teknologi-ai-dalam-pengembangan-identitas-digital",
+    "teknologi-ai-dalam-pengembangan-sonifikasi-data"
   ],
   "published": [
     {
@@ -538,6 +539,16 @@
       "title": "Revolusi Identitas Digital: Bagaimana AI Mengubah Cara Kita Berinteraksi",
       "path": "/home/runner/work/sainstek/sainstek/output/20260810_031548_teknologi-ai-dalam-pengembangan-identitas-digital/final.mp4",
       "video_id": "TUIIbKWg_QE",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260810_223507",
+      "topic": "teknologi-ai-dalam-pengembangan-sonifikasi-data",
+      "title": "Mengungkap Rahasia Data dengan Suara: Teknologi AI Sonifikasi",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260810_223507_teknologi-ai-dalam-pengembangan-sonifikasi-data/final.mp4",
+      "video_id": "OD17kwxSnnE",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
