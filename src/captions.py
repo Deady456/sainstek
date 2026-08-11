@@ -1,3 +1,7 @@
+import os
+import warnings
+os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
+warnings.filterwarnings("ignore", category=UserWarning)
 import time
 from pathlib import Path
 from faster_whisper import WhisperModel
@@ -84,15 +88,15 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
         if start_sec < hook_end_time:
             style_name = "HookPill" if i == 0 else "DarkPill"
-            text_fmt = "{scx125scy125	(0,150,scx100scy100)}" + text
+            text_fmt = "{\\fscx125\\fscy125\\t(0,150,\\fscx100\\fscy100)}" + text
         else:
             style_name = "Default"
             if chunk_size == 1:
-                text_fmt = "{scx120scy120	(0,150,scx100scy100)}" + text
+                text_fmt = "{\\fscx120\\fscy120\\t(0,150,\\fscx100\\fscy100)}" + text
             else:
                 text_fmt = text
 
         lines.append(f"Dialogue: 0,{start},{end},{style_name},,0,0,0,,{text_fmt}")
 
-    out_path.write_text(header + chr(10).join(lines), encoding="utf-8")
+    out_path.write_text(header + "\\n".join(lines), encoding="utf-8")
     return out_path
