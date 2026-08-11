@@ -30,52 +30,71 @@ import random
 random.shuffle(PEXELS_API_KEYS)
 _cfg_model = CONFIG.get("script", {}).get("model", "")
 LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "gemini" if "gemini" in _cfg_model.lower() else "groq")
-_gkeys = []
-for k, v in os.environ.items():
-    if k.startswith("GEMINI_API_KEY") and v.strip():
-        _gkeys.extend([x.strip().strip('\"').strip('\'') for x in re.split(r',|\n|\\n', v) if x.strip()])
-GEMINI_API_KEYS = _gkeys if _gkeys else [""]
-GEMINI_API_KEY = GEMINI_API_KEYS[0]
 
-_grkeys = []
-for k, v in os.environ.items():
-    if k.startswith("GROQ_API_KEY") and v.strip():
-        _grkeys.extend([x.strip().strip('\"').strip('\'') for x in re.split(r',|\n|\\n', v) if x.strip()])
-GROQ_API_KEYS = _grkeys if _grkeys else ["dummy"]
+def _get_keys(prefix):
+    keys = []
+    for k, v in os.environ.items():
+        if k.startswith(prefix) and v.strip():
+            keys.extend([x.strip().strip('"').strip("'") for x in re.split(r',|\\n|\\\\n', v) if x.strip()])
+    return keys
 
-_omnkeys = []
-for k, v in os.environ.items():
-    if k.startswith("OMNIROUTE_API_KEY") and v.strip():
-        _omnkeys.extend([x.strip().strip('\"').strip('\'') for x in re.split(r',|\n|\\n', v) if x.strip()])
-OMNIROUTE_API_KEYS = _omnkeys if _omnkeys else ["dummy"]
+GEMINI_API_KEYS = _get_keys("GEMINI_API_KEY")
+GROQ_API_KEYS = _get_keys("GROQ_API_KEY")
+OPENROUTER_API_KEYS = _get_keys("OPENROUTER_API_KEY")
+NVIDIA_API_KEYS = _get_keys("NVIDIA_API_KEY")
+OPENCODE_ZEN_API_KEYS = _get_keys("OPENCODE_ZEN_API_KEY")
+STABILITY_API_KEYS = _get_keys("STABILITY_API_KEY")
+OMNIROUTE_API_KEYS = _get_keys("OMNIROUTE_API_KEY")
+
+# Primary configuration
+LLM_API_KEYS = GEMINI_API_KEYS if LLM_PROVIDER == "gemini" else GROQ_API_KEYS
+if not LLM_API_KEYS: LLM_API_KEYS = [""]
+LLM_API_KEY = LLM_API_KEYS[0]
 
 if LLM_PROVIDER == "gemini":
-    LLM_API_KEY = GEMINI_API_KEY
-    LLM_API_KEYS = GEMINI_API_KEYS
     LLM_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
     LLM_MODEL = CONFIG.get("script", {}).get("model", "models/gemini-2.5-flash")
-elif LLM_PROVIDER == "openrouter":
-    _orkeys = []
-    for k, v in os.environ.items():
-        if k.startswith("OPENROUTER_API_KEY") and v.strip():
-            _orkeys.extend([x.strip().strip('"').strip("'") for x in re.split(r',|\n|\\n', v) if x.strip()])
-    OPENROUTER_API_KEYS = _orkeys if _orkeys else [""]
-    LLM_API_KEYS = OPENROUTER_API_KEYS
-    LLM_API_KEY = LLM_API_KEYS[0]
-    LLM_BASE_URL = "https://openrouter.ai/api/v1"
-    LLM_MODEL = CONFIG.get("script", {}).get("model", "meta-llama/llama-3.3-70b-instruct")
 elif LLM_PROVIDER == "groq":
-    LLM_API_KEYS = GROQ_API_KEYS
-    LLM_API_KEY = LLM_API_KEYS[0]
     LLM_BASE_URL = "https://api.groq.com/openai/v1"
-    LLM_MODEL = CONFIG.get("script", {}).get("model", "llama-3.3-70b-versatile")
-elif LLM_PROVIDER == "omniroute":
-    _model = CONFIG.get("script", {}).get("model", "")
-    LLM_API_KEYS = OMNIROUTE_API_KEYS
-    LLM_API_KEY = LLM_API_KEYS[0] if LLM_API_KEYS else "dummy"
-    LLM_BASE_URL = "https://vocalize-turmoil-gizmo.ngrok-free.dev/v1"
-    
-    # We will use the model exactly as defined in config.yaml
-    LLM_MODEL = _model if _model else "llama-3.3-70b-versatile"
+    LLM_MODEL = "llama-3.3-70b-versatile"
 else:
-    raise ValueError(f"Unknown LLM_PROVIDER: {LLM_PROVIDER}")
+    LLM_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
+    LLM_MODEL = "models/gemini-2.5-flash"
+
+# Fallback sequence for LLM
+FALLBACK_PROVIDERS = []
+if GEMINI_API_KEYS:
+    FALLBACK_PROVIDERS.append({
+        "name": "gemini",
+        "keys": GEMINI_API_KEYS,
+        "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+        "model": "gemini-2.5-flash"
+    })
+if GROQ_API_KEYS:
+    FALLBACK_PROVIDERS.append({
+        "name": "groq",
+        "keys": GROQ_API_KEYS,
+        "base_url": "https://api.groq.com/openai/v1",
+        "model": "llama-3.3-70b-versatile"
+    })
+if OPENROUTER_API_KEYS:
+    FALLBACK_PROVIDERS.append({
+        "name": "openrouter",
+        "keys": OPENROUTER_API_KEYS,
+        "base_url": "https://openrouter.ai/api/v1",
+        "model": "meta-llama/llama-3.3-70b-instruct"
+    })
+if NVIDIA_API_KEYS:
+    FALLBACK_PROVIDERS.append({
+        "name": "nvidia",
+        "keys": NVIDIA_API_KEYS,
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "model": "meta/llama-3.1-70b-instruct"
+    })
+if OPENCODE_ZEN_API_KEYS:
+    FALLBACK_PROVIDERS.append({
+        "name": "opencode-zen",
+        "keys": OPENCODE_ZEN_API_KEYS,
+        "base_url": "https://api.opencodezen.com/v1", # Assuming generic OpenAI compat endpoint
+        "model": "gpt-4o-mini"
+    })

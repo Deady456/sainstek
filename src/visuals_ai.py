@@ -188,20 +188,63 @@ def _apply_hook_text(img_path: Path, hook_text: str, width: int, height: int):
     except Exception as e:
         print(f"Failed to apply hook text: {e}")
 
-def generate(prompt: str, out_path: Path, width=1080, height=1920, hook_text: str = None) -> Path:
+
+def _generate_stability_ai(prompt: str, out_path, width=1080, height=1920):
+    from .config import STABILITY_API_KEYS
+    import requests
+    if not STABILITY_API_KEYS:
+        return False
+        
+    for key in STABILITY_API_KEYS:
+        url = "https://api.stability.ai/v2beta/stable-image/generate/core"
+        data = {
+            "prompt": prompt,
+            "output_format": "jpeg",
+            "aspect_ratio": "9:16"
+        }
+        headers = {
+            "Authorization": f"Bearer {key}",
+            "Accept": "image/*"
+        }
+        
+        try:
+            resp = requests.post(url, headers=headers, data=data, files={"none": ""}, timeout=60)
+            if resp.status_code == 200 and len(resp.content) > 1000:
+                with open(out_path, 'wb') as f:
+                    f.write(resp.content)
+                print("  Successfully generated image using Stability AI fallback")
+                return True
+            else:
+                print(f"  Stability AI error: {resp.status_code} - {resp.text}")
+        except Exception as e:
+            print(f"  Stability AI connection error: {e}")
+            
+    return False
+
+def generate(prompt: str, out_path, width=1080, height=1920, hook_text: str = None):
+    import requests
     out_path.parent.mkdir(parents=True, exist_ok=True)
     url = f"{POLLINATIONS_URL}{requests.utils.quote(prompt)}?width={width}&height={height}&nologo=true"
+    
+    success = False
     for attempt in range(3):
         try:
             resp = requests.get(url, timeout=60)
             if resp.status_code == 200 and len(resp.content) > 1000:
                 out_path.write_bytes(resp.content)
-                if hook_text:
-                    _apply_hook_text(out_path, hook_text, width, height)
-                return out_path
+                success = True
+                break
         except requests.RequestException:
             pass
-    _generate_fallback(prompt, out_path, width, height)
+            
+    if not success:
+        print("  Pollinations AI failed. Falling back to Stability AI...")
+        success = _generate_stability_ai(prompt, out_path, width, height)
+        
+    if not success:
+        print("  Stability AI failed. Falling back to default Gradient Base...")
+        _generate_fallback(prompt, out_path, width, height)
+        
     if hook_text:
         _apply_hook_text(out_path, hook_text, width, height)
     return out_path
