@@ -91,7 +91,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             text_fmt = "{\\fscx125\\fscy125\\t(0,150,\\fscx100\\fscy100)}" + text
         else:
             style_name = "Default"
-            if chunk_size == 1:
+            if chunk_size <= 2:
                 text_fmt = "{\\fscx120\\fscy120\\t(0,150,\\fscx100\\fscy100)}" + text
             else:
                 text_fmt = text
