@@ -71,9 +71,9 @@ def build(
         str(raw_vanta.absolute()),
         f"--props=public/job_temp/props.json"
     ]
-    
-    result = subprocess.run(cmd, cwd=vanta_dir, capture_output=True, text=True, shell=(os.name == 'nt'))
-    
+    env = os.environ.copy()
+    env["REMOTION_NO_TELEMETRY"] = "1"
+    result = subprocess.run(cmd, cwd=vanta_dir, capture_output=True, text=True, env=env, shell=(os.name == 'nt'))    
     if result.returncode != 0:
         print("Vanta Render Failed!")
         print(result.stdout)

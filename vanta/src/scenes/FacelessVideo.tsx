@@ -49,10 +49,10 @@ export const FacelessVideo: React.FC<FacelessVideoProps> = ({
       {/* Inject Font */}
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,800&family=Teko&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,800&family=Bangers&display=swap');
           
           .hook-text {
-            background: linear-gradient(90deg, #C0C0C0 0%, #1E90FF 100%);
+            background: linear-gradient(90deg, #FF007F 0%, #FFD700 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             -webkit-text-stroke: 0px; /* Disable stroke when using background-clip */
@@ -109,18 +109,22 @@ export const FacelessVideo: React.FC<FacelessVideoProps> = ({
         {/* Title Hook - Only shows for the first 2 seconds */}
         {currentTime < 2 && title && (
           <div
-            className="hook-text"
             style={{
               position: "absolute",
               top: 300,
-              fontSize: 95, // Lebih besar
+              fontSize: 85,
               fontWeight: 900,
-              fontFamily: "'Teko', cursive", // Font unik
+              fontFamily: "'Montserrat', sans-serif",
+              color: "white",
+              backgroundColor: "#CC0000", // Red Pill Box
+              padding: "20px 40px",
+              borderRadius: "50px", // Pill shape
               textTransform: "uppercase",
               letterSpacing: 3,
               textAlign: "center",
               lineHeight: 1.1,
-              transform: `scale(${spring({ fps, frame, config: { damping: 15 } })}) rotate(-2deg)`, // Sedikit miring untuk style unik
+              boxShadow: "0px 10px 20px rgba(0,0,0,0.6)",
+              transform: `scale(${spring({ fps, frame, config: { damping: 15 } })}) rotate(-2deg)`,
             }}
           >
             {title}
@@ -158,16 +162,17 @@ export const FacelessVideo: React.FC<FacelessVideoProps> = ({
               <span
                 key={index}
                 style={{
-                  fontSize: 75,
+                  fontSize: 70,
                   fontWeight: 900,
                   fontFamily: "'Montserrat', sans-serif",
-                  // HeyGen / Premium style: White with black stroke, active word turns Gold
                   color: isActive ? "#FFD700" : "#FFFFFF",
-                  WebkitTextStroke: "5px black", // Thick stroke
-                  paintOrder: "stroke fill", // Ensure stroke is outside
+                  backgroundColor: "rgba(0, 0, 0, 0.75)",
+                  padding: "10px 25px",
+                  borderRadius: "40px",
+                  margin: "6px",
                   transform: `scale(${scale})`,
-                  textShadow: isActive ? "0px 0px 40px rgba(255, 215, 0, 0.8), 0px 10px 20px rgba(0,0,0,1)" : "0px 10px 20px rgba(0,0,0,1)",
-                  transition: "color 0.1s ease-out",
+                  boxShadow: isActive ? "0px 0px 30px rgba(255, 215, 0, 0.6)" : "0px 10px 20px rgba(0,0,0,0.8)",
+                  transition: "all 0.1s ease-out",
                   display: "inline-block",
                   lineHeight: 1.2,
                 }}

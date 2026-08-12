@@ -1,8 +1,9 @@
 import argparse
+import json
 import re
 import time
 from datetime import datetime
-from . import script, voice, captions, visuals, assemble, assemble_vanta, upload, state, visuals_ai
+from . import script, voice, captions, visuals, assemble, assemble_vanta, upload, upload_tiktok, state, visuals_ai
 from . import branding, review
 from .config import CONFIG, OUTPUT_DIR
 
@@ -49,6 +50,8 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     work = OUTPUT_DIR / f"{stamp}_{slug(data['topic'])}"
     work.mkdir(parents=True, exist_ok=True)
+    with open(work / 'script.json', 'w') as f:
+        json.dump(data, f, indent=2)
 
     # ============================================================
     # Step 2: Synthesize voiceover (with variety)
@@ -65,14 +68,14 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     _log("3/8 Transcribing for word-level captions (Faster-Whisper)")
     _log("    loading model (first run downloads)...")
     t0 = time.time()
-    words = captions.transcribe_words(voice_mp3)
+    words = captions.transcribe_words(voice_mp3, original_text=data["full_text"])
     _log(f"    {len(words)} words in {time.time()-t0:.1f}s")
 
     # ============================================================
     # Step 4: Fetch B-roll footage
     # ============================================================
     _log("4/8 Fetching footage from Pexels")
-    scene_videos = visuals.fetch_for_scenes(data["scenes"], work / "broll")
+    scene_videos = visuals.fetch_all(data["scenes"], work / "broll")
     _log(f"    {len(scene_videos)} clips ready")
 
     # ============================================================
@@ -84,12 +87,12 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     # so captions stay synced to the audio. The video plays the thumbnail for
     # thumb_dur seconds, then content scenes begin at the same audio position
     # where these captions start -> perfect sync, no double offset.
-    _hook_cfg = CFG.get("hook_text", {})
-    hook_text = data.get("thumbnail_text", "")
-    if hook_text and _hook_cfg.get("enabled", False):
-        captions_words = words[len(hook_text.split()):]
-    else:
-        captions_words = words
+    hook_cfg = CFG.get("hook_text", {})
+    hook_enabled = hook_cfg.get("enabled", False)
+    hook_word_count = 0
+    if hook_enabled and data.get("scenes"):
+        hook_word_count = len(data["scenes"][0]["text"].split())
+    captions_words = words[hook_word_count:] if hook_word_count < len(words) else words
     ass_path = captions.write_ass(captions_words, work / "captions.ass",
                                   CFG["video"]["width"], CFG["video"]["height"], offset=-0.3)
 
@@ -103,7 +106,7 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     # Step 6: Assemble video
     # ============================================================
     _log("6/8 Assembling final video with Vanta (Remotion)")
-    _log("    processing scenes (scale/crop/loop)...")
+    _log("    processing scenes and running React render...")
     t0 = time.time()
     final = assemble_vanta.build(
         scene_videos=scene_videos,
@@ -166,6 +169,14 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
             publish_at=publish_at,
         )
         _log(f"    uploaded: https://youtube.com/shorts/{video_id}")
+        
+        # TikTok Upload
+        if CONFIG.get("upload", {}).get("tiktok", {}).get("enabled", False):
+            _log("    Uploading to TikTok")
+            # Convert tags to hashtags string
+            hashtags = " ".join([f"#{t.replace(' ', '')}" for t in data["tags"]])
+            tiktok_desc = f"{data['title']}\n\n{data['description']}\n\n{hashtags}"
+            upload_tiktok.upload_video(video_path=final, description=tiktok_desc)
     else:
         _log("8/8 Upload skipped (--no-upload)")
 

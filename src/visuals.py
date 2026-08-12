@@ -82,7 +82,8 @@ def search_pixabay_vertical(query: str, min_duration: float = 3.0, result_index:
     return None
 
 def download(url: str, out_path: Path) -> Path:
-    with requests.get(url, stream=True, timeout=120) as r:
+    headers = {"User-Agent": "AntigravityBot/1.0 (admin@example.com)"}
+    with requests.get(url, stream=True, headers=headers, timeout=120) as r:
         r.raise_for_status()
         sz = int(r.headers.get("content-length", 0))
         with open(out_path, "wb") as f:
@@ -96,55 +97,154 @@ def download(url: str, out_path: Path) -> Path:
                         print(f"      downloading... {pct}%")
     return out_path
 
-def _fetch_single_clip(i: int, j: int, q: str, varied_q: str, out_dir: Path) -> Path:
+def search_wikipedia_image(name: str) -> str | None:
+    encoded_name = requests.utils.quote(name)
+    # 1. Try exact match first
+    endpoints = [
+        f"https://id.wikipedia.org/w/api.php?action=query&prop=pageimages&titles={encoded_name}&format=json&pithumbsize=1000",
+        f"https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&titles={encoded_name}&format=json&pithumbsize=1000"
+    ]
+    for url in endpoints:
+        try:
+            r = requests.get(url, headers={"User-Agent": "AntigravityBot/1.0 (admin@example.com)"}, timeout=15)
+            if r.status_code == 200:
+                data = r.json()
+                pages = data.get("query", {}).get("pages", {})
+                for page_id, page_data in pages.items():
+                    if page_id != "-1" and "thumbnail" in page_data:
+                        return page_data["thumbnail"]["source"]
+        except Exception as e:
+            print(f"      Wikipedia exact match error: {e}")
+            
+    # 2. Try fuzzy search if exact match fails
+    search_endpoints = [
+        f"https://id.wikipedia.org/w/api.php?action=query&list=search&srsearch={encoded_name}&format=json",
+        f"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={encoded_name}&format=json"
+    ]
+    for url in search_endpoints:
+        try:
+            r = requests.get(url, headers={"User-Agent": "AntigravityBot/1.0 (admin@example.com)"}, timeout=15)
+            if r.status_code == 200:
+                search_data = r.json()
+                results = search_data.get("query", {}).get("search", [])
+                if results:
+                    best_title = results[0]["title"]
+                    # Fetch image for this title
+                    img_url = f"https://{url.split('/')[2]}/w/api.php?action=query&prop=pageimages&titles={requests.utils.quote(best_title)}&format=json&pithumbsize=1000"
+                    r_img = requests.get(img_url, headers={"User-Agent": "AntigravityBot/1.0 (admin@example.com)"}, timeout=15)
+                    if r_img.status_code == 200:
+                        img_data = r_img.json()
+                        pages = img_data.get("query", {}).get("pages", {})
+                        for page_id, page_data in pages.items():
+                            if page_id != "-1" and "thumbnail" in page_data:
+                                return page_data["thumbnail"]["source"]
+        except Exception as e:
+            print(f"      Wikipedia search error: {e}")
+            
+    return None
+
+def search_pixabay_photo(query: str, result_index: int = 0) -> str | None:
+    try:
+        r = requests.get(
+            "https://pixabay.com/api/",
+            params={"key": PIXABAY_KEY, "q": query, "image_type": "photo", "per_page": 10, "safesearch": "true"},
+            timeout=15,
+        )
+        if r.status_code == 200:
+            hits = r.json().get("hits", [])
+            matches = []
+            for hit in hits:
+                # Get the highest resolution image available
+                if "no_largeImageURL" in hit:
+                    matches.append(hit["no_largeImageURL"])
+                elif "webformatURL" in hit:
+                    matches.append(hit["webformatURL"])
+            
+            if matches:
+                idx = min(result_index, len(matches) - 1)
+                return matches[idx]
+    except Exception as e:
+        print(f"      Pixabay Photo API error: {e}")
+    return None
+
+def _fetch_single_clip(i: int, j: int, scene: dict, varied_q: str, out_dir: Path) -> Path:
     t0 = time.time()
+    q = scene.get("visual_query", "abstract background")
     clean_q = simplify_query(q)
+    final_mp4 = out_dir / f"scene_{i:02d}_{j:02d}.mp4"
     
-    # 1. Try Pexels with clean query
+    # 0. Always try Wikipedia first if factual_subject is present
+    factual_subject = scene.get("factual_subject")
+    if factual_subject and str(factual_subject).lower() != "null":
+        # Modify query slightly if it's the second clip for the same scene to avoid same image
+        search_term = factual_subject if j == 0 else f"{factual_subject} detail"
+        wiki_url = search_wikipedia_image(search_term)
+        if wiki_url:
+            print(f"      found Wikipedia photo for {search_term}: {wiki_url[:50]}...")
+            img_path = out_dir / f"scene_{i:02d}_{j:02d}_wiki.jpg"
+            
+            try:
+                download(wiki_url, img_path)
+                import subprocess
+                subprocess.run([
+                    "ffmpeg", "-y", "-loop", "1", "-i", str(img_path),
+                    "-lavfi", "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,boxblur=20:20[bg];[0:v]scale=1080:1920:force_original_aspect_ratio=decrease[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2",
+                    "-c:v", "libx264", "-t", "4", "-pix_fmt", "yuv420p",
+                    str(final_mp4)
+                ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                return final_mp4
+            except Exception as e:
+                print(f"      fetch/ffmpeg failed for Wikipedia image {search_term}: {e}")
+
+    # 1. Fallback to real photos from Pixabay (since user wants REAL sources)
+    search_q = factual_subject if (factual_subject and str(factual_subject).lower() != "null") else clean_q
+    photo_url = search_pixabay_photo(search_q, result_index=j)
+    
+    # 2. Try single word if full phrase fails
+    if photo_url is None and search_q:
+        single_word = search_q.split()[0]
+        photo_url = search_pixabay_photo(single_word, result_index=j)
+        
+    if photo_url:
+        print(f"      found Pixabay REAL PHOTO for {search_q}: {photo_url[:50]}...")
+        img_path = out_dir / f"scene_{i:02d}_{j:02d}_pixabay.jpg"
+        
+        try:
+            download(photo_url, img_path)
+            import subprocess
+            subprocess.run([
+                "ffmpeg", "-y", "-loop", "1", "-i", str(img_path),
+                "-lavfi", "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,boxblur=20:20[bg];[0:v]scale=1080:1920:force_original_aspect_ratio=decrease[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2",
+                "-c:v", "libx264", "-t", "4", "-pix_fmt", "yuv420p",
+                str(final_mp4)
+            ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return final_mp4
+        except Exception as e:
+            print(f"      fetch/ffmpeg failed for Pixabay photo {search_q}: {e}")
+
+    # 3. Ultimate Fallback: Pexels stock video (real camera footage, NOT AI)
+    print(f"      Wiki & Pixabay Photo failed, falling back to Pexels video for: {clean_q}")
     url = search_pexels_vertical(clean_q, result_index=j)
-    
-    # 2. Fallback to Pixabay if Pexels returned nothing
     if url is None:
         url = search_pixabay_vertical(clean_q, result_index=j)
-        
-    # 3. Try single core word on Pexels/Pixabay
-    if url is None:
-        single_word = clean_q.split()[0] if clean_q else "abstract"
+    if url is None and clean_q:
+        single_word = clean_q.split()[0]
         url = search_pexels_vertical(single_word, result_index=j) or search_pixabay_vertical(single_word, result_index=j)
         
-    final_mp4 = out_dir / f"scene_{i:02d}_{j:02d}.mp4"
     if url is not None:
         download(url, final_mp4)
-        print(f"      downloaded ({time.time()-t0:.0f}s) - scene {i+1} clip {j+1}")
+        print(f"      downloaded video ({time.time()-t0:.0f}s) - scene {i+1} clip {j+1}")
         return final_mp4
-    else:
-        print(f"      Pexels & Pixabay failed, falling back to Pollinations AI for {q}")
-        import subprocess
-        try:
-            from .visuals_ai import generate as ai_generate
-        except ImportError:
-            ai_generate = None
-            
-        img_path = out_dir / f"scene_{i:02d}_{j:02d}.jpg"
-        rich_prompt = f"photorealistic 8k photo of {q}, shot on 35mm lens, cinematic lighting, vertical"
         
-        if ai_generate:
-            ai_generate(rich_prompt, img_path)
-        else:
-            # Fallback direct Pollinations image download
-            poll_url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(rich_prompt)}?model=flux&width=1080&height=1920&nologo=true"
-            r = requests.get(poll_url, timeout=30)
-            with open(img_path, "wb") as f:
-                f.write(r.content)
-                
-        # Convert image to 4-second MP4 via FFmpeg
-        subprocess.run([
-            "ffmpeg", "-y", "-loop", "1", "-i", str(img_path),
-            "-c:v", "libx264", "-t", "4", "-pix_fmt", "yuv420p",
-            "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920",
-            str(final_mp4)
-        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        return final_mp4
+    # 4. If everything fails, use a generic video so the pipeline doesn't crash
+    # But absolutely DO NOT USE AI (Pollinations)
+    print(f"      All real sources failed. Using generic nature fallback.")
+    fallback_url = search_pexels_vertical("nature", result_index=random.randint(0, 5))
+    if fallback_url:
+         download(fallback_url, final_mp4)
+         return final_mp4
+         
+    raise RuntimeError(f"Completely failed to find any real source visual for scene {i} clip {j}")
 
 def fetch_all(scenes: list[dict], out_dir: Path) -> list[Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -153,13 +253,13 @@ def fetch_all(scenes: list[dict], out_dir: Path) -> list[Path]:
     for i, s in enumerate(scenes):
         q = s.get("visual_query", "abstract background")
         for j in range(2): # 2 clips per scene
-            tasks.append((i, j, q, f"{q} {j}"))
+            tasks.append((i, j, s, f"{q} {j}"))
 
     results = {}
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
         futures = {
-            executor.submit(_fetch_single_clip, i, j, q, vq, out_dir): (i, j)
-            for i, j, q, vq in tasks
+            executor.submit(_fetch_single_clip, i, j, s, vq, out_dir): (i, j)
+            for i, j, s, vq in tasks
         }
         for future in concurrent.futures.as_completed(futures):
             ij = futures[future]
