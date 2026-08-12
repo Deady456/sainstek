@@ -3,7 +3,7 @@ import json
 import re
 import time
 from datetime import datetime
-from . import script, voice, captions, visuals, assemble, assemble_vanta, upload, upload_tiktok, state, visuals_ai
+from . import script, voice, captions, visuals, assemble, assemble_vanta, upload, state, visuals_ai
 from . import branding, review
 from .config import CONFIG, OUTPUT_DIR
 
@@ -169,14 +169,6 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
             publish_at=publish_at,
         )
         _log(f"    uploaded: https://youtube.com/shorts/{video_id}")
-        
-        # TikTok Upload
-        if CONFIG.get("upload", {}).get("tiktok", {}).get("enabled", False):
-            _log("    Uploading to TikTok")
-            # Convert tags to hashtags string
-            hashtags = " ".join([f"#{t.replace(' ', '')}" for t in data["tags"]])
-            tiktok_desc = f"{data['title']}\n\n{data['description']}\n\n{hashtags}"
-            upload_tiktok.upload_video(video_path=final, description=tiktok_desc)
     else:
         _log("8/8 Upload skipped (--no-upload)")
 
