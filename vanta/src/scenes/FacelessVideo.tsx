@@ -116,7 +116,7 @@ export const FacelessVideo: React.FC<FacelessVideoProps> = ({
               fontWeight: 900,
               fontFamily: "'Montserrat', sans-serif",
               color: "white",
-              backgroundColor: "#CC0000", // Red Pill Box
+              backgroundColor: "#00008B", // Red Pill Box
               padding: "20px 40px",
               borderRadius: "50px", // Pill shape
               textTransform: "uppercase",
@@ -132,15 +132,16 @@ export const FacelessVideo: React.FC<FacelessVideoProps> = ({
         )}
 
         {/* Animated Captions (Premium Chunked View) */}
-        <div
+        {currentTime >= 2 && (
+          <div
           style={{
             position: "absolute",
             bottom: 350,
             display: "flex",
-            flexWrap: "wrap",
+            flexWrap: "nowrap",
             justifyContent: "center",
             gap: "18px",
-            width: "80%",
+            width: "95%",
             textAlign: "center",
           }}
         >
@@ -181,7 +182,8 @@ export const FacelessVideo: React.FC<FacelessVideoProps> = ({
               </span>
             );
           })}
-        </div>
+          </div>
+        )}
       </AbsoluteFill>
     </AbsoluteFill>
   );
