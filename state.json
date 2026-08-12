@@ -60,7 +60,8 @@
     "teknologi-ai-dalam-pengembangan-identitas-digital",
     "teknologi-ai-dalam-pengembangan-sonifikasi-data",
     "teknologi-ai-dalam-pengembangan-kriptografi-kwantum",
-    "teknologi-ai-dalam-pengembangan-ilmu-astrobiologi"
+    "teknologi-ai-dalam-pengembangan-ilmu-astrobiologi",
+    "teknologi-ai-dalam-pengembangan-efek-visual-film"
   ],
   "published": [
     {
@@ -571,6 +572,16 @@
       "title": "Bagaimana AI Mengubah Pencarian Kehidupan di Luar Angkasa?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260812_123454_teknologi-ai-dalam-pengembangan-ilmu-astrobiologi/final.mp4",
       "video_id": "nPlmzKOwzWU",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260812_163244",
+      "topic": "teknologi-ai-dalam-pengembangan-efek-visual-film",
+      "title": "10 Trik AI untuk Membuat Film Hollywood Lebih Realistis!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260812_163244_teknologi-ai-dalam-pengembangan-efek-visual-film/final.mp4",
+      "video_id": "VecAanzWv9A",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
