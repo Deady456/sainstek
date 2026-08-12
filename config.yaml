@@ -53,7 +53,7 @@ branding:
   watermark:
     enabled: true
     path: "assets/branding/watermark.png"
-    position: "center"
+    position: "center_left"
     opacity: 0.6
     size: 300
 hook_text:
@@ -63,5 +63,5 @@ hook_text:
   color: "white"
   outline_color: "&H00000000"
   outline: 4
-  position: "center"
+  position: "center_left"
   duration: 3

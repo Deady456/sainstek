@@ -121,7 +121,7 @@ def add_watermark(video_path: Path, output_path: Path) -> Path:
         "top_left": f"20:20",
         "bottom_right": f"main_w-{size}-20:main_h-{size}-20",
         "bottom_left": f"20:main_h-{size}-20",
-        "center": f"(main_w-{size})/2+{x_offset}:(main_h*0.20)",
+        "center": f"(main_w-{size})/2+{x_offset}:(main_h*0.20)",`n          "center_left": f"20:(main_h-{size})/2",
     }
     overlay_pos = pos_map.get(position, pos_map["top_right"])
 
