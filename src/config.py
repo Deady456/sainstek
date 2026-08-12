@@ -53,13 +53,13 @@ LLM_API_KEY = LLM_API_KEYS[0]
 
 if LLM_PROVIDER == "gemini":
     LLM_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
-    LLM_MODEL = CONFIG.get("script", {}).get("model", "models/gemini-2.5-flash")
+    LLM_MODEL = CONFIG.get("script", {}).get("model", "models/gemini-3.5-flash")
 elif LLM_PROVIDER == "groq":
     LLM_BASE_URL = "https://api.groq.com/openai/v1"
     LLM_MODEL = "llama-3.3-70b-versatile"
 else:
     LLM_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
-    LLM_MODEL = "models/gemini-2.5-flash"
+    LLM_MODEL = "models/gemini-3.5-flash"
 
 # Fallback sequence for LLM
 FALLBACK_PROVIDERS = []
@@ -68,7 +68,7 @@ if GEMINI_API_KEYS:
         "name": "gemini",
         "keys": GEMINI_API_KEYS,
         "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
-        "model": "gemini-2.5-flash"
+        "model": "gemini-3.5-flash"
     })
 if GROQ_API_KEYS:
     FALLBACK_PROVIDERS.append({
