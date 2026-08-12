@@ -59,7 +59,8 @@
     "teknologi-ai-dalam-pengembangan-teknologi-augmented-audio",
     "teknologi-ai-dalam-pengembangan-identitas-digital",
     "teknologi-ai-dalam-pengembangan-sonifikasi-data",
-    "teknologi-ai-dalam-pengembangan-kriptografi-kwantum"
+    "teknologi-ai-dalam-pengembangan-kriptografi-kwantum",
+    "teknologi-ai-dalam-pengembangan-ilmu-astrobiologi"
   ],
   "published": [
     {
@@ -560,6 +561,16 @@
       "title": "Bahaya Teknologi Kuantum Pada Keamanan Online, Apa yang Bisa Dilakukan?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260811_070539_teknologi-ai-dalam-pengembangan-kriptografi-kwantum/final.mp4",
       "video_id": "NXz1em_094w",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260812_123454",
+      "topic": "teknologi-ai-dalam-pengembangan-ilmu-astrobiologi",
+      "title": "Bagaimana AI Mengubah Pencarian Kehidupan di Luar Angkasa?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260812_123454_teknologi-ai-dalam-pengembangan-ilmu-astrobiologi/final.mp4",
+      "video_id": "nPlmzKOwzWU",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
