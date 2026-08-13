@@ -62,7 +62,8 @@
     "teknologi-ai-dalam-pengembangan-kriptografi-kwantum",
     "teknologi-ai-dalam-pengembangan-ilmu-astrobiologi",
     "teknologi-ai-dalam-pengembangan-efek-visual-film",
-    "teknologi-ai-dalam-pengembangan-asisten-virtual-untuk-penyandang-disabilitas"
+    "teknologi-ai-dalam-pengembangan-asisten-virtual-untuk-penyandang-disabilitas",
+    "teknologi-ai-dalam-pengembangan-sistem-rekomendasi-kesehatan-mental"
   ],
   "published": [
     {
@@ -593,6 +594,16 @@
       "title": "Revolusi Asisten Virtual untuk Penyandang Disabilitas dengan Teknologi AI",
       "path": "/home/runner/work/sainstek/sainstek/output/20260813_003134_teknologi-ai-dalam-pengembangan-asisten-virtual-untuk-penyan/final.mp4",
       "video_id": "NEXgag-eUhc",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260813_123137",
+      "topic": "teknologi-ai-dalam-pengembangan-sistem-rekomendasi-kesehatan-mental",
+      "title": "Teknologi AI yang Bisa Bantu Deteksi Gangguan Mental!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260813_123137_teknologi-ai-dalam-pengembangan-sistem-rekomendasi-kesehatan/final.mp4",
+      "video_id": "YwuLfH8P1Rw",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
