@@ -227,7 +227,7 @@ def _call_and_extract(messages, max_retries=5) -> dict:
         try:
             t0 = time.time()
             resp = _call_llm(
-                model=LLM_MODEL, max_tokens=2000,
+                model=LLM_MODEL, max_tokens=4096,
                 response_format={"type": "json_object"},
                 messages=messages,
             )
