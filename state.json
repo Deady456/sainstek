@@ -68,7 +68,8 @@
     "teknologi-ai-dalam-pengembangan-forensik-digital",
     "teknologi-ai-dalam-pengembangan-biomimetik",
     "teknologi-ai-dalam-pengembangan-teknologi-pembangkit-listrik-terapungan",
-    "teknologi-ai-dalam-pengembangan-jaringan-5g-terintegrasi"
+    "teknologi-ai-dalam-pengembangan-jaringan-5g-terintegrasi",
+    "teknologi-ai-dalam-pengembangan-sistem-prediksi-gempa-bumi"
   ],
   "published": [
     {
@@ -659,6 +660,16 @@
       "title": "Revolusi 5G: Bagaimana AI Membentuk Jaringan Masa Depan",
       "path": "/home/runner/work/sainstek/sainstek/output/20260816_003214_teknologi-ai-dalam-pengembangan-jaringan-5g-terintegrasi/final.mp4",
       "video_id": "Ec4mxC1reaU",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260816_123133",
+      "topic": "teknologi-ai-dalam-pengembangan-sistem-prediksi-gempa-bumi",
+      "title": "Teknologi AI Canggih untuk Prediksi Gempa Bumi, Mungkinkah?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260816_123133_teknologi-ai-dalam-pengembangan-sistem-prediksi-gempa-bumi/final.mp4",
+      "video_id": "9DkxZwFhsl0",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
