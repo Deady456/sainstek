@@ -56,45 +56,55 @@ if LLM_PROVIDER == "gemini":
     LLM_MODEL = CONFIG.get("script", {}).get("model", "models/gemini-3.5-flash")
 elif LLM_PROVIDER == "groq":
     LLM_BASE_URL = "https://api.groq.com/openai/v1"
-    LLM_MODEL = "qwen-3.6-27b"
+    LLM_MODEL = "openai/gpt-oss-120b"
 else:
     LLM_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
     LLM_MODEL = "models/gemini-3.5-flash"
 
 # Fallback sequence for LLM
 FALLBACK_PROVIDERS = []
+
+# Define all available providers
+_all_providers = {}
 if GEMINI_API_KEYS:
-    FALLBACK_PROVIDERS.append({
+    _all_providers["gemini"] = {
         "name": "gemini",
         "keys": GEMINI_API_KEYS,
         "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
-        "model": "gemini-3.5-flash"
-    })
+        "model": "gemini-2.5-flash"
+    }
 if GROQ_API_KEYS:
-    FALLBACK_PROVIDERS.append({
+    _all_providers["groq"] = {
         "name": "groq",
         "keys": GROQ_API_KEYS,
         "base_url": "https://api.groq.com/openai/v1",
-        "model": "qwen-3.6-27b"
-    })
+        "model": "openai/gpt-oss-120b"
+    }
 if OPENROUTER_API_KEYS:
-    FALLBACK_PROVIDERS.append({
+    _all_providers["openrouter"] = {
         "name": "openrouter",
         "keys": OPENROUTER_API_KEYS,
         "base_url": "https://openrouter.ai/api/v1",
         "model": "meta-llama/llama-3.3-70b-instruct"
-    })
+    }
 if NVIDIA_API_KEYS:
-    FALLBACK_PROVIDERS.append({
+    _all_providers["nvidia"] = {
         "name": "nvidia",
         "keys": NVIDIA_API_KEYS,
         "base_url": "https://integrate.api.nvidia.com/v1",
         "model": "meta/llama-3.1-70b-instruct"
-    })
+    }
 if OPENCODE_ZEN_API_KEYS:
-    FALLBACK_PROVIDERS.append({
+    _all_providers["opencode-zen"] = {
         "name": "opencode-zen",
         "keys": OPENCODE_ZEN_API_KEYS,
-        "base_url": "https://api.opencodezen.com/v1", # Assuming generic OpenAI compat endpoint
+        "base_url": "https://api.opencodezen.com/v1",
         "model": "gpt-4o-mini"
-    })
+    }
+
+# Push primary provider first
+if LLM_PROVIDER in _all_providers:
+    FALLBACK_PROVIDERS.append(_all_providers.pop(LLM_PROVIDER))
+
+# Push the rest
+FALLBACK_PROVIDERS.extend(_all_providers.values())
