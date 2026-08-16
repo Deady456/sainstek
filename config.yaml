@@ -3,7 +3,7 @@ audience: "orang dewasa Indonesia yang melek teknologi, pengguna gadget, dan pen
 language: id
 
 script:
-  model: llama-3.3-70b-versatile
+  model: qwen-3.6-27b
   target_seconds: 80
   words_per_second: 2.5
 
@@ -28,7 +28,7 @@ voice:
 captions:
   whisper_model: base
   font: "Anton"
-  font_size:  85
+  font_size:  70
   primary_color: "&H0000FFFF"
   outline_color: "&H00000000"
   outline: 6
@@ -59,7 +59,7 @@ branding:
 hook_text:
   enabled: true
   font: "Anton"
-  font_size:  85
+  font_size:  70
   color: "white"
   outline_color: "&H00000000"
   outline: 4

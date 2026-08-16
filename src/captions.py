@@ -41,7 +41,7 @@ def _fmt_ts(t: float) -> str:
 def write_ass(words: list[dict], out_path: Path, video_w: int, video_h: int, offset: float = 0.0) -> Path:
     c = CONFIG["captions"]
     chunk_size = c.get("words_per_caption", 3)
-    font_size = c.get("font_size", 110)
+    font_size = c.get("font_size", 70)
     margin_v = int(video_h * (1 - c.get("position_y", 0.5)))
     
     channel = CONFIG.get("upload", {}).get("channel", "default")
