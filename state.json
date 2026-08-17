@@ -70,7 +70,8 @@
     "teknologi-ai-dalam-pengembangan-teknologi-pembangkit-listrik-terapungan",
     "teknologi-ai-dalam-pengembangan-jaringan-5g-terintegrasi",
     "teknologi-ai-dalam-pengembangan-sistem-prediksi-gempa-bumi",
-    "ai-music-revolution-2024"
+    "ai-music-revolution-2024",
+    "ai-dalam-pengiriman-drone-otomatis"
   ],
   "published": [
     {
@@ -681,6 +682,16 @@
       "title": "AI Ciptakan Musik dalam Hitungan Detik: Revolusi Google MusicLM 2024 yang Mengguncang Industri",
       "path": "/home/runner/work/sainstek/sainstek/output/20260817_003258_ai-music-revolution-2024/final.mp4",
       "video_id": "QcXnu2cS6MU",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260817_123327",
+      "topic": "ai-dalam-pengiriman-drone-otomatis",
+      "title": "Bagaimana AI Mengubah Pengiriman Drone: Kecepatan, Keamanan, dan Masa Depan Logistik",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260817_123327_ai-dalam-pengiriman-drone-otomatis/final.mp4",
+      "video_id": "lbmr9RS5KXA",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
