@@ -69,7 +69,8 @@
     "teknologi-ai-dalam-pengembangan-biomimetik",
     "teknologi-ai-dalam-pengembangan-teknologi-pembangkit-listrik-terapungan",
     "teknologi-ai-dalam-pengembangan-jaringan-5g-terintegrasi",
-    "teknologi-ai-dalam-pengembangan-sistem-prediksi-gempa-bumi"
+    "teknologi-ai-dalam-pengembangan-sistem-prediksi-gempa-bumi",
+    "ai-music-revolution-2024"
   ],
   "published": [
     {
@@ -670,6 +671,16 @@
       "title": "Teknologi AI Canggih untuk Prediksi Gempa Bumi, Mungkinkah?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260816_123133_teknologi-ai-dalam-pengembangan-sistem-prediksi-gempa-bumi/final.mp4",
       "video_id": "9DkxZwFhsl0",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260817_003258",
+      "topic": "ai-music-revolution-2024",
+      "title": "AI Ciptakan Musik dalam Hitungan Detik: Revolusi Google MusicLM 2024 yang Mengguncang Industri",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260817_003258_ai-music-revolution-2024/final.mp4",
+      "video_id": "QcXnu2cS6MU",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
