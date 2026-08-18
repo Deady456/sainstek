@@ -61,12 +61,6 @@ jobs:
           if [ -n "${{ secrets.CLIENT_SECRET_B64 }}" ]; then echo "${{ secrets.CLIENT_SECRET_B64 }}" | base64 -d > client_secret.json || true; fi
           if [ -n "${{ secrets.TOKEN_B64 }}" ]; then echo "${{ secrets.TOKEN_B64 }}" | base64 -d > token_default.json || true; fi
 
-      - name: Set TikTok Cookies
-        if: env.TIKTOK_COOKIES != ''
-        env:
-          TIKTOK_COOKIES: ${{ secrets.TIKTOK_COOKIES }}
-        run: echo "$TIKTOK_COOKIES" > tiktok_cookies.txt
-
       - name: Create .env file
         env:
           ALL_SECRETS: ${{ toJson(secrets) }}
