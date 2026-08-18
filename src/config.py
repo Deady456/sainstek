@@ -71,7 +71,7 @@ if GEMINI_API_KEYS:
         "name": "gemini",
         "keys": GEMINI_API_KEYS,
         "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
-        "model": "gemini-2.5-flash"
+        "model": "gemini-3.6-flash"
     }
 if GROQ_API_KEYS:
     _all_providers["groq"] = {
