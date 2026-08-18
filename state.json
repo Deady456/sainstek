@@ -71,7 +71,8 @@
     "teknologi-ai-dalam-pengembangan-jaringan-5g-terintegrasi",
     "teknologi-ai-dalam-pengembangan-sistem-prediksi-gempa-bumi",
     "ai-music-revolution-2024",
-    "ai-dalam-pengiriman-drone-otomatis"
+    "ai-dalam-pengiriman-drone-otomatis",
+    "gpt-4o-multimodal-revolusi"
   ],
   "published": [
     {
@@ -692,6 +693,16 @@
       "title": "Bagaimana AI Mengubah Pengiriman Drone: Kecepatan, Keamanan, dan Masa Depan Logistik",
       "path": "/home/runner/work/sainstek/sainstek/output/20260817_123327_ai-dalam-pengiriman-drone-otomatis/final.mp4",
       "video_id": "lbmr9RS5KXA",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260818_004112",
+      "topic": "gpt-4o-multimodal-revolusi",
+      "title": "GPT-4o: AI Multimodal Pertama yang Bisa Bicara, Lihat, & Tulis - Kecepatan 3x Lebih Tinggi!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260818_004112_gpt-4o-multimodal-revolusi/final.mp4",
+      "video_id": "JEAfPEmPatQ",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
