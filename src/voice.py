@@ -41,7 +41,7 @@ def replace_numbers_id(text: str) -> str:
     return text
 
 
-﻿import asyncio
+import asyncio
 import os
 import time
 from pathlib import Path

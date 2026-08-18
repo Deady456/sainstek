@@ -346,10 +346,10 @@ def generate(content_format: str = None) -> dict:
             if "visual_query" not in sc or not sc["visual_query"]:
                 words = re.findall(r"[a-zA-Z]{3,}", sc.get("text", ""))
                 fallback = " ".join(words[-3:]) if len(words) >= 3 else "abstract background"
-                print(f"    scene {i}: missing visual_query, using \"{fallback}\"")
+                print(f'    scene {i}: missing visual_query, using "{fallback}"')
                 sc["visual_query"] = fallback
 
-                for sc in data["scenes"]:
+        for sc in data["scenes"]:
             sc["text"] = replace_numbers_id(sc.get("text", ""))
         if "title" in data:
             data["title"] = replace_numbers_id(data["title"])
