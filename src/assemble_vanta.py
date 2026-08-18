@@ -84,7 +84,17 @@ def build(
     
     # Mix background music
     ROOT = Path(__file__).resolve().parent.parent
-    bg_music = ROOT / "assets" / "bg.mp3"
+    # Select background music (random if multiple exist in assets/music or assets/)
+    import random
+    music_candidates = []
+    music_dir = ROOT / "assets" / "music"
+    if music_dir.is_dir():
+        for ext in ("*.mp3", "*.wav", "*.m4a", "*.ogg"):
+            music_candidates.extend(list(music_dir.rglob(ext)))
+    if not music_candidates:
+        music_candidates = [p for p in (ROOT / "assets").glob("*.mp3") if p.is_file() and p.name != "bg.mp3"]
+    
+    bg_music = random.choice(music_candidates) if music_candidates else (ROOT / "assets" / "bg.mp3")
     
     if bg_music.exists():
         print("    [Vanta] Adding background music (15%)...")
