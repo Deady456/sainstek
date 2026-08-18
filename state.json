@@ -72,7 +72,8 @@
     "teknologi-ai-dalam-pengembangan-sistem-prediksi-gempa-bumi",
     "ai-music-revolution-2024",
     "ai-dalam-pengiriman-drone-otomatis",
-    "gpt-4o-multimodal-revolusi"
+    "gpt-4o-multimodal-revolusi",
+    "ai-quantum-compiler-boosts-performance"
   ],
   "published": [
     {
@@ -703,6 +704,16 @@
       "title": "GPT-4o: AI Multimodal Pertama yang Bisa Bicara, Lihat, & Tulis - Kecepatan 3x Lebih Tinggi!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260818_004112_gpt-4o-multimodal-revolusi/final.mp4",
       "video_id": "JEAfPEmPatQ",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260818_123300",
+      "topic": "ai-quantum-compiler-boosts-performance",
+      "title": "Bagaimana AI Mengubah Kompilasi Kuantum: Kecepatan 30% Lebih Cepat & Biaya Turun!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260818_123300_ai-quantum-compiler-boosts-performance/final.mp4",
+      "video_id": "dLFWqYsNvEA",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
