@@ -75,10 +75,20 @@ def build(
     env["REMOTION_NO_TELEMETRY"] = "1"
     result = subprocess.run(cmd, cwd=vanta_dir, capture_output=True, text=True, env=env, shell=(os.name == 'nt'))    
     if result.returncode != 0:
-        print("Vanta Render Failed!")
-        print(result.stdout)
-        print(result.stderr)
-        raise RuntimeError("Vanta Render Failed")
+        print("    [Vanta] Remotion render unavailable, falling back to FFmpeg assembler...")
+        from . import assemble
+        return assemble.build(
+            scene_videos=scene_videos,
+            voice_audio=voice_audio,
+            captions_ass=captions_ass,
+            out_path=out_path,
+            work_dir=work_dir,
+            words=words,
+            scenes=scenes,
+            videos_per_scene=videos_per_scene,
+            hook_text=hook_text,
+            thumbnail_img=thumbnail_img,
+        )
         
     print(f"    [Vanta] Render complete: {raw_vanta.name}")
     
