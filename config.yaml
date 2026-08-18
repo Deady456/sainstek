@@ -28,10 +28,10 @@ voice:
 captions:
   whisper_model: base
   font: "Anton"
-  font_size:  70
+  font_size: 56
   primary_color: "&H0000FFFF"
   outline_color: "&H00000000"
-  outline: 6
+  outline: 5
   words_per_caption: 2
   position_y: 0.55
 
@@ -59,9 +59,9 @@ branding:
 hook_text:
   enabled: true
   font: "Anton"
-  font_size:  70
+  font_size: 56
   color: "white"
   outline_color: "&H00000000"
-  outline: 4
+  outline: 5
   position: "center_left"
   duration: 3

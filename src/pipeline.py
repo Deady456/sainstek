@@ -68,7 +68,7 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     _log("3/8 Transcribing for word-level captions (Faster-Whisper)")
     _log("    loading model (first run downloads)...")
     t0 = time.time()
-    words = captions.transcribe_words(voice_mp3)
+    words = captions.transcribe_words(voice_mp3, original_text=data["full_text"])
     _log(f"    {len(words)} words in {time.time()-t0:.1f}s")
 
     # ============================================================
@@ -92,7 +92,7 @@ def run_once(publish_at: str | None = None, upload_to_youtube: bool = True,
     hook_word_count = 0
     if hook_enabled and data.get("scenes"):
         hook_word_count = len(data["scenes"][0]["text"].split())
-    captions_words = words[hook_word_count:] if hook_word_count < len(words) else words
+    captions_words = words
     ass_path = captions.write_ass(captions_words, work / "captions.ass",
                                   CFG["video"]["width"], CFG["video"]["height"], offset=-0.3)
 
