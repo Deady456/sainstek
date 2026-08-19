@@ -112,7 +112,7 @@ export const FacelessVideo: React.FC<FacelessVideoProps> = ({
             style={{
               position: "absolute",
               top: 300,
-              fontSize: 85,
+              fontSize: 56,
               fontWeight: 900,
               fontFamily: "'Montserrat', sans-serif",
               color: "white",
@@ -163,12 +163,12 @@ export const FacelessVideo: React.FC<FacelessVideoProps> = ({
               <span
                 key={index}
                 style={{
-                  fontSize: 70,
+                  fontSize: 48,
                   fontWeight: 900,
                   fontFamily: "'Montserrat', sans-serif",
                   color: isActive ? "#FFD700" : "#FFFFFF",
                   backgroundColor: "rgba(0, 0, 0, 0.75)",
-                  padding: "10px 25px",
+                  padding: "8px 18px",
                   borderRadius: "40px",
                   margin: "6px",
                   transform: `scale(${scale})`,
