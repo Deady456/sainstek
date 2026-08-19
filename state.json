@@ -74,7 +74,8 @@
     "ai-dalam-pengiriman-drone-otomatis",
     "gpt-4o-multimodal-revolusi",
     "ai-quantum-compiler-boosts-performance",
-    "teknologi-ai-membaca-gulungan-kuno-vesuvius"
+    "teknologi-ai-membaca-gulungan-kuno-vesuvius",
+    "robot-humanoid-figure-dua-bmw"
   ],
   "published": [
     {
@@ -725,6 +726,16 @@
       "title": "Keajaiban AI Membaca Teks Kuno Hangus Berusia Dua Ribu Tahun",
       "path": "/home/runner/work/sainstek/sainstek/output/20260819_055936_teknologi-ai-membaca-gulungan-kuno-vesuvius/final.mp4",
       "video_id": "1msrW0zO-Zk",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260819_123303",
+      "topic": "robot-humanoid-figure-dua-bmw",
+      "title": "Robot Humanoid Canggih Ini Mulai Bekerja di Pabrik BMW dengan AI OpenAI",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260819_123303_robot-humanoid-figure-dua-bmw/final.mp4",
+      "video_id": "DHWPtjeO2Y0",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
