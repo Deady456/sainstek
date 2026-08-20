@@ -75,7 +75,8 @@
     "gpt-4o-multimodal-revolusi",
     "ai-quantum-compiler-boosts-performance",
     "teknologi-ai-membaca-gulungan-kuno-vesuvius",
-    "robot-humanoid-figure-dua-bmw"
+    "robot-humanoid-figure-dua-bmw",
+    "teknologi-ai-brain-computer-interface-neuralink"
   ],
   "published": [
     {
@@ -736,6 +737,16 @@
       "title": "Robot Humanoid Canggih Ini Mulai Bekerja di Pabrik BMW dengan AI OpenAI",
       "path": "/home/runner/work/sainstek/sainstek/output/20260819_123303_robot-humanoid-figure-dua-bmw/final.mp4",
       "video_id": "DHWPtjeO2Y0",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260820_003225",
+      "topic": "teknologi-ai-brain-computer-interface-neuralink",
+      "title": "Sihir AI Terbukti! Manusia Kini Bisa Kontrol Komputer Pakai Pikiran",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260820_003225_teknologi-ai-brain-computer-interface-neuralink/final.mp4",
+      "video_id": "Cq6IJf9WDiE",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
