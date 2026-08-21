@@ -78,7 +78,8 @@
     "robot-humanoid-figure-dua-bmw",
     "teknologi-ai-brain-computer-interface-neuralink",
     "teknologi-ai-menerjemahkan-bahasa-paus-sperma",
-    "teknologi-penyimpanan-data-kaca-kuarsa-project-silica"
+    "teknologi-penyimpanan-data-kaca-kuarsa-project-silica",
+    "teknologi-ai-prediksi-cuaca-paling-akurat-graphcast"
   ],
   "published": [
     {
@@ -769,6 +770,16 @@
       "title": "Teknologi Kaca Murni Simpan Data Manusia Hingga Sepuluh Ribu Tahun!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260821_003136_teknologi-penyimpanan-data-kaca-kuarsa-project-silica/final.mp4",
       "video_id": "Q5D0jo5DSB4",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260821_123150",
+      "topic": "teknologi-ai-prediksi-cuaca-paling-akurat-graphcast",
+      "title": "AI Ini Mampu Memprediksi Cuaca Seluruh Dunia Hanya Dalam Hitungan Detik!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260821_123150_teknologi-ai-prediksi-cuaca-paling-akurat-graphcast/final.mp4",
+      "video_id": "BUoWCa-H05Y",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
