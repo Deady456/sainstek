@@ -38,6 +38,44 @@ def clean_query(q: str) -> str:
     return " ".join(cleaned[:3]) if cleaned else q
 
 
+GALAXY_BANK_DIR = Path(r"C:\Users\Administrator\Desktop\Galaxy_Source_Bank")
+
+GALAXY_CATEGORIES = {
+    "01_black_holes": ["black hole", "blackhole", "supermassive", "accretion", "singularity", "event horizon", "quasar", "relativistic", "tidal disruption"],
+    "02_galaxies_nebulae": ["galaxy", "galaxies", "nebula", "nebulae", "pillars", "creation", "milky way", "andromeda", "spiral", "stars"],
+    "03_extreme_stars": ["pulsar", "supernova", "neutron", "magnetar", "starquake", "hypergiant", "gamma"],
+    "04_exoplanets": ["exoplanet", "planet", "rings", "saturn", "lava", "magma", "diamond", "rogue", "alien world"],
+    "05_deep_space_voids": ["void", "bootes", "cosmic web", "dark matter", "filaments"],
+    "06_hooks_transitions": ["warp", "hyperspace", "wormhole", "zoom", "transition", "hyperdrive", "jump", "meteor"],
+    "07_nasa_james_webb": ["nasa", "james webb", "jwst", "telescope", "voyager", "artemis", "astronaut", "rover", "mars", "moon"],
+    "08_spacex_starship": ["spacex", "starship", "falcon", "booster", "rocket", "colony", "terraforming"],
+    "09_megastructures": ["dyson", "swarm", "o'neill", "cylinder", "habitat", "stellar engine", "space elevator"],
+    "10_cosmic_threats": ["cme", "solar flare", "superflare", "magnetic", "roche limit", "disaster", "threat"]
+}
+
+def search_galaxy_bank_video(query: str) -> list[Path]:
+    """Priority #1: Find matching HD video from curated Galaxy Source Bank."""
+    if not GALAXY_BANK_DIR.exists():
+        return []
+    ql = query.lower()
+    matched_folders = []
+    for cat_name, kws in GALAXY_CATEGORIES.items():
+        if any(kw in ql for kw in kws):
+            matched_folders.append(GALAXY_BANK_DIR / cat_name)
+    
+    if not matched_folders:
+        matched_folders = [GALAXY_BANK_DIR / "07_nasa_james_webb", GALAXY_BANK_DIR / "02_galaxies_nebulae", GALAXY_BANK_DIR / "01_black_holes"]
+
+    candidates = []
+    for folder in matched_folders:
+        if folder.exists():
+            candidates.extend(list(folder.glob("*.mp4")) + list(folder.glob("*.webm")))
+    
+    if candidates:
+        random.shuffle(candidates)
+        return candidates[:3]
+    return []
+
 def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
     cq = clean_query(query)
     found = []
@@ -53,6 +91,9 @@ def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
             )
             if r.status_code == 200:
                 videos = r.json().get("videos", [])
+                if not videos:
+                    # RULE 2: If 200 OK but 0 videos found, break immediately to save quota
+                    break
                 for v in videos:
                     if v.get("duration", 0) < min_duration:
                         continue
@@ -228,19 +269,32 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             out_clip_path = out_dir / f"clip_{clip_counter:03d}.mp4"
             clip_ready = False
 
-            # 1. Search Pexels HD Portrait Video
+            # 0. Priority: Curated Galaxy Source Bank (Zero API Quota, Pure HD)
             for q in queries:
-                links = search_pexels_hd_video(q)
-                for link in links:
-                    temp_v = out_dir / f"raw_v_{clip_counter}.mp4"
-                    if download_file(link, temp_v):
-                        trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
-                        if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
-                            video_pool.append(temp_v)
-                            clip_ready = True
-                            break
+                bank_matches = search_galaxy_bank_video(q)
+                for bank_v in bank_matches:
+                    trim_video_clip(bank_v, out_clip_path, subclip_dur, w, h, fps)
+                    if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
+                        video_pool.append(bank_v)
+                        clip_ready = True
+                        break
                 if clip_ready:
                     break
+
+            # 1. Search Pexels HD Portrait Video
+            if not clip_ready:
+                for q in queries:
+                    links = search_pexels_hd_video(q)
+                    for link in links:
+                        temp_v = out_dir / f"raw_v_{clip_counter}.mp4"
+                        if download_file(link, temp_v):
+                            trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
+                            if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
+                                video_pool.append(temp_v)
+                                clip_ready = True
+                                break
+                    if clip_ready:
+                        break
 
             # 2. Search Pixabay HD Motion Video
             if not clip_ready:

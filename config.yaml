@@ -1,5 +1,5 @@
-niche: "fakta teknologi dan AI yang viral dan mengejutkan (AI terbaru, ChatGPT, coding, gadget, software, cybersecurity, internet, robot, future tech, inovasi digital)"
-audience: "orang dewasa Indonesia yang melek teknologi, pengguna gadget, dan penasaran dengan perkembangan AI"
+niche: "fakta sains astronomi, penemuan teleskop James Webb, misteri galaksi, misi NASA Artemis, roket SpaceX Starship, eksoplanet, dan fenomena kosmik terekstrim di alam semesta"
+audience: "penonton Indonesia yang penasaran dengan misteri luar angkasa, astronomi modern, teleskop James Webb, dan masa depan eksplorasi antariksa"
 language: id
 
 script:
@@ -45,8 +45,21 @@ upload:
   category_id: "27"
   made_for_kids: false
   channel: "default"
-  default_tags: ["teknologi", "AI", "fakta teknologi", "artificial intelligence", "gadget", "coding", "tech viral", "fakta AI", "ChatGPT", "inovasi", "robot", "sains teknologi", "edukasi tech", "digital", "future tech"]
+  default_tags: ["sains antariksa", "astronomi", "james webb", "nasa", "spacex", "fakta galaksi", "alam semesta", "black hole", "exoplanet", "edukasi sains", "bintang", "supernova", "starship"]
 
+music:
+  enabled: true
+  source: "local"
+  local_dir: "assets/music"
+  volume: 0.15
+  fade_in: 2.0
+  fade_out: 3.0
+  mood_mapping:
+    list: "upbeat"
+    story: "cinematic"
+    comparison: "neutral"
+    myth_busting: "suspense"
+    neutral: "neutral"
 
 branding:
   enabled: true
