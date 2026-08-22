@@ -128,11 +128,3 @@ jobs:
             git pull --rebase --autostash
             git push
           fi
-
-      - name: Upload video artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: final-video-mp4
-          path: output/**/final.mp4
-          retention-days: 7
