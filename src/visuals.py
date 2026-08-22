@@ -38,100 +38,6 @@ def clean_query(q: str) -> str:
     return " ".join(cleaned[:3]) if cleaned else q
 
 
-GALAXY_BANK_DIR = Path(os.environ.get("GALAXY_BANK_DIR", r"C:\Users\Administrator\Desktop\Galaxy_Source_Bank"))
-GALAXY_CATALOG_FILE = ROOT / "assets" / "galaxy_catalog.json"
-
-_galaxy_catalog_cache = None
-
-def get_galaxy_catalog() -> dict:
-    global _galaxy_catalog_cache
-    if _galaxy_catalog_cache is None:
-        if GALAXY_CATALOG_FILE.exists():
-            try:
-                _galaxy_catalog_cache = json.loads(GALAXY_CATALOG_FILE.read_text(encoding="utf-8"))
-            except Exception:
-                _galaxy_catalog_cache = {}
-        else:
-            _galaxy_catalog_cache = {}
-    return _galaxy_catalog_cache
-
-GALAXY_CATEGORIES = {
-    "01_black_holes": ["black hole", "blackhole", "supermassive", "accretion", "singularity", "event horizon", "quasar", "relativistic", "tidal disruption"],
-    "02_galaxies_nebulae": ["galaxy", "galaxies", "nebula", "nebulae", "pillars", "creation", "milky way", "andromeda", "spiral", "stars"],
-    "03_extreme_stars": ["pulsar", "supernova", "neutron", "magnetar", "starquake", "hypergiant", "gamma"],
-    "04_exoplanets": ["exoplanet", "planet", "rings", "saturn", "lava", "magma", "diamond", "rogue", "alien world"],
-    "05_deep_space_voids": ["void", "bootes", "cosmic web", "dark matter", "filaments"],
-    "06_hooks_transitions": ["warp", "hyperspace", "wormhole", "zoom", "transition", "hyperdrive", "jump", "meteor"],
-    "07_nasa_james_webb": ["nasa", "james webb", "jwst", "telescope", "voyager", "artemis", "astronaut", "rover", "mars", "moon"],
-    "08_spacex_starship": ["spacex", "starship", "falcon", "booster", "rocket", "colony", "terraforming"],
-    "09_megastructures": ["dyson", "swarm", "o'neill", "cylinder", "habitat", "stellar engine", "space elevator"],
-    "10_cosmic_threats": ["cme", "solar flare", "superflare", "magnetic", "roche limit", "disaster", "threat"]
-}
-
-def download_drive_video(file_id: str, out_path: Path) -> bool:
-    """Download video from Google Drive by file ID."""
-    url = f"https://drive.usercontent.google.com/download?id={file_id}&export=download&authuser=0"
-    try:
-        with requests.get(url, stream=True, headers=HEADERS, timeout=30) as r:
-            if r.status_code == 200 and int(r.headers.get("content-length", 5000)) > 4000:
-                with open(out_path, "wb") as f:
-                    for chunk in r.iter_content(1 << 20):
-                        f.write(chunk)
-                return True
-    except Exception as e:
-        print(f"    [Drive Download] Warning: {e}")
-    return False
-
-def search_galaxy_bank_video(query: str, out_dir: Path = None) -> list[Path]:
-    """Priority #1: Find matching HD video from curated Galaxy Source Bank (Local PC or Cloud Drive)."""
-    ql = query.lower()
-    matched_cats = []
-    for cat_name, kws in GALAXY_CATEGORIES.items():
-        if any(kw in ql for kw in kws):
-            matched_cats.append(cat_name)
-    
-    if not matched_cats:
-        matched_cats = ["07_nasa_james_webb", "02_galaxies_nebulae", "01_black_holes"]
-
-    candidates = []
-
-    # 1. Check local directory first (if running on Windows PC with local bank)
-    if GALAXY_BANK_DIR.exists():
-        for cat in matched_cats:
-            folder = GALAXY_BANK_DIR / cat
-            if folder.exists():
-                candidates.extend(list(folder.glob("*.mp4")) + list(folder.glob("*.webm")))
-        if candidates:
-            random.shuffle(candidates)
-            return candidates[:3]
-
-    # 2. If running in Cloud / GitHub Actions (Local bank doesn't exist), download from Google Drive bank!
-    catalog = get_galaxy_catalog()
-    if catalog and out_dir:
-        drive_items = []
-        for cat in matched_cats:
-            if cat in catalog:
-                drive_items.extend(catalog[cat])
-        
-        if not drive_items:
-            for cat in ["07_nasa_james_webb", "02_galaxies_nebulae", "01_black_holes"]:
-                if cat in catalog:
-                    drive_items.extend(catalog[cat])
-        
-        if drive_items:
-            random.shuffle(drive_items)
-            for item in drive_items[:3]:
-                file_id = item["id"]
-                file_name = item.get("name", f"drive_{file_id}.mp4")
-                dl_path = out_dir / f"gdrive_{file_id}_{file_name}"
-                if dl_path.exists() and dl_path.stat().st_size > 4000:
-                    candidates.append(dl_path)
-                elif download_drive_video(file_id, dl_path):
-                    print(f"    [Galaxy Bank] Downloaded from Google Drive: {item['name']}")
-                    candidates.append(dl_path)
-
-    return candidates
-
 def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
     cq = clean_query(query)
     found = []
@@ -142,13 +48,13 @@ def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
             r = requests.get(
                 PEXELS_API,
                 headers={"Authorization": key},
-                params={"query": cq, "orientation": "portrait", "per_page": 10, "size": "medium"},
+                params={"query": cq, "orientation": "portrait", "per_page": 15, "size": "medium"},
                 timeout=12,
             )
             if r.status_code == 200:
                 videos = r.json().get("videos", [])
                 if not videos:
-                    # RULE 2: If 200 OK but 0 videos found, break immediately to save quota
+                    # RULE 2: If query returned 0 videos, do NOT loop backup keys. Break early!
                     break
                 for v in videos:
                     if v.get("duration", 0) < min_duration:
@@ -170,7 +76,7 @@ def search_pixabay_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
     try:
         r = requests.get(
             "https://pixabay.com/api/videos/",
-            params={"key": PIXABAY_KEY, "q": cq, "per_page": 10, "safesearch": "true", "video_type": "film"},
+            params={"key": PIXABAY_KEY, "q": cq, "per_page": 15, "safesearch": "true", "video_type": "film"},
             timeout=12,
         )
         if r.status_code == 200:
@@ -244,9 +150,9 @@ def convert_image_to_hd_clip(img_path: Path, out_path: Path, duration: float, w:
 
     frames = int(duration * fps)
     if zoom_idx % 2 == 0:
-        zoom_expr = f"zoompan=z='min(1.15,1.0+0.005*on)':d={frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={w}x{h}:fps={fps}"
+        zoom_expr = f"zoompan=z=\'min(1.15,1.0+0.005*on)\':d={frames}:x=\'iw/2-(iw/zoom/2)\':y=\'ih/2-(ih/zoom/2)\':s={w}x{h}:fps={fps}"
     else:
-        zoom_expr = f"zoompan=z='max(1.0,1.14-0.005*on)':d={frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={w}x{h}:fps={fps}"
+        zoom_expr = f"zoompan=z=\'max(1.0,1.14-0.005*on)\':d={frames}:x=\'iw/2-(iw/zoom/2)\':y=\'ih/2-(ih/zoom/2)\':s={w}x{h}:fps={fps}"
 
     cmd = [
         "ffmpeg", "-y", "-loop", "1", "-i", str(clean_img_path),
@@ -302,10 +208,13 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
     total_audio_dur = probe_duration(voice_audio) if (voice_audio and voice_audio.exists()) else (len(scenes) * 7.0)
     scene_durations = _calculate_scene_durations(words, scenes, total_audio_dur)
 
+    # Usage trackers to enforce strict MAX 2X visual repetition rule across the entire video
+    used_sources = {}  # url/link -> usage_count
+    donor_usage = {}   # donor_path -> usage_count
     video_pool = []
     clip_counter = 0
 
-    print(f"    [Curated Visuals] Fetching clean HD stock footage for {len(scenes)} scenes ({total_audio_dur:.1f}s audio)...")
+    print(f"    [Curated Visuals] Fetching clean HD stock footage for {len(scenes)} scenes ({total_audio_dur:.1f}s audio, max 2x reuse)...")
 
     for i, scene in enumerate(scenes):
         total_scene_dur = scene_durations[i]
@@ -325,43 +234,40 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             out_clip_path = out_dir / f"clip_{clip_counter:03d}.mp4"
             clip_ready = False
 
-            # 0. Priority: Curated Galaxy Source Bank (Zero API Quota, Pure HD)
+            # 1. Search Pexels HD Portrait Video
             for q in queries:
-                bank_matches = search_galaxy_bank_video(q, out_dir)
-                for bank_v in bank_matches:
-                    trim_video_clip(bank_v, out_clip_path, subclip_dur, w, h, fps)
-                    if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
-                        video_pool.append(bank_v)
-                        clip_ready = True
-                        break
+                links = search_pexels_hd_video(q)
+                candidate_links = [lnk for lnk in links if used_sources.get(lnk, 0) < 2]
+                candidate_links.sort(key=lambda lnk: used_sources.get(lnk, 0))
+
+                for link in candidate_links:
+                    temp_v = out_dir / f"raw_v_{clip_counter}.mp4"
+                    if download_file(link, temp_v):
+                        trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
+                        if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
+                            used_sources[link] = used_sources.get(link, 0) + 1
+                            if temp_v not in video_pool:
+                                video_pool.append(temp_v)
+                            clip_ready = True
+                            break
                 if clip_ready:
                     break
-
-            # 1. Search Pexels HD Portrait Video
-            if not clip_ready:
-                for q in queries:
-                    links = search_pexels_hd_video(q)
-                    for link in links:
-                        temp_v = out_dir / f"raw_v_{clip_counter}.mp4"
-                        if download_file(link, temp_v):
-                            trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
-                            if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
-                                video_pool.append(temp_v)
-                                clip_ready = True
-                                break
-                    if clip_ready:
-                        break
 
             # 2. Search Pixabay HD Motion Video
             if not clip_ready:
                 for q in queries:
                     links = search_pixabay_hd_video(q)
-                    for link in links:
+                    candidate_links = [lnk for lnk in links if used_sources.get(lnk, 0) < 2]
+                    candidate_links.sort(key=lambda lnk: used_sources.get(lnk, 0))
+
+                    for link in candidate_links:
                         temp_v = out_dir / f"raw_pb_{clip_counter}.mp4"
                         if download_file(link, temp_v):
                             trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
                             if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
-                                video_pool.append(temp_v)
+                                used_sources[link] = used_sources.get(link, 0) + 1
+                                if temp_v not in video_pool:
+                                    video_pool.append(temp_v)
                                 clip_ready = True
                                 break
                     if clip_ready:
@@ -371,21 +277,30 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             if not clip_ready:
                 for q in queries:
                     img_links = search_wikimedia_commons_hd(q)
-                    for img_url in img_links:
+                    candidate_img_links = [img_url for img_url in img_links if used_sources.get(img_url, 0) < 2]
+                    candidate_img_links.sort(key=lambda img_url: used_sources.get(img_url, 0))
+
+                    for img_url in candidate_img_links:
                         temp_img = out_dir / f"raw_wm_{clip_counter}.jpg"
                         if download_file(img_url, temp_img):
                             convert_image_to_hd_clip(temp_img, out_clip_path, subclip_dur, w, h, fps, zoom_idx=clip_counter)
                             if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
+                                used_sources[img_url] = used_sources.get(img_url, 0) + 1
                                 clip_ready = True
                                 break
                     if clip_ready:
                         break
 
-            # 4. Failsafe: Pool Recycling (Reuse confirmed HD video footage with different pan/zoom, NO junk web images!)
+            # 4. Failsafe: Pool Recycling (Max 2x per donor footage with alternating pan/zoom)
             if not clip_ready and video_pool:
-                donor = random.choice(video_pool)
-                trim_video_clip(donor, out_clip_path, subclip_dur, w, h, fps)
-                clip_ready = True
+                valid_donors = [d for d in video_pool if donor_usage.get(d, 0) < 2]
+                if valid_donors:
+                    valid_donors.sort(key=lambda d: donor_usage.get(d, 0))
+                    donor = valid_donors[0]
+                    trim_video_clip(donor, out_clip_path, subclip_dur, w, h, fps)
+                    if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
+                        donor_usage[donor] = donor_usage.get(donor, 0) + 1
+                        clip_ready = True
 
             if not clip_ready:
                 # Solid dark cinematic gradient placeholder (never raw web junk)
@@ -399,5 +314,8 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
 
         print(f"    scene {i+1}/{len(scenes)}: {total_scene_dur:.1f}s -> {num_subclips} HD clips ready")
 
-    print(f"    [Curated Visuals] All {len(all_clips)} HD clips fetched cleanly without web junk.")
+    print(f"    [Curated Visuals] All {len(all_clips)} HD clips fetched cleanly without web junk (Strict max 2x repetition).")
     return all_clips
+
+
+fetch_for_scenes = fetch_all

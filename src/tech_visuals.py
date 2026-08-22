@@ -48,11 +48,14 @@ def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
             r = requests.get(
                 PEXELS_API,
                 headers={"Authorization": key},
-                params={"query": cq, "orientation": "portrait", "per_page": 10, "size": "medium"},
+                params={"query": cq, "orientation": "portrait", "per_page": 15, "size": "medium"},
                 timeout=12,
             )
             if r.status_code == 200:
                 videos = r.json().get("videos", [])
+                if not videos:
+                    # RULE 2: If query returned 0 videos, do NOT loop backup keys. Break early!
+                    break
                 for v in videos:
                     if v.get("duration", 0) < min_duration:
                         continue
@@ -73,7 +76,7 @@ def search_pixabay_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
     try:
         r = requests.get(
             "https://pixabay.com/api/videos/",
-            params={"key": PIXABAY_KEY, "q": cq, "per_page": 10, "safesearch": "true", "video_type": "film"},
+            params={"key": PIXABAY_KEY, "q": cq, "per_page": 15, "safesearch": "true", "video_type": "film"},
             timeout=12,
         )
         if r.status_code == 200:
@@ -147,9 +150,9 @@ def convert_image_to_hd_clip(img_path: Path, out_path: Path, duration: float, w:
 
     frames = int(duration * fps)
     if zoom_idx % 2 == 0:
-        zoom_expr = f"zoompan=z='min(1.15,1.0+0.005*on)':d={frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={w}x{h}:fps={fps}"
+        zoom_expr = f"zoompan=z=\'min(1.15,1.0+0.005*on)\':d={frames}:x=\'iw/2-(iw/zoom/2)\':y=\'ih/2-(ih/zoom/2)\':s={w}x{h}:fps={fps}"
     else:
-        zoom_expr = f"zoompan=z='max(1.0,1.14-0.005*on)':d={frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={w}x{h}:fps={fps}"
+        zoom_expr = f"zoompan=z=\'max(1.0,1.14-0.005*on)\':d={frames}:x=\'iw/2-(iw/zoom/2)\':y=\'ih/2-(ih/zoom/2)\':s={w}x{h}:fps={fps}"
 
     cmd = [
         "ffmpeg", "-y", "-loop", "1", "-i", str(clean_img_path),
@@ -205,10 +208,13 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
     total_audio_dur = probe_duration(voice_audio) if (voice_audio and voice_audio.exists()) else (len(scenes) * 7.0)
     scene_durations = _calculate_scene_durations(words, scenes, total_audio_dur)
 
+    # Usage trackers to enforce strict MAX 2X visual repetition rule across the entire video
+    used_sources = {}  # url/link -> usage_count
+    donor_usage = {}   # donor_path -> usage_count
     video_pool = []
     clip_counter = 0
 
-    print(f"    [Curated Visuals] Fetching clean HD stock footage for {len(scenes)} scenes ({total_audio_dur:.1f}s audio)...")
+    print(f"    [Curated Visuals] Fetching clean HD stock footage for {len(scenes)} scenes ({total_audio_dur:.1f}s audio, max 2x reuse)...")
 
     for i, scene in enumerate(scenes):
         total_scene_dur = scene_durations[i]
@@ -231,12 +237,17 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             # 1. Search Pexels HD Portrait Video
             for q in queries:
                 links = search_pexels_hd_video(q)
-                for link in links:
+                candidate_links = [lnk for lnk in links if used_sources.get(lnk, 0) < 2]
+                candidate_links.sort(key=lambda lnk: used_sources.get(lnk, 0))
+
+                for link in candidate_links:
                     temp_v = out_dir / f"raw_v_{clip_counter}.mp4"
                     if download_file(link, temp_v):
                         trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
                         if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
-                            video_pool.append(temp_v)
+                            used_sources[link] = used_sources.get(link, 0) + 1
+                            if temp_v not in video_pool:
+                                video_pool.append(temp_v)
                             clip_ready = True
                             break
                 if clip_ready:
@@ -246,12 +257,17 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             if not clip_ready:
                 for q in queries:
                     links = search_pixabay_hd_video(q)
-                    for link in links:
+                    candidate_links = [lnk for lnk in links if used_sources.get(lnk, 0) < 2]
+                    candidate_links.sort(key=lambda lnk: used_sources.get(lnk, 0))
+
+                    for link in candidate_links:
                         temp_v = out_dir / f"raw_pb_{clip_counter}.mp4"
                         if download_file(link, temp_v):
                             trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
                             if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
-                                video_pool.append(temp_v)
+                                used_sources[link] = used_sources.get(link, 0) + 1
+                                if temp_v not in video_pool:
+                                    video_pool.append(temp_v)
                                 clip_ready = True
                                 break
                     if clip_ready:
@@ -261,21 +277,30 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             if not clip_ready:
                 for q in queries:
                     img_links = search_wikimedia_commons_hd(q)
-                    for img_url in img_links:
+                    candidate_img_links = [img_url for img_url in img_links if used_sources.get(img_url, 0) < 2]
+                    candidate_img_links.sort(key=lambda img_url: used_sources.get(img_url, 0))
+
+                    for img_url in candidate_img_links:
                         temp_img = out_dir / f"raw_wm_{clip_counter}.jpg"
                         if download_file(img_url, temp_img):
                             convert_image_to_hd_clip(temp_img, out_clip_path, subclip_dur, w, h, fps, zoom_idx=clip_counter)
                             if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
+                                used_sources[img_url] = used_sources.get(img_url, 0) + 1
                                 clip_ready = True
                                 break
                     if clip_ready:
                         break
 
-            # 4. Failsafe: Pool Recycling (Reuse confirmed HD video footage with different pan/zoom, NO junk web images!)
+            # 4. Failsafe: Pool Recycling (Max 2x per donor footage with alternating pan/zoom)
             if not clip_ready and video_pool:
-                donor = random.choice(video_pool)
-                trim_video_clip(donor, out_clip_path, subclip_dur, w, h, fps)
-                clip_ready = True
+                valid_donors = [d for d in video_pool if donor_usage.get(d, 0) < 2]
+                if valid_donors:
+                    valid_donors.sort(key=lambda d: donor_usage.get(d, 0))
+                    donor = valid_donors[0]
+                    trim_video_clip(donor, out_clip_path, subclip_dur, w, h, fps)
+                    if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
+                        donor_usage[donor] = donor_usage.get(donor, 0) + 1
+                        clip_ready = True
 
             if not clip_ready:
                 # Solid dark cinematic gradient placeholder (never raw web junk)
@@ -289,5 +314,8 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
 
         print(f"    scene {i+1}/{len(scenes)}: {total_scene_dur:.1f}s -> {num_subclips} HD clips ready")
 
-    print(f"    [Curated Visuals] All {len(all_clips)} HD clips fetched cleanly without web junk.")
+    print(f"    [Curated Visuals] All {len(all_clips)} HD clips fetched cleanly without web junk (Strict max 2x repetition).")
     return all_clips
+
+
+fetch_for_scenes = fetch_all
