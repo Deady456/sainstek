@@ -81,7 +81,8 @@
     "teknologi-penyimpanan-data-kaca-kuarsa-project-silica",
     "teknologi-ai-prediksi-cuaca-paling-akurat-graphcast",
     "teknologi-ai-penemuan-material-baru-gnome",
-    "fenomena-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b"
+    "fenomena-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b",
+    "penemuan-eksoplanet-k2-delapan-belas-b-james-webb"
   ],
   "published": [
     {
@@ -802,6 +803,16 @@
       "title": "Misteri WASP-76b: Eksoplanet Ekstrem Tempat Hujan Besi Cair!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260822_061949_fenomena-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b/final.mp4",
       "video_id": "ts5YW1OfT60",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260822_070055",
+      "topic": "penemuan-eksoplanet-k2-delapan-belas-b-james-webb",
+      "title": "Misteri Eksoplanet K Dua Delapan Belas B: Apakah Ini Rumah Baru Bagi Kehidupan?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260822_070055_penemuan-eksoplanet-k2-delapan-belas-b-james-webb/final.mp4",
+      "video_id": "aMXF9P0nDI0",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
