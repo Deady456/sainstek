@@ -83,7 +83,8 @@
     "teknologi-ai-penemuan-material-baru-gnome",
     "fenomena-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b",
     "penemuan-eksoplanet-k2-delapan-belas-b-james-webb",
-    "misteri-objek-jumbo-nebula-orion-james-webb"
+    "misteri-objek-jumbo-nebula-orion-james-webb",
+    "misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas"
   ],
   "published": [
     {
@@ -824,6 +825,16 @@
       "title": "Misteri Objek JuMBO di Nebula Orion yang Membingungkan Para Astronom",
       "path": "/home/runner/work/sainstek/sainstek/output/20260822_123241_misteri-objek-jumbo-nebula-orion-james-webb/final.mp4",
       "video_id": "sBtl93-X8l0",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260822_163242",
+      "topic": "misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas",
+      "title": "Misteri TON enam ratus delapan belas: Lubang Hitam Terbesar yang Mampu Menelan Seluruh Tata Surya!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260822_163242_misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas/final.mp4",
+      "video_id": "8vrwrUwYGHM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
