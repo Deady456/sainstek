@@ -82,7 +82,8 @@
     "teknologi-ai-prediksi-cuaca-paling-akurat-graphcast",
     "teknologi-ai-penemuan-material-baru-gnome",
     "fenomena-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b",
-    "penemuan-eksoplanet-k2-delapan-belas-b-james-webb"
+    "penemuan-eksoplanet-k2-delapan-belas-b-james-webb",
+    "misteri-objek-jumbo-nebula-orion-james-webb"
   ],
   "published": [
     {
@@ -813,6 +814,16 @@
       "title": "Misteri Eksoplanet K Dua Delapan Belas B: Apakah Ini Rumah Baru Bagi Kehidupan?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260822_070055_penemuan-eksoplanet-k2-delapan-belas-b-james-webb/final.mp4",
       "video_id": "aMXF9P0nDI0",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260822_123241",
+      "topic": "misteri-objek-jumbo-nebula-orion-james-webb",
+      "title": "Misteri Objek JuMBO di Nebula Orion yang Membingungkan Para Astronom",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260822_123241_misteri-objek-jumbo-nebula-orion-james-webb/final.mp4",
+      "video_id": "sBtl93-X8l0",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
