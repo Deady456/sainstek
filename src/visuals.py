@@ -38,7 +38,22 @@ def clean_query(q: str) -> str:
     return " ".join(cleaned[:3]) if cleaned else q
 
 
-GALAXY_BANK_DIR = Path(r"C:\Users\Administrator\Desktop\Galaxy_Source_Bank")
+GALAXY_BANK_DIR = Path(os.environ.get("GALAXY_BANK_DIR", r"C:\Users\Administrator\Desktop\Galaxy_Source_Bank"))
+GALAXY_CATALOG_FILE = ROOT / "assets" / "galaxy_catalog.json"
+
+_galaxy_catalog_cache = None
+
+def get_galaxy_catalog() -> dict:
+    global _galaxy_catalog_cache
+    if _galaxy_catalog_cache is None:
+        if GALAXY_CATALOG_FILE.exists():
+            try:
+                _galaxy_catalog_cache = json.loads(GALAXY_CATALOG_FILE.read_text(encoding="utf-8"))
+            except Exception:
+                _galaxy_catalog_cache = {}
+        else:
+            _galaxy_catalog_cache = {}
+    return _galaxy_catalog_cache
 
 GALAXY_CATEGORIES = {
     "01_black_holes": ["black hole", "blackhole", "supermassive", "accretion", "singularity", "event horizon", "quasar", "relativistic", "tidal disruption"],
@@ -53,28 +68,69 @@ GALAXY_CATEGORIES = {
     "10_cosmic_threats": ["cme", "solar flare", "superflare", "magnetic", "roche limit", "disaster", "threat"]
 }
 
-def search_galaxy_bank_video(query: str) -> list[Path]:
-    """Priority #1: Find matching HD video from curated Galaxy Source Bank."""
-    if not GALAXY_BANK_DIR.exists():
-        return []
+def download_drive_video(file_id: str, out_path: Path) -> bool:
+    """Download video from Google Drive by file ID."""
+    url = f"https://drive.usercontent.google.com/download?id={file_id}&export=download&authuser=0"
+    try:
+        with requests.get(url, stream=True, headers=HEADERS, timeout=30) as r:
+            if r.status_code == 200 and int(r.headers.get("content-length", 5000)) > 4000:
+                with open(out_path, "wb") as f:
+                    for chunk in r.iter_content(1 << 20):
+                        f.write(chunk)
+                return True
+    except Exception as e:
+        print(f"    [Drive Download] Warning: {e}")
+    return False
+
+def search_galaxy_bank_video(query: str, out_dir: Path = None) -> list[Path]:
+    """Priority #1: Find matching HD video from curated Galaxy Source Bank (Local PC or Cloud Drive)."""
     ql = query.lower()
-    matched_folders = []
+    matched_cats = []
     for cat_name, kws in GALAXY_CATEGORIES.items():
         if any(kw in ql for kw in kws):
-            matched_folders.append(GALAXY_BANK_DIR / cat_name)
+            matched_cats.append(cat_name)
     
-    if not matched_folders:
-        matched_folders = [GALAXY_BANK_DIR / "07_nasa_james_webb", GALAXY_BANK_DIR / "02_galaxies_nebulae", GALAXY_BANK_DIR / "01_black_holes"]
+    if not matched_cats:
+        matched_cats = ["07_nasa_james_webb", "02_galaxies_nebulae", "01_black_holes"]
 
     candidates = []
-    for folder in matched_folders:
-        if folder.exists():
-            candidates.extend(list(folder.glob("*.mp4")) + list(folder.glob("*.webm")))
-    
-    if candidates:
-        random.shuffle(candidates)
-        return candidates[:3]
-    return []
+
+    # 1. Check local directory first (if running on Windows PC with local bank)
+    if GALAXY_BANK_DIR.exists():
+        for cat in matched_cats:
+            folder = GALAXY_BANK_DIR / cat
+            if folder.exists():
+                candidates.extend(list(folder.glob("*.mp4")) + list(folder.glob("*.webm")))
+        if candidates:
+            random.shuffle(candidates)
+            return candidates[:3]
+
+    # 2. If running in Cloud / GitHub Actions (Local bank doesn't exist), download from Google Drive bank!
+    catalog = get_galaxy_catalog()
+    if catalog and out_dir:
+        drive_items = []
+        for cat in matched_cats:
+            if cat in catalog:
+                drive_items.extend(catalog[cat])
+        
+        if not drive_items:
+            for cat in ["07_nasa_james_webb", "02_galaxies_nebulae", "01_black_holes"]:
+                if cat in catalog:
+                    drive_items.extend(catalog[cat])
+        
+        if drive_items:
+            random.shuffle(drive_items)
+            for item in drive_items[:3]:
+                file_id = item["id"]
+                file_name = item.get("name", f"drive_{file_id}.mp4")
+                dl_path = out_dir / f"gdrive_{file_id}_{file_name}"
+                if dl_path.exists() and dl_path.stat().st_size > 4000:
+                    candidates.append(dl_path)
+                elif download_drive_video(file_id, dl_path):
+                    print(f"    [Galaxy Bank] Downloaded from Google Drive: {item['name']}")
+                    candidates.append(dl_path)
+
+    return candidates
 
 def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
     cq = clean_query(query)
@@ -271,7 +327,7 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
 
             # 0. Priority: Curated Galaxy Source Bank (Zero API Quota, Pure HD)
             for q in queries:
-                bank_matches = search_galaxy_bank_video(q)
+                bank_matches = search_galaxy_bank_video(q, out_dir)
                 for bank_v in bank_matches:
                     trim_video_clip(bank_v, out_clip_path, subclip_dur, w, h, fps)
                     if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
