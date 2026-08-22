@@ -211,7 +211,8 @@ def _system_prompt(content_format: str = None) -> str:
 
 Aturan:
 - Skrip harus {ts} detik, ~{tw} kata total ({tw//ts} kata per detik).
-- Mulai dengan HOOK 1 kalimat yang bikin penasaran dalam <3 detik, gaya semi-formal. Jangan pakai "Halo guys", "Hai", atau perkenalan.
+- Mulai dengan HOOK 1 kalimat yang sangat memikat dan memicu rasa penasaran dalam <3 detik (gaya semi-formal). Langsung ke inti bahasan tanpa basa-basi (DILARANG menggunakan 'Halo guys', 'Hai', atau sapaan pembuka).
+- RAHASIA RETENSI (SEAMLESS INFINITY LOOP): Kalimat terakhir pada scene penutup WAJIB dibuat menggantung atau menyatu mulus kembali ke kalimat HOOK pertama di scene 1, sehingga saat video berulang otomatis di YouTube Shorts, transisi terasa alami dan menciptakan efek tonton berulang (retensi >100%).
 - Isi: informasi relevan sesuai niche yang diminta. Anda WAJIB memberikan fakta, angka, data, atau berita terbaru yang SANGAT AKURAT dan dapat diverifikasi. DILARANG mengarang cerita/halusinasi.
 - Akhiri dengan CTA 1 kalimat semi-formal ajakan subscribe/ikuti.
 - Gunakan bahasa Indonesia semi-formal: rapi dan informatif, tapi tetap enak didengar. Hindari bahasa terlalu santai atau kaku.
