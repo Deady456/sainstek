@@ -20,6 +20,17 @@ HEADERS = {
 # Blacklist words that could return ads, cartoons, or drawings
 JUNK_WORDS = {"cartoon", "drawing", "illustration", "anime", "clipart", "vector", "meme", "banner", "ad"}
 
+GENERIC_NICHES = [
+    "cinematic motion background",
+    "futuristic technology digital",
+    "nature landscape dramatic",
+    "abstract light movement",
+    "macro science detailed",
+    "dark atmospheric cinematic",
+    "aerial view cinematic",
+    "neon abstract motion",
+]
+
 def probe_duration(path: Path) -> float:
     try:
         r = subprocess.run(
@@ -38,6 +49,59 @@ def clean_query(q: str) -> str:
     return " ".join(cleaned[:3]) if cleaned else q
 
 
+def expand_queries(scene: dict) -> list[str]:
+    """Generate multiple tiered queries from scene data to guarantee fresh, distinct visual clips."""
+    queries = []
+    
+    # 1. Factual subject (if present)
+    factual = scene.get("factual_subject")
+    if factual and isinstance(factual, str) and factual.lower() != "null":
+        f_clean = clean_query(factual.strip())
+        if f_clean and f_clean not in queries:
+            queries.append(f_clean)
+            
+    # 2. Main visual query
+    vq = scene.get("visual_query", "")
+    if vq:
+        v_clean = clean_query(vq.strip())
+        if v_clean and v_clean not in queries:
+            queries.append(v_clean)
+            
+        # 3. Keyword subsets from visual query
+        v_words = [w.strip().lower() for w in re.split(r'[,\s]+', vq) if w.strip() and w.lower() not in JUNK_WORDS and len(w) > 2]
+        if len(v_words) >= 2:
+            sub1 = " ".join(v_words[:2])
+            sub2 = " ".join(v_words[-2:])
+            if sub1 not in queries:
+                queries.append(sub1)
+            if sub2 not in queries:
+                queries.append(sub2)
+        elif len(v_words) == 1 and v_words[0] not in queries:
+            queries.append(v_words[0])
+
+    # 4. Text/narration contextual keywords
+    text = scene.get("text", "")
+    if text:
+        text_words = [tw.strip(".,!?:;\"'").lower() for tw in text.split() if len(tw) > 3 and not tw.startswith("http")]
+        if len(text_words) >= 3:
+            kw_phrase = " ".join(text_words[:3])
+            if kw_phrase not in queries:
+                queries.append(kw_phrase)
+
+    # 5. Generic rich cinematic fallbacks
+    queries.extend([random.choice(GENERIC_NICHES), "cinematic abstract background"])
+    
+    # Return unique, non-empty queries
+    seen = set()
+    result = []
+    for q in queries:
+        q_strip = q.strip()
+        if q_strip and q_strip.lower() not in seen:
+            seen.add(q_strip.lower())
+            result.append(q_strip)
+    return result
+
+
 def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
     cq = clean_query(query)
     found = []
@@ -48,7 +112,7 @@ def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
             r = requests.get(
                 PEXELS_API,
                 headers={"Authorization": key},
-                params={"query": cq, "orientation": "portrait", "per_page": 15, "size": "medium"},
+                params={"query": cq, "orientation": "portrait", "per_page": 30, "size": "medium"},
                 timeout=12,
             )
             if r.status_code == 200:
@@ -62,7 +126,9 @@ def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
                     files = [f for f in v.get("video_files", []) if f.get("height", 0) > f.get("width", 0) and f.get("width", 0) >= 720]
                     if files:
                         files.sort(key=lambda f: f.get("height", 0), reverse=True)
-                        found.append(files[0]["link"])
+                        link = files[0]["link"]
+                        if link not in found:
+                            found.append(link)
                 if found:
                     break
         except Exception:
@@ -76,7 +142,7 @@ def search_pixabay_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
     try:
         r = requests.get(
             "https://pixabay.com/api/videos/",
-            params={"key": PIXABAY_KEY, "q": cq, "per_page": 15, "safesearch": "true", "video_type": "film"},
+            params={"key": PIXABAY_KEY, "q": cq, "per_page": 30, "safesearch": "true", "video_type": "film"},
             timeout=12,
         )
         if r.status_code == 200:
@@ -87,7 +153,9 @@ def search_pixabay_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
                 videos = hit.get("videos", {})
                 for vtype in ["large", "medium", "small"]:
                     if vtype in videos and videos[vtype].get("url"):
-                        found.append(videos[vtype]["url"])
+                        u = videos[vtype]["url"]
+                        if u not in found:
+                            found.append(u)
                         break
     except Exception:
         pass
@@ -96,7 +164,7 @@ def search_pixabay_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
 
 def search_wikimedia_commons_hd(name: str) -> list[str]:
     encoded = quote(clean_query(name))
-    url = f"https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch={encoded}&gsrnamespace=6&prop=imageinfo&iiprop=url|size|mime&format=json"
+    url = f"https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch={encoded}&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime&format=json"
     results = []
     try:
         r = requests.get(url, headers=HEADERS, timeout=8)
@@ -109,7 +177,8 @@ def search_wikimedia_commons_hd(name: str) -> list[str]:
                 h = ii.get("height", 0)
                 img_url = ii.get("url", "")
                 if mime.startswith("image/") and not mime.endswith("svg+xml") and w >= 800 and img_url:
-                    results.append(img_url)
+                    if img_url not in results:
+                        results.append(img_url)
     except Exception:
         pass
     return results
@@ -214,31 +283,25 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
     video_pool = []
     clip_counter = 0
 
-    print(f"    [Curated Visuals] Fetching clean HD stock footage for {len(scenes)} scenes ({total_audio_dur:.1f}s audio, max 2x reuse)...")
+    print(f"    [Curated Visuals] Fetching diverse HD stock footage for {len(scenes)} scenes ({total_audio_dur:.1f}s audio, max 2x repetition limit)...")
 
     for i, scene in enumerate(scenes):
         total_scene_dur = scene_durations[i]
-        num_subclips = max(1, int(round(total_scene_dur / 3.2)))
+        num_subclips = max(1, int(round(total_scene_dur / 3.0)))
         subclip_dur = total_scene_dur / num_subclips
 
-        queries = []
-        factual = scene.get("factual_subject")
-        if factual and isinstance(factual, str) and factual.lower() != "null":
-            queries.append(factual.strip())
-
-        vq = scene.get("visual_query", "")
-        if vq:
-            queries.append(vq.strip())
+        # Generate expanded, tiered search queries
+        tiered_queries = expand_queries(scene)
 
         for sub_idx in range(num_subclips):
             out_clip_path = out_dir / f"clip_{clip_counter:03d}.mp4"
             clip_ready = False
 
-            # 1. Search Pexels HD Portrait Video
-            for q in queries:
+            # 1. Search Pexels HD Portrait Video (Aggressive query sweep)
+            for q in tiered_queries:
                 links = search_pexels_hd_video(q)
                 candidate_links = [lnk for lnk in links if used_sources.get(lnk, 0) < 2]
-                candidate_links.sort(key=lambda lnk: used_sources.get(lnk, 0))
+                candidate_links.sort(key=lambda lnk: (used_sources.get(lnk, 0), random.random()))
 
                 for link in candidate_links:
                     temp_v = out_dir / f"raw_v_{clip_counter}.mp4"
@@ -253,12 +316,12 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
                 if clip_ready:
                     break
 
-            # 2. Search Pixabay HD Motion Video
+            # 2. Search Pixabay HD Motion Video (Aggressive query sweep)
             if not clip_ready:
-                for q in queries:
+                for q in tiered_queries:
                     links = search_pixabay_hd_video(q)
                     candidate_links = [lnk for lnk in links if used_sources.get(lnk, 0) < 2]
-                    candidate_links.sort(key=lambda lnk: used_sources.get(lnk, 0))
+                    candidate_links.sort(key=lambda lnk: (used_sources.get(lnk, 0), random.random()))
 
                     for link in candidate_links:
                         temp_v = out_dir / f"raw_pb_{clip_counter}.mp4"
@@ -275,10 +338,10 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
 
             # 3. Search Wikimedia Commons Real Photo
             if not clip_ready:
-                for q in queries:
+                for q in tiered_queries:
                     img_links = search_wikimedia_commons_hd(q)
                     candidate_img_links = [img_url for img_url in img_links if used_sources.get(img_url, 0) < 2]
-                    candidate_img_links.sort(key=lambda img_url: used_sources.get(img_url, 0))
+                    candidate_img_links.sort(key=lambda img_url: (used_sources.get(img_url, 0), random.random()))
 
                     for img_url in candidate_img_links:
                         temp_img = out_dir / f"raw_wm_{clip_counter}.jpg"
@@ -295,7 +358,7 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             if not clip_ready and video_pool:
                 valid_donors = [d for d in video_pool if donor_usage.get(d, 0) < 2]
                 if valid_donors:
-                    valid_donors.sort(key=lambda d: donor_usage.get(d, 0))
+                    valid_donors.sort(key=lambda d: (donor_usage.get(d, 0), random.random()))
                     donor = valid_donors[0]
                     trim_video_clip(donor, out_clip_path, subclip_dur, w, h, fps)
                     if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
@@ -312,9 +375,9 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             all_clips.append(out_clip_path)
             clip_counter += 1
 
-        print(f"    scene {i+1}/{len(scenes)}: {total_scene_dur:.1f}s -> {num_subclips} HD clips ready")
+        print(f"    scene {i+1}/{len(scenes)}: {total_scene_dur:.1f}s -> {num_subclips} diverse HD clips ready")
 
-    print(f"    [Curated Visuals] All {len(all_clips)} HD clips fetched cleanly without web junk (Strict max 2x repetition).")
+    print(f"    [Curated Visuals] All {len(all_clips)} HD clips fetched cleanly (Strict max 2x repetition).")
     return all_clips
 
 
