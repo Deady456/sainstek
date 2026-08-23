@@ -84,7 +84,8 @@
     "fenomena-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b",
     "penemuan-eksoplanet-k2-delapan-belas-b-james-webb",
     "misteri-objek-jumbo-nebula-orion-james-webb",
-    "misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas"
+    "misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas",
+    "penemuan-galaksi-tertua-jades-gs-z-empat-belas-nol-james-webb"
   ],
   "published": [
     {
@@ -835,6 +836,16 @@
       "title": "Misteri TON enam ratus delapan belas: Lubang Hitam Terbesar yang Mampu Menelan Seluruh Tata Surya!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260822_163242_misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas/final.mp4",
       "video_id": "8vrwrUwYGHM",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260823_003156",
+      "topic": "penemuan-galaksi-tertua-jades-gs-z-empat-belas-nol-james-webb",
+      "title": "Penemuan Galaksi Tertua JADES-GS-z14-nol oleh Teleskop James Webb Yang Mengguncang Teori Astronomi",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260823_003156_penemuan-galaksi-tertua-jades-gs-z-empat-belas-nol-james-web/final.mp4",
+      "video_id": "bBafPc8qU9s",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
