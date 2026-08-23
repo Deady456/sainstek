@@ -85,7 +85,8 @@
     "penemuan-eksoplanet-k2-delapan-belas-b-james-webb",
     "misteri-objek-jumbo-nebula-orion-james-webb",
     "misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas",
-    "penemuan-galaksi-tertua-jades-gs-z-empat-belas-nol-james-webb"
+    "penemuan-galaksi-tertua-jades-gs-z-empat-belas-nol-james-webb",
+    "penemuan-atmosfer-planet-lima-puluh-lima-cancri-e-james-webb"
   ],
   "published": [
     {
@@ -846,6 +847,16 @@
       "title": "Penemuan Galaksi Tertua JADES-GS-z14-nol oleh Teleskop James Webb Yang Mengguncang Teori Astronomi",
       "path": "/home/runner/work/sainstek/sainstek/output/20260823_003156_penemuan-galaksi-tertua-jades-gs-z-empat-belas-nol-james-web/final.mp4",
       "video_id": "bBafPc8qU9s",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260823_123154",
+      "topic": "penemuan-atmosfer-planet-lima-puluh-lima-cancri-e-james-webb",
+      "title": "Teleskop James Webb Temukan Atmosfer di Planet Neraka Lahar lima puluh lima Cancri e!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260823_123154_penemuan-atmosfer-planet-lima-puluh-lima-cancri-e-james-webb/final.mp4",
+      "video_id": "4gTErG9Vkos",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
