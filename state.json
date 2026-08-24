@@ -87,7 +87,8 @@
     "misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas",
     "penemuan-galaksi-tertua-jades-gs-z-empat-belas-nol-james-webb",
     "penemuan-atmosfer-planet-lima-puluh-lima-cancri-e-james-webb",
-    "misteri-bintang-terbesar-stephenson-dua-garis-delapan-belas"
+    "misteri-bintang-terbesar-stephenson-dua-garis-delapan-belas",
+    "misteri-eksoplanet-hujan-kaca-hd-seratus-delapan-puluh-sembilan-ribu-tujuh-ratus-tiga-puluh-tiga-b"
   ],
   "published": [
     {
@@ -868,6 +869,16 @@
       "title": "Monster Kosmik Terbesar: Bintang Ini Mampu Menelan Sepuluh Miliar Matahari!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260824_003151_misteri-bintang-terbesar-stephenson-dua-garis-delapan-belas/final.mp4",
       "video_id": "uGA5cm3r8Hw",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260824_123222",
+      "topic": "misteri-eksoplanet-hujan-kaca-hd-seratus-delapan-puluh-sembilan-ribu-tujuh-ratus-tiga-puluh-tiga-b",
+      "title": "Planet Biru Cantik Ini Ternyata Punya Hujan Kaca Cair Menyamping!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260824_123222_misteri-eksoplanet-hujan-kaca-hd-seratus-delapan-puluh-sembi/final.mp4",
+      "video_id": "7acnCMLVjzY",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
