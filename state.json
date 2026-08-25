@@ -88,7 +88,8 @@
     "penemuan-galaksi-tertua-jades-gs-z-empat-belas-nol-james-webb",
     "penemuan-atmosfer-planet-lima-puluh-lima-cancri-e-james-webb",
     "misteri-bintang-terbesar-stephenson-dua-garis-delapan-belas",
-    "misteri-eksoplanet-hujan-kaca-hd-seratus-delapan-puluh-sembilan-ribu-tujuh-ratus-tiga-puluh-tiga-b"
+    "misteri-eksoplanet-hujan-kaca-hd-seratus-delapan-puluh-sembilan-ribu-tujuh-ratus-tiga-puluh-tiga-b",
+    "misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh-enam-b"
   ],
   "published": [
     {
@@ -879,6 +880,16 @@
       "title": "Planet Biru Cantik Ini Ternyata Punya Hujan Kaca Cair Menyamping!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260824_123222_misteri-eksoplanet-hujan-kaca-hd-seratus-delapan-puluh-sembi/final.mp4",
       "video_id": "7acnCMLVjzY",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260825_003307",
+      "topic": "misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh-enam-b",
+      "title": "Misteri Eksoplanet Gliese 436b: Planet dengan Es yang Terbakar Bak Komet",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260825_003307_misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh/final.mp4",
+      "video_id": "P3NH2C5SOzo",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
