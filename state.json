@@ -91,7 +91,8 @@
     "misteri-eksoplanet-hujan-kaca-hd-seratus-delapan-puluh-sembilan-ribu-tujuh-ratus-tiga-puluh-tiga-b",
     "misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh-enam-b",
     "misteri-lautan-air-terbesar-kuasar-apm-nol-delapan",
-    "misteri-ledakan-sinar-gamma-terterang-grb-dua-dua-satu-nol-nol-sembilan-a"
+    "misteri-ledakan-sinar-gamma-terterang-grb-dua-dua-satu-nol-nol-sembilan-a",
+    "misteri-eksoplanet-terpanas-kelt-sembilan-b"
   ],
   "published": [
     {
@@ -912,6 +913,16 @@
       "title": "Mengapa Ledakan Kosmik Terterang Ini Membutakan Satelit NASA?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260826_003141_misteri-ledakan-sinar-gamma-terterang-grb-dua-dua-satu-nol-n/final.mp4",
       "video_id": "JgWZiCrCamI",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260826_123330",
+      "topic": "misteri-eksoplanet-terpanas-kelt-sembilan-b",
+      "title": "Misteri KELT-9b: Planet Neraka Terpanas yang Lebih Membara dari Bintang!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260826_123330_misteri-eksoplanet-terpanas-kelt-sembilan-b/final.mp4",
+      "video_id": "jYQk__fiN9Q",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
