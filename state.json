@@ -90,7 +90,8 @@
     "misteri-bintang-terbesar-stephenson-dua-garis-delapan-belas",
     "misteri-eksoplanet-hujan-kaca-hd-seratus-delapan-puluh-sembilan-ribu-tujuh-ratus-tiga-puluh-tiga-b",
     "misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh-enam-b",
-    "misteri-lautan-air-terbesar-kuasar-apm-nol-delapan"
+    "misteri-lautan-air-terbesar-kuasar-apm-nol-delapan",
+    "misteri-ledakan-sinar-gamma-terterang-grb-dua-dua-satu-nol-nol-sembilan-a"
   ],
   "published": [
     {
@@ -901,6 +902,16 @@
       "title": "Lautan Air Terbesar di Alam Semesta Seratus Empat Puluh Triliun Kali Samudra Bumi!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260825_123427_misteri-lautan-air-terbesar-kuasar-apm-nol-delapan/final.mp4",
       "video_id": "7XSGhP5l4m8",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260826_003141",
+      "topic": "misteri-ledakan-sinar-gamma-terterang-grb-dua-dua-satu-nol-nol-sembilan-a",
+      "title": "Mengapa Ledakan Kosmik Terterang Ini Membutakan Satelit NASA?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260826_003141_misteri-ledakan-sinar-gamma-terterang-grb-dua-dua-satu-nol-n/final.mp4",
+      "video_id": "JgWZiCrCamI",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
