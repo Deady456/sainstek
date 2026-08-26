@@ -59,6 +59,7 @@ def clean_query(q: str) -> str:
 
 
 def expand_queries(scene: dict) -> list[str]:
+    """Generate multiple tiered queries from scene data to guarantee fresh, distinct visual clips."""
     queries = []
     factual = scene.get("factual_subject")
     if factual and isinstance(factual, str) and factual.lower() != "null":
@@ -85,7 +86,7 @@ def expand_queries(scene: dict) -> list[str]:
 
     text = scene.get("text", "")
     if text:
-        text_words = [tw.strip(".,!?:;\"'").lower() for tw in text.split() if len(tw) > 3 and not tw.startswith("http")]
+        text_words = [re.sub(r'[^a-zA-Z0-9]', '', tw).lower() for tw in text.split() if len(tw) > 3 and not tw.startswith("http")]
         if len(text_words) >= 3:
             kw_phrase = " ".join(text_words[:3])
             if kw_phrase not in queries:
@@ -104,7 +105,7 @@ def expand_queries(scene: dict) -> list[str]:
 
 
 def find_bank_match(scene: dict, used_sources: dict) -> dict | None:
-    """Find matching video from Google Drive Galaxy Resource Bank based on scene context."""
+    """Find strictly relevant video from Google Drive Galaxy Resource Bank (Score >= 3)."""
     if not GALAXY_BANK:
         return None
         
@@ -117,10 +118,10 @@ def find_bank_match(scene: dict, used_sources: dict) -> dict | None:
     candidates = []
     for item in GALAXY_BANK:
         vid_id = item["id"]
-        if used_sources.get(vid_id, 0) >= 2:
+        # Strict 1x usage limit per bank video in a single short (no duplicates in the same video)
+        if used_sources.get(vid_id, 0) >= 1:
             continue
             
-        # Score relevance
         score = 0
         for kw in item.get("keywords", []):
             if kw in scene_str:
@@ -131,21 +132,15 @@ def find_bank_match(scene: dict, used_sources: dict) -> dict | None:
             if iw in scene_str:
                 score += 2
 
-        if score > 0:
-            candidates.append((score, used_sources.get(vid_id, 0), random.random(), item))
+        # STRICT threshold: score must be at least 3 to qualify (no loose generic matches)
+        if score >= 3:
+            candidates.append((score, random.random(), item))
 
     if candidates:
-        # Sort by highest score first, then lowest usage count
-        candidates.sort(key=lambda c: (-c[0], c[1], c[2]))
-        return candidates[0][3]
+        candidates.sort(key=lambda c: (-c[0], c[1]))
+        return candidates[0][2]
 
-    # Fallback to any unused bank video for general space scenes
-    if any(k in scene_str for k in ["space", "bintang", "galaksi", "planet", "alam semesta", "cosmos", "dunia", "langit"]):
-        unused_bank = [item for item in GALAXY_BANK if used_sources.get(item["id"], 0) < 2]
-        if unused_bank:
-            unused_bank.sort(key=lambda item: (used_sources.get(item["id"], 0), random.random()))
-            return unused_bank[0]
-            
+    # No loose fallback! Generic scenes must use fresh Pexels/Pixabay stock instead
     return None
 
 
@@ -194,7 +189,7 @@ def search_pexels_hd_video(query: str, min_duration: float = 3.0) -> list[str]:
             if r.status_code == 200:
                 videos = r.json().get("videos", [])
                 if not videos:
-                    break
+                    break  # Save quota: do not loop if query returns 0 items
                 for v in videos:
                     if v.get("duration", 0) < min_duration:
                         continue
@@ -294,9 +289,9 @@ def convert_image_to_hd_clip(img_path: Path, out_path: Path, duration: float, w:
 
     frames = int(duration * fps)
     if zoom_idx % 2 == 0:
-        zoom_expr = f"zoompan=z=\'min(1.15,1.0+0.005*on)\':d={frames}:x=\'iw/2-(iw/zoom/2)\':y=\'ih/2-(ih/zoom/2)\':s={w}x{h}:fps={fps}"
+        zoom_expr = f"zoompan=z='min(1.15,1.0+0.005*on)':d={frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={w}x{h}:fps={fps}"
     else:
-        zoom_expr = f"zoompan=z=\'max(1.0,1.14-0.005*on)\':d={frames}:x=\'iw/2-(iw/zoom/2)\':y=\'ih/2-(ih/zoom/2)\':s={w}x{h}:fps={fps}"
+        zoom_expr = f"zoompan=z='max(1.0,1.14-0.005*on)':d={frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={w}x{h}:fps={fps}"
 
     cmd = [
         "ffmpeg", "-y", "-loop", "1", "-i", str(clean_img_path),
@@ -326,7 +321,7 @@ def _calculate_scene_durations(words: list[dict], scenes: list[dict], total_audi
     durations = []
     cursor = 0
     for i, sentence in enumerate(spoken):
-        scene_words = [w.strip(".,!?;:\"'") for w in sentence.split()]
+        scene_words = [re.sub(r'[^a-zA-Z0-9]', '', w) for w in sentence.split()]
         start_idx = cursor
         end_idx = min(cursor + len(scene_words), len(words))
         if i == len(spoken) - 1:
@@ -344,6 +339,12 @@ def _calculate_scene_durations(words: list[dict], scenes: list[dict], total_audi
 
 
 def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice_audio: Path = None) -> list[Path]:
+    """
+    Intelligent Hybrid Visual Engine:
+    - Balances Google Drive Galaxy Resource Bank & Dynamic Stock Video (Pexels / Pixabay / Wikimedia).
+    - Capped at max 25-30% Bank clips (max 2-3 clips per short, strictly unique).
+    - Alternates sources to guarantee visual variety on every generation.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
     all_clips = []
     v = CONFIG["video"]
@@ -357,7 +358,11 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
     video_pool = []
     clip_counter = 0
 
-    print(f"    [Galaxy Bank & Curated Visuals] Fetching HD footage for {len(scenes)} scenes ({total_audio_dur:.1f}s audio, max 2x limit)...")
+    total_est_subclips = sum(max(1, int(round(sd / 3.0))) for sd in scene_durations)
+    max_bank_clips = max(1, min(3, total_est_subclips // 3))
+    bank_clips_used = 0
+
+    print(f"    [Hybrid Visual Engine] Fetching dynamic footage for {len(scenes)} scenes ({total_audio_dur:.1f}s audio, Bank Cap: {max_bank_clips}/{total_est_subclips} clips)...")
 
     for i, scene in enumerate(scenes):
         total_scene_dur = scene_durations[i]
@@ -369,21 +374,27 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             out_clip_path = out_dir / f"clip_{clip_counter:03d}.mp4"
             clip_ready = False
 
-            # 1. PRIMARY: Check Google Drive Galaxy Resource Bank
-            bank_item = find_bank_match(scene, used_sources)
-            if bank_item:
-                temp_v = out_dir / f"raw_bank_{clip_counter}.mp4"
-                if download_bank_video(bank_item, temp_v):
-                    trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
-                    if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
-                        vid_id = bank_item["id"]
-                        used_sources[vid_id] = used_sources.get(vid_id, 0) + 1
-                        if temp_v not in video_pool:
-                            video_pool.append(temp_v)
-                        clip_ready = True
-                        print(f"      [Galaxy Bank] Used '{bank_item['name'][:40]}' (Usage: {used_sources[vid_id]}/2)")
+            # HYBRID ROTATION:
+            # Even subclips: Check Bank first IF under quota and strict match found, else Pexels
+            # Odd subclips: Check Pexels/Pixabay first to guarantee variety, Bank only as secondary
+            prefer_bank = (clip_counter % 2 == 0) and (bank_clips_used < max_bank_clips)
 
-            # 2. SECONDARY: Pexels HD Portrait Video (Aggressive query sweep)
+            if prefer_bank:
+                bank_item = find_bank_match(scene, used_sources)
+                if bank_item:
+                    temp_v = out_dir / f"raw_bank_{clip_counter}.mp4"
+                    if download_bank_video(bank_item, temp_v):
+                        trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
+                        if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
+                            vid_id = bank_item["id"]
+                            used_sources[vid_id] = used_sources.get(vid_id, 0) + 1
+                            bank_clips_used += 1
+                            if temp_v not in video_pool:
+                                video_pool.append(temp_v)
+                            clip_ready = True
+                            print(f"      [Hybrid: Bank ({bank_clips_used}/{max_bank_clips})] '{bank_item['name'][:35]}'")
+
+            # Dynamic Stock Footage: Pexels HD Video
             if not clip_ready:
                 for q in tiered_queries:
                     links = search_pexels_hd_video(q)
@@ -391,7 +402,7 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
                     candidate_links.sort(key=lambda lnk: (used_sources.get(lnk, 0), random.random()))
 
                     for link in candidate_links:
-                        temp_v = out_dir / f"raw_v_{clip_counter}.mp4"
+                        temp_v = out_dir / f"raw_px_{clip_counter}.mp4"
                         if download_file(link, temp_v):
                             trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
                             if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
@@ -399,11 +410,12 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
                                 if temp_v not in video_pool:
                                     video_pool.append(temp_v)
                                 clip_ready = True
+                                print(f"      [Hybrid: Pexels HD] Matched query: '{q}'")
                                 break
                     if clip_ready:
                         break
 
-            # 3. TERTIARY: Pixabay HD Motion Video
+            # Dynamic Stock Footage: Pixabay HD Video
             if not clip_ready:
                 for q in tiered_queries:
                     links = search_pixabay_hd_video(q)
@@ -419,11 +431,28 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
                                 if temp_v not in video_pool:
                                     video_pool.append(temp_v)
                                 clip_ready = True
+                                print(f"      [Hybrid: Pixabay HD] Matched query: '{q}'")
                                 break
                     if clip_ready:
                         break
 
-            # 4. QUATERNARY: Wikimedia Commons Real Photo
+            # Secondary Bank check (if not checked initially but bank quota remaining)
+            if not clip_ready and bank_clips_used < max_bank_clips:
+                bank_item = find_bank_match(scene, used_sources)
+                if bank_item:
+                    temp_v = out_dir / f"raw_bank_{clip_counter}.mp4"
+                    if download_bank_video(bank_item, temp_v):
+                        trim_video_clip(temp_v, out_clip_path, subclip_dur, w, h, fps)
+                        if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
+                            vid_id = bank_item["id"]
+                            used_sources[vid_id] = used_sources.get(vid_id, 0) + 1
+                            bank_clips_used += 1
+                            if temp_v not in video_pool:
+                                video_pool.append(temp_v)
+                            clip_ready = True
+                            print(f"      [Hybrid: Bank Secondary ({bank_clips_used}/{max_bank_clips})] '{bank_item['name'][:35]}'")
+
+            # Dynamic Imagery: Wikimedia Commons HD + Ken Burns Zoom
             if not clip_ready:
                 for q in tiered_queries:
                     img_links = search_wikimedia_commons_hd(q)
@@ -437,11 +466,12 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
                             if out_clip_path.exists() and out_clip_path.stat().st_size > 1000:
                                 used_sources[img_url] = used_sources.get(img_url, 0) + 1
                                 clip_ready = True
+                                print(f"      [Hybrid: Wikimedia HD] Real image: '{q}'")
                                 break
                     if clip_ready:
                         break
 
-            # 5. FAILSAFE: Pool Recycling (Max 2x per donor footage)
+            # Failsafe: Pool Recycling (Max 2x per donor footage)
             if not clip_ready and video_pool:
                 valid_donors = [d for d in video_pool if donor_usage.get(d, 0) < 2]
                 if valid_donors:
@@ -452,6 +482,7 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
                         donor_usage[donor] = donor_usage.get(donor, 0) + 1
                         clip_ready = True
 
+            # Emergency Fallback Placeholder
             if not clip_ready:
                 im = Image.new("RGB", (w, h), (15, 20, 30))
                 ph_path = out_dir / f"ph_{clip_counter}.jpg"
@@ -461,9 +492,9 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
             all_clips.append(out_clip_path)
             clip_counter += 1
 
-        print(f"    scene {i+1}/{len(scenes)}: {total_scene_dur:.1f}s -> {num_subclips} diverse HD clips ready")
+        print(f"    scene {i+1}/{len(scenes)}: {total_scene_dur:.1f}s -> {num_subclips} clips ready")
 
-    print(f"    [Curated Visuals] All {len(all_clips)} HD clips fetched cleanly (Bank + Stock, Max 2x repetition).")
+    print(f"    [Hybrid Visual Engine] Generated {len(all_clips)} diverse HD clips (Bank: {bank_clips_used}/{max_bank_clips}, Live Stock: {len(all_clips) - bank_clips_used}).")
     return all_clips
 
 
