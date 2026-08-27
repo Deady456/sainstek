@@ -54,7 +54,7 @@ LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "9router")
 if LLM_PROVIDER == "9router":
     LLM_API_KEYS = NINEROUTER_API_KEYS
     LLM_BASE_URL = NINEROUTER_BASE_URL
-    LLM_MODEL = "gemini/gemini-3.7-flash"
+    LLM_MODEL = "gemini/gemini-3.6-flash"
 elif LLM_PROVIDER == "gemini":
     LLM_API_KEYS = GEMINI_API_KEYS if GEMINI_API_KEYS else NINEROUTER_API_KEYS
     LLM_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
@@ -66,7 +66,7 @@ elif LLM_PROVIDER == "groq":
 else:
     LLM_API_KEYS = NINEROUTER_API_KEYS
     LLM_BASE_URL = NINEROUTER_BASE_URL
-    LLM_MODEL = "gemini/gemini-3.7-flash"
+    LLM_MODEL = "gemini/gemini-3.6-flash"
 
 if not LLM_API_KEYS:
     LLM_API_KEYS = ["sk-1f7d1788ce9c1aa7-gixqcc-64a9e8fd"]
@@ -83,7 +83,7 @@ if NINEROUTER_API_KEYS:
         "name": "9router",
         "keys": NINEROUTER_API_KEYS,
         "base_url": NINEROUTER_BASE_URL,
-        "model": "gemini/gemini-3.7-flash"
+        "model": "gemini/gemini-3.6-flash"
     }
 if GEMINI_API_KEYS:
     _all_providers["gemini"] = {
