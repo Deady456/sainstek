@@ -32,7 +32,7 @@ PEXELS_API_KEYS = _pexels_keys if _pexels_keys else ["dummy_key"]
 import random
 random.shuffle(PEXELS_API_KEYS)
 
-# 9Router AWS Configuration (Primary)
+# 9Router AWS Configuration (Primary Gateway)
 NINEROUTER_API_KEYS = _get_keys("NINEROUTER_API_KEY") or _get_keys("NINEROUTER_KEY") or _get_keys("OMNIROUTE_API_KEY")
 if not NINEROUTER_API_KEYS:
     NINEROUTER_API_KEYS = ["sk-1f7d1788ce9c1aa7-gixqcc-64a9e8fd"]
@@ -72,58 +72,73 @@ if not LLM_API_KEYS:
     LLM_API_KEYS = ["sk-1f7d1788ce9c1aa7-gixqcc-64a9e8fd"]
 LLM_API_KEY = LLM_API_KEYS[0]
 
-# Fallback sequence for LLM
+# ============================================================
+# Comprehensive Fallback Providers Sequence:
+# 1. Try ALL 9Router AWS models first (Gemini -> AG-Tiered -> OpenRouter Llama -> GitHub GPT)
+# 2. Direct Provider Fallbacks (Google Direct -> Groq Direct -> OpenRouter Direct -> Nvidia -> Opencode)
+# ============================================================
 FALLBACK_PROVIDERS = []
 
-# Define all available providers
-_all_providers = {}
-
+# --- 1. 9Router Providers (Gateway AWS) ---
 if NINEROUTER_API_KEYS:
-    _all_providers["9router"] = {
-        "name": "9router",
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-gemini",
         "keys": NINEROUTER_API_KEYS,
         "base_url": NINEROUTER_BASE_URL,
         "model": "gemini/gemini-3.6-flash"
-    }
+    })
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-ag-gemini",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "ag/gemini-3.7-flash-medium"
+    })
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-openrouter",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "openrouter/meta-llama/llama-3.3-70b-instruct"
+    })
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-gpt4o",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "gh/gpt-4o-mini"
+    })
+
+# --- 2. Direct Providers (Fallback jika server 9Router tidak terjangkau) ---
 if GEMINI_API_KEYS:
-    _all_providers["gemini"] = {
+    FALLBACK_PROVIDERS.append({
         "name": "gemini",
         "keys": GEMINI_API_KEYS,
         "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
         "model": "gemini-3.6-flash"
-    }
+    })
 if GROQ_API_KEYS:
-    _all_providers["groq"] = {
+    FALLBACK_PROVIDERS.append({
         "name": "groq",
         "keys": GROQ_API_KEYS,
         "base_url": "https://api.groq.com/openai/v1",
         "model": "openai/gpt-oss-120b"
-    }
+    })
 if OPENROUTER_API_KEYS:
-    _all_providers["openrouter"] = {
+    FALLBACK_PROVIDERS.append({
         "name": "openrouter",
         "keys": OPENROUTER_API_KEYS,
         "base_url": "https://openrouter.ai/api/v1",
         "model": "meta-llama/llama-3.3-70b-instruct"
-    }
+    })
 if NVIDIA_API_KEYS:
-    _all_providers["nvidia"] = {
+    FALLBACK_PROVIDERS.append({
         "name": "nvidia",
         "keys": NVIDIA_API_KEYS,
         "base_url": "https://integrate.api.nvidia.com/v1",
         "model": "meta/llama-3.1-70b-instruct"
-    }
+    })
 if OPENCODE_ZEN_API_KEYS:
-    _all_providers["opencode-zen"] = {
+    FALLBACK_PROVIDERS.append({
         "name": "opencode-zen",
         "keys": OPENCODE_ZEN_API_KEYS,
         "base_url": "https://api.opencodezen.com/v1",
         "model": "gpt-4o-mini"
-    }
-
-# Push primary provider first
-if LLM_PROVIDER in _all_providers:
-    FALLBACK_PROVIDERS.append(_all_providers.pop(LLM_PROVIDER))
-
-# Push the rest
-FALLBACK_PROVIDERS.extend(_all_providers.values())
+    })
