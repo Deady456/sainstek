@@ -20,23 +20,25 @@ OUTPUT_DIR = ROOT / "output"
 OUTPUT_DIR.mkdir(exist_ok=True)
 STATE_FILE = ROOT / "state.json"
 
-_pexels_keys = []
-for k, v in os.environ.items():
-    if k.startswith("PEXELS_API_KEY") and v.strip():
-        import re
-        _pexels_keys.extend([x.strip().strip('\"').strip('\'') for x in re.split(r',|\n|\\n', v) if x.strip()])
-PEXELS_API_KEYS = _pexels_keys if _pexels_keys else ["dummy_key"]
-import random
-random.shuffle(PEXELS_API_KEYS)
-_cfg_model = CONFIG.get("script", {}).get("model", "")
-LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "gemini" if "gemini" in _cfg_model.lower() else "groq")
-
 def _get_keys(prefix):
     keys = []
     for k, v in os.environ.items():
         if k.startswith(prefix) and v.strip():
-            keys.extend([x.strip().strip('"').strip("'") for x in re.split(r',|\\n|\\\\n', v) if x.strip()])
+            keys.extend([x.strip().strip('"').strip("'") for x in re.split(r',|\n|\\n', v) if x.strip()])
     return keys
+
+_pexels_keys = _get_keys("PEXELS_API_KEY")
+PEXELS_API_KEYS = _pexels_keys if _pexels_keys else ["dummy_key"]
+import random
+random.shuffle(PEXELS_API_KEYS)
+
+# 9Router AWS Configuration (Primary)
+NINEROUTER_API_KEYS = _get_keys("NINEROUTER_API_KEY") or _get_keys("NINEROUTER_KEY") or _get_keys("OMNIROUTE_API_KEY")
+if not NINEROUTER_API_KEYS:
+    NINEROUTER_API_KEYS = ["sk-1f7d1788ce9c1aa7-gixqcc-64a9e8fd"]
+
+NINEROUTER_URL = os.environ.get("NINEROUTER_URL", "http://13.214.33.122:20128").rstrip("/")
+NINEROUTER_BASE_URL = f"{NINEROUTER_URL}/v1" if not NINEROUTER_URL.endswith("/v1") else NINEROUTER_URL
 
 GEMINI_API_KEYS = _get_keys("GEMINI_API_KEY")
 GROQ_API_KEYS = _get_keys("GROQ_API_KEY")
@@ -46,26 +48,43 @@ OPENCODE_ZEN_API_KEYS = _get_keys("OPENCODE_ZEN_API_KEY")
 STABILITY_API_KEYS = _get_keys("STABILITY_API_KEY")
 OMNIROUTE_API_KEYS = _get_keys("OMNIROUTE_API_KEY")
 
-# Primary configuration
-LLM_API_KEYS = GEMINI_API_KEYS if LLM_PROVIDER == "gemini" else GROQ_API_KEYS
-if not LLM_API_KEYS: LLM_API_KEYS = [""]
-LLM_API_KEY = LLM_API_KEYS[0]
+_cfg_model = CONFIG.get("script", {}).get("model", "")
+LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "9router")
 
-if LLM_PROVIDER == "gemini":
+if LLM_PROVIDER == "9router":
+    LLM_API_KEYS = NINEROUTER_API_KEYS
+    LLM_BASE_URL = NINEROUTER_BASE_URL
+    LLM_MODEL = "gemini/gemini-3.7-flash"
+elif LLM_PROVIDER == "gemini":
+    LLM_API_KEYS = GEMINI_API_KEYS if GEMINI_API_KEYS else NINEROUTER_API_KEYS
     LLM_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
     LLM_MODEL = CONFIG.get("script", {}).get("model", "models/gemini-3.5-flash")
 elif LLM_PROVIDER == "groq":
+    LLM_API_KEYS = GROQ_API_KEYS if GROQ_API_KEYS else NINEROUTER_API_KEYS
     LLM_BASE_URL = "https://api.groq.com/openai/v1"
     LLM_MODEL = "openai/gpt-oss-120b"
 else:
-    LLM_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
-    LLM_MODEL = "models/gemini-3.5-flash"
+    LLM_API_KEYS = NINEROUTER_API_KEYS
+    LLM_BASE_URL = NINEROUTER_BASE_URL
+    LLM_MODEL = "gemini/gemini-3.7-flash"
+
+if not LLM_API_KEYS:
+    LLM_API_KEYS = ["sk-1f7d1788ce9c1aa7-gixqcc-64a9e8fd"]
+LLM_API_KEY = LLM_API_KEYS[0]
 
 # Fallback sequence for LLM
 FALLBACK_PROVIDERS = []
 
 # Define all available providers
 _all_providers = {}
+
+if NINEROUTER_API_KEYS:
+    _all_providers["9router"] = {
+        "name": "9router",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "gemini/gemini-3.7-flash"
+    }
 if GEMINI_API_KEYS:
     _all_providers["gemini"] = {
         "name": "gemini",
