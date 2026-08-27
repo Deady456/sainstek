@@ -74,24 +74,19 @@ LLM_API_KEY = LLM_API_KEYS[0]
 
 # ============================================================
 # Comprehensive Fallback Providers Sequence:
-# 1. Try ALL 9Router AWS models first (Gemini -> AG-Tiered -> OpenRouter Llama -> GitHub GPT)
-# 2. Direct Provider Fallbacks (Google Direct -> Groq Direct -> OpenRouter Direct -> Nvidia -> Opencode)
+# 1. 9Router Full Multi-Provider Pool (Gemini, OpenRouter, GPT, OpenCode Free, Kilo Free, ChatByte, Nvidia)
+# 2. Direct Providers (Google Direct -> Groq Direct -> OpenRouter Direct -> Nvidia -> Opencode)
 # ============================================================
 FALLBACK_PROVIDERS = []
 
 # --- 1. 9Router Providers (Gateway AWS) ---
 if NINEROUTER_API_KEYS:
+    # A. Tier 1: Fastest & Primary (<1.5s)
     FALLBACK_PROVIDERS.append({
         "name": "9router-gemini",
         "keys": NINEROUTER_API_KEYS,
         "base_url": NINEROUTER_BASE_URL,
         "model": "gemini/gemini-3.6-flash"
-    })
-    FALLBACK_PROVIDERS.append({
-        "name": "9router-ag-gemini",
-        "keys": NINEROUTER_API_KEYS,
-        "base_url": NINEROUTER_BASE_URL,
-        "model": "ag/gemini-3.7-flash-medium"
     })
     FALLBACK_PROVIDERS.append({
         "name": "9router-openrouter",
@@ -104,6 +99,44 @@ if NINEROUTER_API_KEYS:
         "keys": NINEROUTER_API_KEYS,
         "base_url": NINEROUTER_BASE_URL,
         "model": "gh/gpt-4o-mini"
+    })
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-gemini-lite",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "gemini/gemini-3.5-flash-lite"
+    })
+    
+    # B. Tier 2: Free Tier Models on 9Router (OpenCode Free, Kilo Free, ChatByte AI)
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-opencode-free",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "oc/mimo-v2.5-free"
+    })
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-kilo-free",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "kc/minimax/minimax-m3:free"
+    })
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-chatbyte",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "cbai/glm-5.2"
+    })
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-ag-gemini",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "ag/gemini-3.7-flash-medium"
+    })
+    FALLBACK_PROVIDERS.append({
+        "name": "9router-nvidia-minimax",
+        "keys": NINEROUTER_API_KEYS,
+        "base_url": NINEROUTER_BASE_URL,
+        "model": "nvidia/minimaxai/minimax-m3"
     })
 
 # --- 2. Direct Providers (Fallback jika server 9Router tidak terjangkau) ---
