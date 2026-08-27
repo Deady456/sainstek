@@ -93,7 +93,8 @@
     "misteri-lautan-air-terbesar-kuasar-apm-nol-delapan",
     "misteri-ledakan-sinar-gamma-terterang-grb-dua-dua-satu-nol-nol-sembilan-a",
     "misteri-eksoplanet-terpanas-kelt-sembilan-b",
-    "misteri-bintang-magnetar-sgr-seribu-delapan-ratus-enam-garis-dua-puluh"
+    "misteri-bintang-magnetar-sgr-seribu-delapan-ratus-enam-garis-dua-puluh",
+    "misteri-eksoplanet-kapas-manis-wasp-seratus-tujuh-b-hujan-pasir"
   ],
   "published": [
     {
@@ -934,6 +935,16 @@
       "title": "Bintang Mati Paling Berbahaya di Alam Semesta yang Bisa Musnahkan Bumi",
       "path": "/home/runner/work/sainstek/sainstek/output/20260827_003148_misteri-bintang-magnetar-sgr-seribu-delapan-ratus-enam-garis/final.mp4",
       "video_id": "1jtiRhcKV-E",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260827_094519",
+      "topic": "misteri-eksoplanet-kapas-manis-wasp-seratus-tujuh-b-hujan-pasir",
+      "title": "Misteri WASP-107b: Planet Ringan Seperti Kapas Manis dengan Hujan Pasir",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260827_094519_misteri-eksoplanet-kapas-manis-wasp-seratus-tujuh-b-hujan-pa/final.mp4",
+      "video_id": "nVhGkngwADM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
