@@ -92,7 +92,8 @@
     "misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh-enam-b",
     "misteri-lautan-air-terbesar-kuasar-apm-nol-delapan",
     "misteri-ledakan-sinar-gamma-terterang-grb-dua-dua-satu-nol-nol-sembilan-a",
-    "misteri-eksoplanet-terpanas-kelt-sembilan-b"
+    "misteri-eksoplanet-terpanas-kelt-sembilan-b",
+    "misteri-bintang-magnetar-sgr-seribu-delapan-ratus-enam-garis-dua-puluh"
   ],
   "published": [
     {
@@ -923,6 +924,16 @@
       "title": "Misteri KELT-9b: Planet Neraka Terpanas yang Lebih Membara dari Bintang!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260826_123330_misteri-eksoplanet-terpanas-kelt-sembilan-b/final.mp4",
       "video_id": "jYQk__fiN9Q",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260827_003148",
+      "topic": "misteri-bintang-magnetar-sgr-seribu-delapan-ratus-enam-garis-dua-puluh",
+      "title": "Bintang Mati Paling Berbahaya di Alam Semesta yang Bisa Musnahkan Bumi",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260827_003148_misteri-bintang-magnetar-sgr-seribu-delapan-ratus-enam-garis/final.mp4",
+      "video_id": "1jtiRhcKV-E",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
