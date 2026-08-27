@@ -94,7 +94,8 @@
     "misteri-ledakan-sinar-gamma-terterang-grb-dua-dua-satu-nol-nol-sembilan-a",
     "misteri-eksoplanet-terpanas-kelt-sembilan-b",
     "misteri-bintang-magnetar-sgr-seribu-delapan-ratus-enam-garis-dua-puluh",
-    "misteri-eksoplanet-kapas-manis-wasp-seratus-tujuh-b-hujan-pasir"
+    "misteri-eksoplanet-kapas-manis-wasp-seratus-tujuh-b-hujan-pasir",
+    "misteri-eksoplanet-wasp-dua-belas-b-ditelan-bintang"
   ],
   "published": [
     {
@@ -945,6 +946,16 @@
       "title": "Misteri WASP-107b: Planet Ringan Seperti Kapas Manis dengan Hujan Pasir",
       "path": "/home/runner/work/sainstek/sainstek/output/20260827_094519_misteri-eksoplanet-kapas-manis-wasp-seratus-tujuh-b-hujan-pa/final.mp4",
       "video_id": "nVhGkngwADM",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260827_123207",
+      "topic": "misteri-eksoplanet-wasp-dua-belas-b-ditelan-bintang",
+      "title": "Planet Berbentuk Telur Ini Sedang Ditelan Bintangnya Sendiri!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260827_123207_misteri-eksoplanet-wasp-dua-belas-b-ditelan-bintang/final.mp4",
+      "video_id": "O0xUgh0yBM0",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
