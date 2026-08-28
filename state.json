@@ -96,7 +96,8 @@
     "misteri-bintang-magnetar-sgr-seribu-delapan-ratus-enam-garis-dua-puluh",
     "misteri-eksoplanet-kapas-manis-wasp-seratus-tujuh-b-hujan-pasir",
     "misteri-eksoplanet-wasp-dua-belas-b-ditelan-bintang",
-    "misteri-eksoplanet-tergelap-tres-dua-b"
+    "misteri-eksoplanet-tergelap-tres-dua-b",
+    "penangkapan-roket-spacex-starship-mechazilla-flight-lima"
   ],
   "published": [
     {
@@ -967,6 +968,16 @@
       "title": "Planet Tergelap di Alam Semesta yang Lebih Hitam Dari Arang! TrES-2b",
       "path": "/home/runner/work/sainstek/sainstek/output/20260828_003200_misteri-eksoplanet-tergelap-tres-dua-b/final.mp4",
       "video_id": "TfiMj6wiC1o",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260828_123226",
+      "topic": "penangkapan-roket-spacex-starship-mechazilla-flight-lima",
+      "title": "Menara Mechazilla Tangkap Roket Starship di Udara! Rekor Baru SpaceX",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260828_123226_penangkapan-roket-spacex-starship-mechazilla-flight-lima/final.mp4",
+      "video_id": "ZueuWOks5js",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
