@@ -95,7 +95,8 @@
     "misteri-eksoplanet-terpanas-kelt-sembilan-b",
     "misteri-bintang-magnetar-sgr-seribu-delapan-ratus-enam-garis-dua-puluh",
     "misteri-eksoplanet-kapas-manis-wasp-seratus-tujuh-b-hujan-pasir",
-    "misteri-eksoplanet-wasp-dua-belas-b-ditelan-bintang"
+    "misteri-eksoplanet-wasp-dua-belas-b-ditelan-bintang",
+    "misteri-eksoplanet-tergelap-tres-dua-b"
   ],
   "published": [
     {
@@ -956,6 +957,16 @@
       "title": "Planet Berbentuk Telur Ini Sedang Ditelan Bintangnya Sendiri!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260827_123207_misteri-eksoplanet-wasp-dua-belas-b-ditelan-bintang/final.mp4",
       "video_id": "O0xUgh0yBM0",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260828_003200",
+      "topic": "misteri-eksoplanet-tergelap-tres-dua-b",
+      "title": "Planet Tergelap di Alam Semesta yang Lebih Hitam Dari Arang! TrES-2b",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260828_003200_misteri-eksoplanet-tergelap-tres-dua-b/final.mp4",
+      "video_id": "TfiMj6wiC1o",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
