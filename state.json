@@ -97,7 +97,8 @@
     "misteri-eksoplanet-kapas-manis-wasp-seratus-tujuh-b-hujan-pasir",
     "misteri-eksoplanet-wasp-dua-belas-b-ditelan-bintang",
     "misteri-eksoplanet-tergelap-tres-dua-b",
-    "penangkapan-roket-spacex-starship-mechazilla-flight-lima"
+    "penangkapan-roket-spacex-starship-mechazilla-flight-lima",
+    "penemuan-lautan-air-eksoplanet-lhs-seribu-seratus-empat-puluh-b"
   ],
   "published": [
     {
@@ -978,6 +979,16 @@
       "title": "Menara Mechazilla Tangkap Roket Starship di Udara! Rekor Baru SpaceX",
       "path": "/home/runner/work/sainstek/sainstek/output/20260828_123226_penangkapan-roket-spacex-starship-mechazilla-flight-lima/final.mp4",
       "video_id": "ZueuWOks5js",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260829_003143",
+      "topic": "penemuan-lautan-air-eksoplanet-lhs-seribu-seratus-empat-puluh-b",
+      "title": "James Webb Temukan Planet Lautan Air yang Berpotensi Huni kehidupan",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260829_003143_penemuan-lautan-air-eksoplanet-lhs-seribu-seratus-empat-pulu/final.mp4",
+      "video_id": "VOX7l1f2Svo",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
