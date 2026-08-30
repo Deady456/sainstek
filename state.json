@@ -100,7 +100,8 @@
     "penangkapan-roket-spacex-starship-mechazilla-flight-lima",
     "penemuan-lautan-air-eksoplanet-lhs-seribu-seratus-empat-puluh-b",
     "misi-nasa-europa-clipper-samudra-jupiter",
-    "misteri-bintang-tercepat-s5-hvs1"
+    "misteri-bintang-tercepat-s5-hvs1",
+    "misi-nasa-parker-solar-probe-menyentuh-matahari"
   ],
   "published": [
     {
@@ -1011,6 +1012,16 @@
       "title": "Bintang Buronan Tercepat di Alam Semesta Terlempar dari Lubang Hitam!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260830_003215_misteri-bintang-tercepat-s5-hvs1/final.mp4",
       "video_id": "zptizwY-I_w",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260830_123143",
+      "topic": "misi-nasa-parker-solar-probe-menyentuh-matahari",
+      "title": "NEKAT! Wahana Antariksa Ini Berhasil 'Menyentuh' Matahari!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260830_123143_misi-nasa-parker-solar-probe-menyentuh-matahari/final.mp4",
+      "video_id": "AAN6RYuXumk",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
