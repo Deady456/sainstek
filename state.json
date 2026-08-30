@@ -99,7 +99,8 @@
     "misteri-eksoplanet-tergelap-tres-dua-b",
     "penangkapan-roket-spacex-starship-mechazilla-flight-lima",
     "penemuan-lautan-air-eksoplanet-lhs-seribu-seratus-empat-puluh-b",
-    "misi-nasa-europa-clipper-samudra-jupiter"
+    "misi-nasa-europa-clipper-samudra-jupiter",
+    "misteri-bintang-tercepat-s5-hvs1"
   ],
   "published": [
     {
@@ -1000,6 +1001,16 @@
       "title": "Misi NASA Europa Clipper: Membongkar Lautan Raksasa di Bulan Jupiter!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260829_123153_misi-nasa-europa-clipper-samudra-jupiter/final.mp4",
       "video_id": "ycCdeX_uTOQ",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260830_003215",
+      "topic": "misteri-bintang-tercepat-s5-hvs1",
+      "title": "Bintang Buronan Tercepat di Alam Semesta Terlempar dari Lubang Hitam!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260830_003215_misteri-bintang-tercepat-s5-hvs1/final.mp4",
+      "video_id": "zptizwY-I_w",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
