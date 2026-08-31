@@ -102,7 +102,8 @@
     "misi-nasa-europa-clipper-samudra-jupiter",
     "misteri-bintang-tercepat-s5-hvs1",
     "misi-nasa-parker-solar-probe-menyentuh-matahari",
-    "misteri-ruang-hampa-raksasa-eridanus-supervoid"
+    "misteri-ruang-hampa-raksasa-eridanus-supervoid",
+    "misteri-struktur-raksasa-great-attractor"
   ],
   "published": [
     {
@@ -1033,6 +1034,16 @@
       "title": "Misteri Eridanus Supervoid: Ruang Hampa Raksasa Sejauh Satu Miliar Tahun Cahaya!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260831_003159_misteri-ruang-hampa-raksasa-eridanus-supervoid/final.mp4",
       "video_id": "Y4Gdzh9zFWc",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260831_123330",
+      "topic": "misteri-struktur-raksasa-great-attractor",
+      "title": "Misteri Great Attractor: Monster Gravitasi yang Menarik Galaksi Kita",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260831_123330_misteri-struktur-raksasa-great-attractor/final.mp4",
+      "video_id": "qk-fCU9-OZM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
