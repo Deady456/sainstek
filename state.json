@@ -101,7 +101,8 @@
     "penemuan-lautan-air-eksoplanet-lhs-seribu-seratus-empat-puluh-b",
     "misi-nasa-europa-clipper-samudra-jupiter",
     "misteri-bintang-tercepat-s5-hvs1",
-    "misi-nasa-parker-solar-probe-menyentuh-matahari"
+    "misi-nasa-parker-solar-probe-menyentuh-matahari",
+    "misteri-ruang-hampa-raksasa-eridanus-supervoid"
   ],
   "published": [
     {
@@ -1022,6 +1023,16 @@
       "title": "NEKAT! Wahana Antariksa Ini Berhasil 'Menyentuh' Matahari!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260830_123143_misi-nasa-parker-solar-probe-menyentuh-matahari/final.mp4",
       "video_id": "AAN6RYuXumk",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260831_003159",
+      "topic": "misteri-ruang-hampa-raksasa-eridanus-supervoid",
+      "title": "Misteri Eridanus Supervoid: Ruang Hampa Raksasa Sejauh Satu Miliar Tahun Cahaya!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260831_003159_misteri-ruang-hampa-raksasa-eridanus-supervoid/final.mp4",
+      "video_id": "Y4Gdzh9zFWc",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
