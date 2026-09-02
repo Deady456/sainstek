@@ -106,7 +106,8 @@
     "misteri-struktur-raksasa-great-attractor",
     "misteri-tabrakan-bintang-neutron-kilonova-gw-tujuh-belas-nol-delapan-tujuh-belas",
     "fenomena-hujan-intan-neptunus-uranus",
-    "misteri-bintang-boyajian-kic-delapan-empat-enam-dua-delapan-lima-dua"
+    "misteri-bintang-boyajian-kic-delapan-empat-enam-dua-delapan-lima-dua",
+    "misteri-eksoplanet-zombie-draugr-psr-b1257+12-b"
   ],
   "published": [
     {
@@ -1077,6 +1078,16 @@
       "title": "Misteri Bintang Boyajian: Meredup Dua Puluh Dua Persen Akibat Alien?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260902_003209_misteri-bintang-boyajian-kic-delapan-empat-enam-dua-delapan-/final.mp4",
       "video_id": "X2H9SyOZHmo",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260902_123317",
+      "topic": "misteri-eksoplanet-zombie-draugr-psr-b1257+12-b",
+      "title": "Misteri Planet Zombie Draugr: Dunia Pertama di Luar Tata Surya",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260902_123317_misteri-eksoplanet-zombie-draugr-psr-b1257-12-b/final.mp4",
+      "video_id": "z_TMPKfgNhY",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
