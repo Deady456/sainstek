@@ -108,7 +108,8 @@
     "fenomena-hujan-intan-neptunus-uranus",
     "misteri-bintang-boyajian-kic-delapan-empat-enam-dua-delapan-lima-dua",
     "misteri-eksoplanet-zombie-draugr-psr-b1257+12-b",
-    "misteri-eksoplanet-intan-psr-j1719-1438-b"
+    "misteri-eksoplanet-intan-psr-j1719-1438-b",
+    "misteri-bintang-tertua-metusalah-hd-seratus-empat-puluh-ribu-dua-ratus-delapan-puluh-tiga"
   ],
   "published": [
     {
@@ -1099,6 +1100,16 @@
       "title": "Terbuat dari Intan Raksasa! Eksoplanet Teraneh di Alam Semesta",
       "path": "/home/runner/work/sainstek/sainstek/output/20260903_003214_misteri-eksoplanet-intan-psr-j1719-1438-b/final.mp4",
       "video_id": "WL8AXVDgAb0",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260903_123340",
+      "topic": "misteri-bintang-tertua-metusalah-hd-seratus-empat-puluh-ribu-dua-ratus-delapan-puluh-tiga",
+      "title": "Bintang Ini Lebih Tua dari Alam Semesta? Misteri Bintang Metusalah!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260903_123340_misteri-bintang-tertua-metusalah-hd-seratus-empat-puluh-ribu/final.mp4",
+      "video_id": "vpMpEGhjTeM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
