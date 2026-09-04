@@ -110,7 +110,8 @@
     "misteri-eksoplanet-zombie-draugr-psr-b1257+12-b",
     "misteri-eksoplanet-intan-psr-j1719-1438-b",
     "misteri-bintang-tertua-metusalah-hd-seratus-empat-puluh-ribu-dua-ratus-delapan-puluh-tiga",
-    "penemuan-eksoplanet-kembaran-bumi-gliese-dua-belas-b"
+    "penemuan-eksoplanet-kembaran-bumi-gliese-dua-belas-b",
+    "penemuan-semburan-air-raksasa-bulan-enceladus-james-webb"
   ],
   "published": [
     {
@@ -1121,6 +1122,16 @@
       "title": "Bumi Kedua Ditemukan? Eksoplanet Gliese dua belas b Potensial Punya Air Cair!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260904_003433_penemuan-eksoplanet-kembaran-bumi-gliese-dua-belas-b/final.mp4",
       "video_id": "CtCle-PUJqU",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260904_123207",
+      "topic": "penemuan-semburan-air-raksasa-bulan-enceladus-james-webb",
+      "title": "Semburan Air Raksasa Enceladus Terdeteksi James Webb: Ada Kehidupan Alien?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260904_123207_penemuan-semburan-air-raksasa-bulan-enceladus-james-webb/final.mp4",
+      "video_id": "z5sVt_SMquI",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
