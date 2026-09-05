@@ -111,7 +111,8 @@
     "misteri-eksoplanet-intan-psr-j1719-1438-b",
     "misteri-bintang-tertua-metusalah-hd-seratus-empat-puluh-ribu-dua-ratus-delapan-puluh-tiga",
     "penemuan-eksoplanet-kembaran-bumi-gliese-dua-belas-b",
-    "penemuan-semburan-air-raksasa-bulan-enceladus-james-webb"
+    "penemuan-semburan-air-raksasa-bulan-enceladus-james-webb",
+    "misteri-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b"
   ],
   "published": [
     {
@@ -1132,6 +1133,16 @@
       "title": "Semburan Air Raksasa Enceladus Terdeteksi James Webb: Ada Kehidupan Alien?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260904_123207_penemuan-semburan-air-raksasa-bulan-enceladus-james-webb/final.mp4",
       "video_id": "z5sVt_SMquI",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260905_003200",
+      "topic": "misteri-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b",
+      "title": "Ngeri! Planet Ini Memiliki Hujan Besi Cair dan Efek Pelangi Kosmik!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260905_003200_misteri-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b/final.mp4",
+      "video_id": "Z-OELReb55s",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
