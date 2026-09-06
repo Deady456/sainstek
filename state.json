@@ -113,7 +113,8 @@
     "penemuan-eksoplanet-kembaran-bumi-gliese-dua-belas-b",
     "penemuan-semburan-air-raksasa-bulan-enceladus-james-webb",
     "misteri-eksoplanet-hujan-besi-wasp-tujuh-puluh-enam-b",
-    "penemuan-tanda-kehidupan-eksoplanet-k2-18b-james-webb"
+    "penemuan-tanda-kehidupan-eksoplanet-k2-18b-james-webb",
+    "misteri-cincin-planet-kerdil-quaoar-melanggar-batas-roche"
   ],
   "published": [
     {
@@ -1154,6 +1155,16 @@
       "title": "Teleskop James Webb Temukan Tanda Kehidupan di Planet Samudra K2-18b!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260905_123139_penemuan-tanda-kehidupan-eksoplanet-k2-18b-james-webb/final.mp4",
       "video_id": "gKbOG7tPqew",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260906_003154",
+      "topic": "misteri-cincin-planet-kerdil-quaoar-melanggar-batas-roche",
+      "title": "Cincin Planet Ini Melanggar Hukum Fisika! Rahasia Planet Kerdil Quaoar",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260906_003154_misteri-cincin-planet-kerdil-quaoar-melanggar-batas-roche/final.mp4",
+      "video_id": "Ec9vJOvWSUc",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
