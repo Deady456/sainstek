@@ -120,7 +120,8 @@
     "penemuan-sampel-asteroid-bennu-osiris-rex-nasa",
     "misteri-struktur-cincin-raksasa-big-ring-melanggar-prinsip-kosmologi",
     "misteri-eksoplanet-hujan-kaca-hd-seratus-delapan-puluh-sembilan-tujuh-ratus-tiga-puluh-tiga-b",
-    "misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas"
+    "misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas",
+    "misteri-lubang-hitam-terdekat-gaia-bh-satu"
   ],
   "published": [
     {
@@ -1231,6 +1232,16 @@
       "title": "TON enam ratus delapan belas: Monster Lubang Hitam Terbesar di Alam Semesta yang Mengerikan",
       "path": "/home/runner/work/sainstek/sainstek/output/20260909_003203_misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas/final.mp4",
       "video_id": "NIGFJQgIuAs",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260909_123248",
+      "topic": "misteri-lubang-hitam-terdekat-gaia-bh-satu",
+      "title": "Penemuan Gaia BH1: Lubang Hitam Terdekat dari Bumi yang Selama Ini Tersembunyi",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260909_123248_misteri-lubang-hitam-terdekat-gaia-bh-satu/final.mp4",
+      "video_id": "EQEZ7EAe0RM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
