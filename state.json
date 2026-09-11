@@ -123,7 +123,8 @@
     "misteri-lubang-hitam-terbesar-ton-enam-ratus-delapan-belas",
     "misteri-lubang-hitam-terdekat-gaia-bh-satu",
     "misteri-eksoplanet-cermin-raksasa-ltt-sembilan-ratus-tujuh-puluh-tujuh-sembilan-b",
-    "misteri-eksoplanet-terpanas-kelt-sembilan-b"
+    "misteri-eksoplanet-terpanas-kelt-sembilan-b",
+    "misteri-bintang-terbesar-stephenson-dua-delapan-belas"
   ],
   "published": [
     {
@@ -1264,6 +1265,16 @@
       "title": "Lebih Panas Dari Bintang! Planet Neraka KELT-9b Melelehkan Besi",
       "path": "/home/runner/work/sainstek/sainstek/output/20260910_123304_misteri-eksoplanet-terpanas-kelt-sembilan-b/final.mp4",
       "video_id": "NMFIVcx9i98",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260911_003210",
+      "topic": "misteri-bintang-terbesar-stephenson-dua-delapan-belas",
+      "title": "Bintang Raksasa Ini Sanggup Menelan Sepuluh Miliar Matahari!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260911_003210_misteri-bintang-terbesar-stephenson-dua-delapan-belas/final.mp4",
+      "video_id": "15EzArZTsc8",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
