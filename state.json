@@ -125,7 +125,8 @@
     "misteri-eksoplanet-cermin-raksasa-ltt-sembilan-ratus-tujuh-puluh-tujuh-sembilan-b",
     "misteri-eksoplanet-terpanas-kelt-sembilan-b",
     "misteri-bintang-terbesar-stephenson-dua-delapan-belas",
-    "penemuan-hujan-pasir-kuarsa-eksoplanet-wasp-seratus-tujuh-b-james-webb"
+    "penemuan-hujan-pasir-kuarsa-eksoplanet-wasp-seratus-tujuh-b-james-webb",
+    "misteri-eksoplanet-permen-kapas-wasp-seratus-sembilan-puluh-tiga-b"
   ],
   "published": [
     {
@@ -1286,6 +1287,16 @@
       "title": "Aneh! Teleskop James Webb Temukan Planet Marshmallow Berhujan Pasir Kuarsa",
       "path": "/home/runner/work/sainstek/sainstek/output/20260911_123512_penemuan-hujan-pasir-kuarsa-eksoplanet-wasp-seratus-tujuh-b-/final.mp4",
       "video_id": "895FMRZCEik",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260912_003226",
+      "topic": "misteri-eksoplanet-permen-kapas-wasp-seratus-sembilan-puluh-tiga-b",
+      "title": "Planet Raksasa Terringan Di Alam Semesta! Bisa Mengapung Di Atas Air?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260912_003226_misteri-eksoplanet-permen-kapas-wasp-seratus-sembilan-puluh-/final.mp4",
+      "video_id": "OA-rcEwbnjc",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
