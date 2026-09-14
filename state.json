@@ -129,7 +129,8 @@
     "misteri-eksoplanet-permen-kapas-wasp-seratus-sembilan-puluh-tiga-b",
     "misteri-eksoplanet-tergelap-tres-dua-b",
     "penemuan-kuasar-paling-terang-j0529-4351-lubang-hitam",
-    "misteri-gempa-bintang-terkuat-magnetar-sgr-delapan-belas-nol-enam-dua-puluh"
+    "misteri-gempa-bintang-terkuat-magnetar-sgr-delapan-belas-nol-enam-dua-puluh",
+    "penemuan-eksoplanet-samudra-lhs-seribu-seratus-empat-puluh-b-james-webb"
   ],
   "published": [
     {
@@ -1330,6 +1331,16 @@
       "title": "Gempa Bintang Dahsyat Ini Melepaskan Energi Matahari Ratusan Ribu Tahun!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260913_123210_misteri-gempa-bintang-terkuat-magnetar-sgr-delapan-belas-nol/final.mp4",
       "video_id": "pirglTYQ4eQ",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260914_003213",
+      "topic": "penemuan-eksoplanet-samudra-lhs-seribu-seratus-empat-puluh-b-james-webb",
+      "title": "Teleskop James Webb Temukan Planet Samudra Berpotensi Ada Kehidupan!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260914_003213_penemuan-eksoplanet-samudra-lhs-seribu-seratus-empat-puluh-b/final.mp4",
+      "video_id": "puOGO75BBCs",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
