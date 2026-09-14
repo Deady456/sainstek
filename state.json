@@ -130,7 +130,8 @@
     "misteri-eksoplanet-tergelap-tres-dua-b",
     "penemuan-kuasar-paling-terang-j0529-4351-lubang-hitam",
     "misteri-gempa-bintang-terkuat-magnetar-sgr-delapan-belas-nol-enam-dua-puluh",
-    "penemuan-eksoplanet-samudra-lhs-seribu-seratus-empat-puluh-b-james-webb"
+    "penemuan-eksoplanet-samudra-lhs-seribu-seratus-empat-puluh-b-james-webb",
+    "misi-nasa-psyche-asteroid-logam"
   ],
   "published": [
     {
@@ -1341,6 +1342,16 @@
       "title": "Teleskop James Webb Temukan Planet Samudra Berpotensi Ada Kehidupan!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260914_003213_penemuan-eksoplanet-samudra-lhs-seribu-seratus-empat-puluh-b/final.mp4",
       "video_id": "puOGO75BBCs",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260914_123219",
+      "topic": "misi-nasa-psyche-asteroid-logam",
+      "title": "Benda Langit Senilai Sepuluh Kuintiliun Dolar! Misi NASA Psyche",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260914_123219_misi-nasa-psyche-asteroid-logam/final.mp4",
+      "video_id": "W1pZPOqwvyA",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
