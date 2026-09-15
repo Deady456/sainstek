@@ -132,7 +132,8 @@
     "misteri-gempa-bintang-terkuat-magnetar-sgr-delapan-belas-nol-enam-dua-puluh",
     "penemuan-eksoplanet-samudra-lhs-seribu-seratus-empat-puluh-b-james-webb",
     "misi-nasa-psyche-asteroid-logam",
-    "penangkapan-roket-super-heavy-spacex-starship-mechazilla"
+    "penangkapan-roket-super-heavy-spacex-starship-mechazilla",
+    "misteri-objek-kembar-jumbo-teleskop-james-webb"
   ],
   "published": [
     {
@@ -1363,6 +1364,16 @@
       "title": "Momen Bersejarah! Roket Raksasa SpaceX Ditangkap Lengan Besi di Udara",
       "path": "/home/runner/work/sainstek/sainstek/output/20260915_003153_penangkapan-roket-super-heavy-spacex-starship-mechazilla/final.mp4",
       "video_id": "imi3y8ZPxOI",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260915_123215",
+      "topic": "misteri-objek-kembar-jumbo-teleskop-james-webb",
+      "title": "Misteri JuMBO: Objek Raksasa Kembar Melayang Bebas Tanpa Bintang di Luar Angkasa",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260915_123215_misteri-objek-kembar-jumbo-teleskop-james-webb/final.mp4",
+      "video_id": "Gy2eRo3my24",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
