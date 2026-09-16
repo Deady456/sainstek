@@ -134,7 +134,8 @@
     "misi-nasa-psyche-asteroid-logam",
     "penangkapan-roket-super-heavy-spacex-starship-mechazilla",
     "misteri-objek-kembar-jumbo-teleskop-james-webb",
-    "misi-parker-solar-probe-menyentuh-matahari"
+    "misi-parker-solar-probe-menyentuh-matahari",
+    "misi-nasa-europa-clipper-samudra-europa"
   ],
   "published": [
     {
@@ -1385,6 +1386,16 @@
       "title": "Misi Ternekat NASA: Wahana Ini Berhasil Menyentuh Korona Matahari!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260916_003159_misi-parker-solar-probe-menyentuh-matahari/final.mp4",
       "video_id": "I4qs5XwjtP0",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260916_123208",
+      "topic": "misi-nasa-europa-clipper-samudra-europa",
+      "title": "Misi NASA Europa Clipper: Menjelajah Samudra Luar Angkasa Pembawa Kehidupan!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260916_123208_misi-nasa-europa-clipper-samudra-europa/final.mp4",
+      "video_id": "r1WPQV_xEsM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
