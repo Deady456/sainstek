@@ -137,7 +137,8 @@
     "misi-parker-solar-probe-menyentuh-matahari",
     "misi-nasa-europa-clipper-samudra-europa",
     "misteri-bintang-terjauh-earendel-wh0137-ls",
-    "misteri-eksoplanet-kanibal-wasp-dua-belas-b"
+    "misteri-eksoplanet-kanibal-wasp-dua-belas-b",
+    "misteri-penarik-agung-the-great-attractor"
   ],
   "published": [
     {
@@ -1418,6 +1419,16 @@
       "title": "Misteri WASP-12b: Eksoplanet Telur yang Sedang Dilahap Bintangnya!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260917_123157_misteri-eksoplanet-kanibal-wasp-dua-belas-b/final.mp4",
       "video_id": "KpNOzEM1AFs",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260918_003202",
+      "topic": "misteri-penarik-agung-the-great-attractor",
+      "title": "Misteri Penarik Agung! Objek Raksasa yang Menyeret Galaksi Bima Sakti",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260918_003202_misteri-penarik-agung-the-great-attractor/final.mp4",
+      "video_id": "OIwaL4YNjNM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
