@@ -139,7 +139,8 @@
     "misteri-bintang-terjauh-earendel-wh0137-ls",
     "misteri-eksoplanet-kanibal-wasp-dua-belas-b",
     "misteri-penarik-agung-the-great-attractor",
-    "misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh-enam-b"
+    "misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh-enam-b",
+    "penemuan-filamen-gelap-euclid"
   ],
   "published": [
     {
@@ -1440,6 +1441,16 @@
       "title": "Misteri Gliese 436b: Planet Es Terbakar yang Melawan Hukum Fisika!",
       "path": "/home/runner/work/sainstek/sainstek/output/20260919_004744_misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh/final.mp4",
       "video_id": "fFwM9_KPx2M",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260923_004751",
+      "topic": "penemuan-filamen-gelap-euclid",
+      "title": "Terungkap! Jembatan Gelap Antara Galaksi Ditemukan Euclid, Membuka Era Baru Kosmos",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260923_004751_penemuan-filamen-gelap-euclid/final.mp4",
+      "video_id": "w3vXZ708eYc",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
