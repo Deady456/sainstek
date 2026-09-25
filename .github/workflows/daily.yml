@@ -68,7 +68,7 @@ jobs:
           python - <<'PY'
           import os, json
           secrets = json.loads(os.environ.get('ALL_SECRETS','{}'))
-          prefixes = ('GROQ_API_KEY', 'GEMINI_API_KEY', 'PEXELS_API_KEY', 'SAMBANOVA_API_KEY', 'NINEROUTER')
+          prefixes = ('OPENROUTER_API_KEY', 'GROQ_API_KEY', 'GEMINI_API_KEY', 'PEXELS_API_KEY', 'SAMBANOVA_API_KEY', 'NINEROUTER')
           explicit = {
               'ELEVENLABS_API_KEYS', 'CLOUDFLARE_ACCOUNT_ID', 'CLOUDFLARE_API_TOKEN',
               'TOKEN_B64', 'CLIENT_SECRET_B64', 'PAT_TOKEN', 'PEXELS_API_KEY', 'SAMBANOVA_API_KEY',
@@ -88,6 +88,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SAMBANOVA_API_KEY: ${{ secrets.SAMBANOVA_API_KEY }}
           LLM_PROVIDER: openrouter
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           ELEVENLABS_API_KEYS: ${{ secrets.ELEVENLABS_API_KEYS }}
         run: |
@@ -113,6 +114,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SAMBANOVA_API_KEY: ${{ secrets.SAMBANOVA_API_KEY }}
           LLM_PROVIDER: openrouter
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           ELEVENLABS_API_KEYS: ${{ secrets.ELEVENLABS_API_KEYS }}
         run: python -m src.upload_all
