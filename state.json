@@ -140,7 +140,8 @@
     "misteri-eksoplanet-kanibal-wasp-dua-belas-b",
     "misteri-penarik-agung-the-great-attractor",
     "misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh-enam-b",
-    "penemuan-filamen-gelap-euclid"
+    "penemuan-filamen-gelap-euclid",
+    "starship-pencapaian-garis-karman-2024"
   ],
   "published": [
     {
@@ -1451,6 +1452,16 @@
       "title": "Terungkap! Jembatan Gelap Antara Galaksi Ditemukan Euclid, Membuka Era Baru Kosmos",
       "path": "/home/runner/work/sainstek/sainstek/output/20260923_004751_penemuan-filamen-gelap-euclid/final.mp4",
       "video_id": "w3vXZ708eYc",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260925_170951",
+      "topic": "starship-pencapaian-garis-karman-2024",
+      "title": "Starship Menembus Garis K\u00e1rm\u00e1n: Langkah Besar Menuju Komersialisasi Luar Angkasa",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260925_170951_starship-pencapaian-garis-karman-2024/final.mp4",
+      "video_id": "7cSwRGxpPGc",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
