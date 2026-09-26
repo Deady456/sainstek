@@ -142,7 +142,8 @@
     "misteri-eksoplanet-es-terbakar-gliese-empat-ratus-tiga-puluh-enam-b",
     "penemuan-filamen-gelap-euclid",
     "starship-pencapaian-garis-karman-2024",
-    "misteri-eksoplanet-raksasa-k2-3-b"
+    "misteri-eksoplanet-raksasa-k2-3-b",
+    "artemis-i-bukti-penjelajahan-bulan"
   ],
   "published": [
     {
@@ -1473,6 +1474,16 @@
       "title": "Eksoplanet Raksasa K2-3b: Misteri Terbaru di Alam Semesta?",
       "path": "/home/runner/work/sainstek/sainstek/output/20260926_003345_misteri-eksoplanet-raksasa-k2-3-b/final.mp4",
       "video_id": "7R76YHmruNc",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260926_123211",
+      "topic": "artemis-i-bukti-penjelajahan-bulan",
+      "title": "Artemis I: Bukti Nyata Tantangan Radiasi dan Heat Shield untuk Kembali ke Bulan",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260926_123211_artemis-i-bukti-penjelajahan-bulan/final.mp4",
+      "video_id": "2kVm-QYt8NM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
