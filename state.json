@@ -144,7 +144,8 @@
     "starship-pencapaian-garis-karman-2024",
     "misteri-eksoplanet-raksasa-k2-3-b",
     "artemis-i-bukti-penjelajahan-bulan",
-    "james-webb-atmosfer-bersih-lhs475b"
+    "james-webb-atmosfer-bersih-lhs475b",
+    "misteri-cahaya-ultra-inframerah-james-webb-galaksi-tumbuh"
   ],
   "published": [
     {
@@ -1495,6 +1496,16 @@
       "title": "James Webb Ungkap Atmosfer Bersih Pertama pada Super Earth LHS 475b: Langkah Besar Cari Kehidupan",
       "path": "/home/runner/work/sainstek/sainstek/output/20260927_003200_james-webb-atmosfer-bersih-lhs475b/final.mp4",
       "video_id": "ZqhZ-47M1AA",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260927_123201",
+      "topic": "misteri-cahaya-ultra-inframerah-james-webb-galaksi-tumbuh",
+      "title": "Misteri Cahaya Ultra\u2011Inframerah James Webb: Galaksi Tumbuh yang Terungkap di NGC Lima Ratus Dua Puluh Tiga",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260927_123201_misteri-cahaya-ultra-inframerah-james-webb-galaksi-tumbuh/final.mp4",
+      "video_id": "dmVyi4TcSTA",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
