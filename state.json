@@ -146,7 +146,8 @@
     "artemis-i-bukti-penjelajahan-bulan",
     "james-webb-atmosfer-bersih-lhs475b",
     "misteri-cahaya-ultra-inframerah-james-webb-galaksi-tumbuh",
-    "filamen-gelap-james-webb"
+    "filamen-gelap-james-webb",
+    "cahaya-terpolarisasi-ngc-1068"
   ],
   "published": [
     {
@@ -1517,6 +1518,16 @@
       "title": "Penemuan Filamen Gelap oleh James Webb: Jaring Tak Terlihat yang Mengikat Seluruh Galaksi",
       "path": "/home/runner/work/sainstek/sainstek/output/20260928_003203_filamen-gelap-james-webb/final.mp4",
       "video_id": "jWVrFw8hlIQ",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260928_123211",
+      "topic": "cahaya-terpolarisasi-ngc-1068",
+      "title": "Rahasia Cahaya Terpolarisasi di Galaksi Aktif NGC seribu enam puluh delapan: Temuan Mengejutkan James Webb",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260928_123211_cahaya-terpolarisasi-ngc-1068/final.mp4",
+      "video_id": "FS80clkJdik",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
