@@ -148,7 +148,8 @@
     "misteri-cahaya-ultra-inframerah-james-webb-galaksi-tumbuh",
     "filamen-gelap-james-webb",
     "cahaya-terpolarisasi-ngc-1068",
-    "penemuan-galaksi-hd1-dan-implikasi-cosmic-dawn"
+    "penemuan-galaksi-hd1-dan-implikasi-cosmic-dawn",
+    "misi-nasa-lucy-asteroid-trojan"
   ],
   "published": [
     {
@@ -1539,6 +1540,16 @@
       "title": "Galaksi HD1 Terungkap: Cahaya Paling Jauh Mengguncang Teori Alam Semesta dan Masa Depan Eksplorasi Luar Angkasa",
       "path": "/home/runner/work/sainstek/sainstek/output/20260929_003216_penemuan-galaksi-hd1-dan-implikasi-cosmic-dawn/final.mp4",
       "video_id": "1PFfXgvuUP8",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260929_123212",
+      "topic": "misi-nasa-lucy-asteroid-trojan",
+      "title": "Misi NASA Lucy: Mengungkap Rahasia Asteroid Trojan yang Menyimpan Air Bumi",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260929_123212_misi-nasa-lucy-asteroid-trojan/final.mp4",
+      "video_id": "g5fcgyPCMdw",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
