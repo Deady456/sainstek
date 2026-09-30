@@ -149,7 +149,8 @@
     "filamen-gelap-james-webb",
     "cahaya-terpolarisasi-ngc-1068",
     "penemuan-galaksi-hd1-dan-implikasi-cosmic-dawn",
-    "misi-nasa-lucy-asteroid-trojan"
+    "misi-nasa-lucy-asteroid-trojan",
+    "deteksi-molekul-metan-proxima-centauri-b-james-webb"
   ],
   "published": [
     {
@@ -1550,6 +1551,16 @@
       "title": "Misi NASA Lucy: Mengungkap Rahasia Asteroid Trojan yang Menyimpan Air Bumi",
       "path": "/home/runner/work/sainstek/sainstek/output/20260929_123212_misi-nasa-lucy-asteroid-trojan/final.mp4",
       "video_id": "g5fcgyPCMdw",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20260930_003207",
+      "topic": "deteksi-molekul-metan-proxima-centauri-b-james-webb",
+      "title": "James Webb Ungkap Metan di Atmosfer Proxima Centauri b, Tanda Kehidupan?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20260930_003207_deteksi-molekul-metan-proxima-centauri-b-james-webb/final.mp4",
+      "video_id": "X40W-0_tjBk",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
