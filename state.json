@@ -154,7 +154,8 @@
     "gelombang-gravitasi-bintang-neutron-jwst",
     "artemis-iii-astronaut-wanita-bulan",
     "artemis-ii-misi-pertama-manusia-kembali-bulan-2024",
-    "air-di-planet-batu-k2-18-b"
+    "air-di-planet-batu-k2-18-b",
+    "deteksi-sulfur-dioksida-wasp-39b-jwst"
   ],
   "published": [
     {
@@ -1605,6 +1606,16 @@
       "title": "Air Terdeteksi di Planet Batu K2\u2011delapan belas b: Temuan James Webb yang Mengguncang Eksoplanet",
       "path": "/home/runner/work/sainstek/sainstek/output/20261002_003248_air-di-planet-batu-k2-18-b/final.mp4",
       "video_id": "knweuI0jAG0",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261002_123204",
+      "topic": "deteksi-sulfur-dioksida-wasp-39b-jwst",
+      "title": "Sulfur Dioksida Tersembunyi di Awan Biru WASP-39b: Penemuan James Webb yang Mengejutkan",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261002_123204_deteksi-sulfur-dioksida-wasp-39b-jwst/final.mp4",
+      "video_id": "X2-bW6CRNZw",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
