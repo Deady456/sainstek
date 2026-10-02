@@ -153,7 +153,8 @@
     "deteksi-molekul-metan-proxima-centauri-b-james-webb",
     "gelombang-gravitasi-bintang-neutron-jwst",
     "artemis-iii-astronaut-wanita-bulan",
-    "artemis-ii-misi-pertama-manusia-kembali-bulan-2024"
+    "artemis-ii-misi-pertama-manusia-kembali-bulan-2024",
+    "air-di-planet-batu-k2-18-b"
   ],
   "published": [
     {
@@ -1594,6 +1595,16 @@
       "title": "Artemis\u202fII: Misi Berawak Pertama NASA Kembali ke Bulan di Tahun Dua Ribu Dua Puluh Empat",
       "path": "/home/runner/work/sainstek/sainstek/output/20261001_123249_artemis-ii-misi-pertama-manusia-kembali-bulan-2024/final.mp4",
       "video_id": "G4QkpWj0uuU",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261002_003248",
+      "topic": "air-di-planet-batu-k2-18-b",
+      "title": "Air Terdeteksi di Planet Batu K2\u2011delapan belas b: Temuan James Webb yang Mengguncang Eksoplanet",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261002_003248_air-di-planet-batu-k2-18-b/final.mp4",
+      "video_id": "knweuI0jAG0",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
