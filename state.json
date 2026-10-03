@@ -155,7 +155,8 @@
     "artemis-iii-astronaut-wanita-bulan",
     "artemis-ii-misi-pertama-manusia-kembali-bulan-2024",
     "air-di-planet-batu-k2-18-b",
-    "deteksi-sulfur-dioksida-wasp-39b-jwst"
+    "deteksi-sulfur-dioksida-wasp-39b-jwst",
+    "rahasia-hujan-kristal-super-earth-baru-jwst"
   ],
   "published": [
     {
@@ -1616,6 +1617,16 @@
       "title": "Sulfur Dioksida Tersembunyi di Awan Biru WASP-39b: Penemuan James Webb yang Mengejutkan",
       "path": "/home/runner/work/sainstek/sainstek/output/20261002_123204_deteksi-sulfur-dioksida-wasp-39b-jwst/final.mp4",
       "video_id": "X2-bW6CRNZw",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261003_003229",
+      "topic": "rahasia-hujan-kristal-super-earth-baru-jwst",
+      "title": "Rahasia Hujan Kristal di Atmosfer Super\u2011Earth Baru JWST: Planet L Nine Eight Fifty Nine c",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261003_003229_rahasia-hujan-kristal-super-earth-baru-jwst/final.mp4",
+      "video_id": "4bU-4yjBEOQ",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
