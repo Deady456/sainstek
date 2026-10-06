@@ -161,7 +161,8 @@
     "artemis-iv-pendaratan-pole-selatan-bulan",
     "penemuan-fosforin-wasp-39b-james-webb",
     "galaksi-tertua-jwst-cahaya-pertama",
-    "event-horizon-telescope-m87-blackhole"
+    "event-horizon-telescope-m87-blackhole",
+    "gelombang-gravitasi-mikro-neutron-supernova"
   ],
   "published": [
     {
@@ -1682,6 +1683,16 @@
       "title": "Misteri Cincin Hitam M87: Bagaimana Gambar Pertama Mengungkap Magnetik Supermassive",
       "path": "/home/runner/work/sainstek/sainstek/output/20261005_123214_event-horizon-telescope-m87-blackhole/final.mp4",
       "video_id": "U-s4M5SlHQ4",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261006_003256",
+      "topic": "gelombang-gravitasi-mikro-neutron-supernova",
+      "title": "Gelombang Gravitasi Mikro dari Supernova Neutron: Penemuan yang Mengubah Kosmos",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261006_003256_gelombang-gravitasi-mikro-neutron-supernova/final.mp4",
+      "video_id": "08d9HPZDXME",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
