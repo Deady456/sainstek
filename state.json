@@ -162,7 +162,8 @@
     "penemuan-fosforin-wasp-39b-james-webb",
     "galaksi-tertua-jwst-cahaya-pertama",
     "event-horizon-telescope-m87-blackhole",
-    "gelombang-gravitasi-mikro-neutron-supernova"
+    "gelombang-gravitasi-mikro-neutron-supernova",
+    "dragonfly-misi-titan-penjelajahan-robot-terbang"
   ],
   "published": [
     {
@@ -1693,6 +1694,16 @@
       "title": "Gelombang Gravitasi Mikro dari Supernova Neutron: Penemuan yang Mengubah Kosmos",
       "path": "/home/runner/work/sainstek/sainstek/output/20261006_003256_gelombang-gravitasi-mikro-neutron-supernova/final.mp4",
       "video_id": "08d9HPZDXME",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261006_123227",
+      "topic": "dragonfly-misi-titan-penjelajahan-robot-terbang",
+      "title": "Dragonfly NASA: Robot Terbang Pertama Menjelajah Titan, Mencari Tanda Kehidupan di Bulan Berawan",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261006_123227_dragonfly-misi-titan-penjelajahan-robot-terbang/final.mp4",
+      "video_id": "9z2JzRL7nJE",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
