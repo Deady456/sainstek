@@ -164,7 +164,8 @@
     "event-horizon-telescope-m87-blackhole",
     "gelombang-gravitasi-mikro-neutron-supernova",
     "dragonfly-misi-titan-penjelajahan-robot-terbang",
-    "fast-radio-burst-misteri"
+    "fast-radio-burst-misteri",
+    "cahaya-biru-fosfor-eksoplanet-jwst-artemis"
   ],
   "published": [
     {
@@ -1715,6 +1716,16 @@
       "title": "Misteri Fast Radio Burst Terkuak: Sinyal Energi Tinggi dari Galaksi Jauh yang Mengguncang Astronomi",
       "path": "/home/runner/work/sainstek/sainstek/output/20261007_003300_fast-radio-burst-misteri/final.mp4",
       "video_id": "78g93YCZMnA",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261007_123148",
+      "topic": "cahaya-biru-fosfor-eksoplanet-jwst-artemis",
+      "title": "Cahaya Biru Misterius & Fosfor di Eksoplanet: Penemuan James Webb dan Rencana Artemis V",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261007_123148_cahaya-biru-fosfor-eksoplanet-jwst-artemis/final.mp4",
+      "video_id": "8lKajxkbnfk",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
