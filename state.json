@@ -163,7 +163,8 @@
     "galaksi-tertua-jwst-cahaya-pertama",
     "event-horizon-telescope-m87-blackhole",
     "gelombang-gravitasi-mikro-neutron-supernova",
-    "dragonfly-misi-titan-penjelajahan-robot-terbang"
+    "dragonfly-misi-titan-penjelajahan-robot-terbang",
+    "fast-radio-burst-misteri"
   ],
   "published": [
     {
@@ -1704,6 +1705,16 @@
       "title": "Dragonfly NASA: Robot Terbang Pertama Menjelajah Titan, Mencari Tanda Kehidupan di Bulan Berawan",
       "path": "/home/runner/work/sainstek/sainstek/output/20261006_123227_dragonfly-misi-titan-penjelajahan-robot-terbang/final.mp4",
       "video_id": "9z2JzRL7nJE",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261007_003300",
+      "topic": "fast-radio-burst-misteri",
+      "title": "Misteri Fast Radio Burst Terkuak: Sinyal Energi Tinggi dari Galaksi Jauh yang Mengguncang Astronomi",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261007_003300_fast-radio-burst-misteri/final.mp4",
+      "video_id": "78g93YCZMnA",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
