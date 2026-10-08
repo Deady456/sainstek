@@ -166,7 +166,8 @@
     "dragonfly-misi-titan-penjelajahan-robot-terbang",
     "fast-radio-burst-misteri",
     "cahaya-biru-fosfor-eksoplanet-jwst-artemis",
-    "misteri-fast-radio-burst-repeating-tiga-hari"
+    "misteri-fast-radio-burst-repeating-tiga-hari",
+    "misteri-kilat-gamma-ultra-energi-magnetar"
   ],
   "published": [
     {
@@ -1737,6 +1738,16 @@
       "title": "Fast Radio Burst Misterius yang Berulang Setiap Tiga Hari: Tantangan Baru bagi Astronomi",
       "path": "/home/runner/work/sainstek/sainstek/output/20261008_003209_misteri-fast-radio-burst-repeating-tiga-hari/final.mp4",
       "video_id": "dBUJPElVhjM",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261008_124709",
+      "topic": "misteri-kilat-gamma-ultra-energi-magnetar",
+      "title": "Kilat Gamma Ultra\u2011Energi dari Magnetar: Rahasia Ledakan Sepuluh Triliun Kali Lebih Terang dari Matahari",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261008_124709_misteri-kilat-gamma-ultra-energi-magnetar/final.mp4",
+      "video_id": "XIbdgThuPus",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
