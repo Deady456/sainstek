@@ -165,7 +165,8 @@
     "gelombang-gravitasi-mikro-neutron-supernova",
     "dragonfly-misi-titan-penjelajahan-robot-terbang",
     "fast-radio-burst-misteri",
-    "cahaya-biru-fosfor-eksoplanet-jwst-artemis"
+    "cahaya-biru-fosfor-eksoplanet-jwst-artemis",
+    "misteri-fast-radio-burst-repeating-tiga-hari"
   ],
   "published": [
     {
@@ -1726,6 +1727,16 @@
       "title": "Cahaya Biru Misterius & Fosfor di Eksoplanet: Penemuan James Webb dan Rencana Artemis V",
       "path": "/home/runner/work/sainstek/sainstek/output/20261007_123148_cahaya-biru-fosfor-eksoplanet-jwst-artemis/final.mp4",
       "video_id": "8lKajxkbnfk",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261008_003209",
+      "topic": "misteri-fast-radio-burst-repeating-tiga-hari",
+      "title": "Fast Radio Burst Misterius yang Berulang Setiap Tiga Hari: Tantangan Baru bagi Astronomi",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261008_003209_misteri-fast-radio-burst-repeating-tiga-hari/final.mp4",
+      "video_id": "dBUJPElVhjM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
