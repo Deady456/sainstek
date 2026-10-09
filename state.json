@@ -168,7 +168,8 @@
     "cahaya-biru-fosfor-eksoplanet-jwst-artemis",
     "misteri-fast-radio-burst-repeating-tiga-hari",
     "misteri-kilat-gamma-ultra-energi-magnetar",
-    "penemuan-air-berwarna-biru-toi-700-d"
+    "penemuan-air-berwarna-biru-toi-700-d",
+    "penemuan-air-di-exoplanet-toi-700-d-jwst"
   ],
   "published": [
     {
@@ -1759,6 +1760,16 @@
       "title": "Eksoplanet Biru TOI-tujuh ratus d: Uap Air Pertama yang Ditemukan James Webb",
       "path": "/home/runner/work/sainstek/sainstek/output/20261009_003223_penemuan-air-berwarna-biru-toi-700-d/final.mp4",
       "video_id": "CVYMNftIj2s",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261009_123217",
+      "topic": "penemuan-air-di-exoplanet-toi-700-d-jwst",
+      "title": "James Webb Temukan Jejak Air di Dunia Mirip Bumi dua ratus lima puluh Tahun Cahaya Jauh, Apa Artinya untuk Kehidupan?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261009_123217_penemuan-air-di-exoplanet-toi-700-d-jwst/final.mp4",
+      "video_id": "LDK0_dg_74o",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
