@@ -167,7 +167,8 @@
     "fast-radio-burst-misteri",
     "cahaya-biru-fosfor-eksoplanet-jwst-artemis",
     "misteri-fast-radio-burst-repeating-tiga-hari",
-    "misteri-kilat-gamma-ultra-energi-magnetar"
+    "misteri-kilat-gamma-ultra-energi-magnetar",
+    "penemuan-air-berwarna-biru-toi-700-d"
   ],
   "published": [
     {
@@ -1748,6 +1749,16 @@
       "title": "Kilat Gamma Ultra\u2011Energi dari Magnetar: Rahasia Ledakan Sepuluh Triliun Kali Lebih Terang dari Matahari",
       "path": "/home/runner/work/sainstek/sainstek/output/20261008_124709_misteri-kilat-gamma-ultra-energi-magnetar/final.mp4",
       "video_id": "XIbdgThuPus",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261009_003223",
+      "topic": "penemuan-air-berwarna-biru-toi-700-d",
+      "title": "Eksoplanet Biru TOI-tujuh ratus d: Uap Air Pertama yang Ditemukan James Webb",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261009_003223_penemuan-air-berwarna-biru-toi-700-d/final.mp4",
+      "video_id": "CVYMNftIj2s",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
