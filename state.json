@@ -169,7 +169,8 @@
     "misteri-fast-radio-burst-repeating-tiga-hari",
     "misteri-kilat-gamma-ultra-energi-magnetar",
     "penemuan-air-berwarna-biru-toi-700-d",
-    "penemuan-air-di-exoplanet-toi-700-d-jwst"
+    "penemuan-air-di-exoplanet-toi-700-d-jwst",
+    "europa-clipper-misi-pencarian-hidup"
   ],
   "published": [
     {
@@ -1770,6 +1771,16 @@
       "title": "James Webb Temukan Jejak Air di Dunia Mirip Bumi dua ratus lima puluh Tahun Cahaya Jauh, Apa Artinya untuk Kehidupan?",
       "path": "/home/runner/work/sainstek/sainstek/output/20261009_123217_penemuan-air-di-exoplanet-toi-700-d-jwst/final.mp4",
       "video_id": "LDK0_dg_74o",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261010_003210",
+      "topic": "europa-clipper-misi-pencarian-hidup",
+      "title": "Misi Europa Clipper: Mengungkap Laut Tersembunyi di Bawah Es Bulan Es Jupiter",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261010_003210_europa-clipper-misi-pencarian-hidup/final.mp4",
+      "video_id": "bPFTvF1WpiA",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
