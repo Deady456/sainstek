@@ -22,3 +22,10 @@ def add_published(entry: dict):
     s = load()
     s["published"].append(entry)
     save(s)
+
+
+def update(updates: dict):
+    s = load()
+    s.update(updates)
+    save(s)
+
