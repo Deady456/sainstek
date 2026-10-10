@@ -4,7 +4,7 @@ language: id
 
 script:
   model: openai/gpt-oss-120b
-  target_seconds: 80
+  target_seconds: 42
   words_per_second: 2.5
 
 voice:
