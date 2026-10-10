@@ -170,7 +170,8 @@
     "misteri-kilat-gamma-ultra-energi-magnetar",
     "penemuan-air-berwarna-biru-toi-700-d",
     "penemuan-air-di-exoplanet-toi-700-d-jwst",
-    "europa-clipper-misi-pencarian-hidup"
+    "europa-clipper-misi-pencarian-hidup",
+    "neutrino-ultra-energi-icecube"
   ],
   "published": [
     {
@@ -1781,6 +1782,16 @@
       "title": "Misi Europa Clipper: Mengungkap Laut Tersembunyi di Bawah Es Bulan Es Jupiter",
       "path": "/home/runner/work/sainstek/sainstek/output/20261010_003210_europa-clipper-misi-pencarian-hidup/final.mp4",
       "video_id": "bPFTvF1WpiA",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
+    },
+    {
+      "ts": "20261010_123247",
+      "topic": "neutrino-ultra-energi-icecube",
+      "title": "Neutrino Ultra\u2011Energi: Sinyal Kosmik yang Menghantam Bumi dari Blazar Jauh",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261010_123247_neutrino-ultra-energi-icecube/final.mp4",
+      "video_id": "3sLiW6-PkpM",
       "publish_at": null,
       "format": null,
       "voice": "unknown"
