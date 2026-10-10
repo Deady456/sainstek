@@ -221,30 +221,89 @@ def _generate_stability_ai(prompt: str, out_path, width=1080, height=1920):
             
     return False
 
+def generate_shellshock_image(prompt: str, out_path, model: str = "cf/@cf/black-forest-labs/flux-1-schnell", width=1080, height=1920) -> bool:
+    """Generate high-quality image via ShellShock AI Gateway on AWS EC2."""
+    import os, base64, requests
+    from pathlib import Path
+    out_path = Path(out_path)
+    gateway_url = os.environ.get("SHELLSHOCK_URL", "http://13.214.34.200:20128/v1/images/generations")
+    api_key = os.environ.get("SHELLSHOCK_API_KEY", "sk-1f7d1788ce9c1aa7-qgi726-f1cb1818")
+
+    payload = {
+        "model": model,
+        "prompt": prompt,
+    }
+    if "flux" not in model.lower():
+        payload["size"] = "1024x1024"
+
+    try:
+        req = requests.post(
+            gateway_url,
+            json=payload,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}"
+            },
+            timeout=45
+        )
+        if req.status_code == 200:
+            res = req.json()
+            if "data" in res and len(res["data"]) > 0:
+                item = res["data"][0]
+                if "b64_json" in item and item["b64_json"]:
+                    out_path.write_bytes(base64.b64decode(item["b64_json"]))
+                    print(f"  [ShellShock] Image successfully generated with {model} ({out_path.stat().st_size} bytes)")
+                    return True
+                elif "url" in item and item["url"]:
+                    r_img = requests.get(item["url"], timeout=30)
+                    if r_img.status_code == 200:
+                        out_path.write_bytes(r_img.content)
+                        print(f"  [ShellShock] Image downloaded from {model} URL ({out_path.stat().st_size} bytes)")
+                        return True
+        print(f"  [ShellShock] Image API returned {req.status_code}: {req.text[:180]}")
+    except Exception as e:
+        print(f"  [ShellShock] Gateway request error: {e}")
+    return False
+
 def generate(prompt: str, out_path, width=1080, height=1920, hook_text: str = None):
     import requests
+    from pathlib import Path
+    out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    url = f"{POLLINATIONS_URL}{requests.utils.quote(prompt)}?width={width}&height={height}&nologo=true"
-    
-    success = False
-    for attempt in range(3):
-        try:
-            resp = requests.get(url, timeout=60)
-            if resp.status_code == 200 and len(resp.content) > 1000:
-                out_path.write_bytes(resp.content)
-                success = True
-                break
-        except requests.RequestException:
-            pass
-            
+
+    # 1. Primary: ShellShock AI Gateway on AWS (Cloudflare FLUX.1 Schnell)
+    print("  Generating image via ShellShock AI Gateway (AWS FLUX)...")
+    success = generate_shellshock_image(prompt, out_path, model="cf/@cf/black-forest-labs/flux-1-schnell", width=width, height=height)
+
+    # 2. Secondary: Stability AI fallback via ShellShock
     if not success:
-        print("  Pollinations AI failed. Falling back to Stability AI...")
+        print("  ShellShock FLUX failed. Falling back to ShellShock Stability AI...")
+        success = generate_shellshock_image(prompt, out_path, model="stability-ai/core", width=width, height=height)
+
+    # 3. Tertiary: Pollinations AI
+    if not success:
+        print("  ShellShock failed. Falling back to Pollinations AI...")
+        url = f"{POLLINATIONS_URL}{requests.utils.quote(prompt)}?width={width}&height={height}&nologo=true"
+        for attempt in range(2):
+            try:
+                resp = requests.get(url, timeout=30)
+                if resp.status_code == 200 and len(resp.content) > 1000:
+                    out_path.write_bytes(resp.content)
+                    success = True
+                    break
+            except Exception:
+                pass
+
+    # 4. Quaternary: Stability AI Direct
+    if not success:
+        print("  Pollinations AI failed. Falling back to direct Stability AI...")
         success = _generate_stability_ai(prompt, out_path, width, height)
-        
+
+    # 5. Last Resort: Aesthetic Gradient Base
     if not success:
-        print("  Stability AI failed. Falling back to default Gradient Base...")
+        print("  All AI image providers failed. Falling back to Gradient Base...")
         _generate_fallback(prompt, out_path, width, height)
-        
+
     if hook_text:
         _apply_hook_text(out_path, hook_text, width, height)
     return out_path

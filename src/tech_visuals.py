@@ -482,12 +482,19 @@ def fetch_all(scenes: list[dict], out_dir: Path, words: list[dict] = None, voice
                         donor_usage[donor] = donor_usage.get(donor, 0) + 1
                         clip_ready = True
 
-            # Emergency Fallback Placeholder
             if not clip_ready:
-                im = Image.new("RGB", (w, h), (15, 20, 30))
-                ph_path = out_dir / f"ph_{clip_counter}.jpg"
-                im.save(ph_path)
-                convert_image_to_hd_clip(ph_path, out_clip_path, subclip_dur, w, h, fps, zoom_idx=clip_counter)
+                # Contextual AI Visual fallback via ShellShock AWS (FLUX.1 Schnell)
+                ph_path = out_dir / f"ai_{clip_counter}.jpg"
+                scene_text = scene.get("text", "") or scene.get("visual_query", "") or "cinematic dark atmospheric visual"
+                ai_prompt = f"Cinematic vertical shot, {scene_text}, 8k, hyperrealistic, dramatic atmosphere"
+                try:
+                    from . import visuals_ai
+                    visuals_ai.generate(ai_prompt, ph_path, width=w, height=h)
+                    convert_image_to_hd_clip(ph_path, out_clip_path, subclip_dur, w, h, fps, zoom_idx=clip_counter)
+                except Exception as e:
+                    im = Image.new("RGB", (w, h), (15, 20, 30))
+                    im.save(ph_path)
+                    convert_image_to_hd_clip(ph_path, out_clip_path, subclip_dur, w, h, fps, zoom_idx=clip_counter)
 
             all_clips.append(out_clip_path)
             clip_counter += 1
