@@ -172,7 +172,8 @@
     "penemuan-air-di-exoplanet-toi-700-d-jwst",
     "europa-clipper-misi-pencarian-hidup",
     "neutrino-ultra-energi-icecube",
-    "helium-primordial-nebula-jwst"
+    "helium-primordial-nebula-jwst",
+    "besi-atmosfer-superjupiter-jwst"
   ],
   "published": [
     {
@@ -1806,6 +1807,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261011_003209",
+      "topic": "besi-atmosfer-superjupiter-jwst",
+      "title": "Terungkap! Besi Mengapung di Atmosfer Super\u2011Jupiter, Penemuan JWST yang Mengejutkan",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261011_003209_besi-atmosfer-superjupiter-jwst/final.mp4",
+      "video_id": "Syi7g09Rrec",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
-  ]
+  ],
+  "_voice_idx": 1
 }
