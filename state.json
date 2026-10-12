@@ -174,7 +174,8 @@
     "neutrino-ultra-energi-icecube",
     "helium-primordial-nebula-jwst",
     "besi-atmosfer-superjupiter-jwst",
-    "deteksi-helium-3-eksoplanet-lhs-3844b"
+    "deteksi-helium-3-eksoplanet-lhs-3844b",
+    "nebula-helix-badai-gas-jwst"
   ],
   "published": [
     {
@@ -1828,7 +1829,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261012_003217",
+      "topic": "nebula-helix-badai-gas-jwst",
+      "title": "Terungkap! Nebula Helix Menyimpan Badai Gas Berkecepatan Tinggi yang Baru Ditemukan JWST",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261012_003217_nebula-helix-badai-gas-jwst/final.mp4",
+      "video_id": "NFaILq3dSeA",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 2
+  "_voice_idx": 3
 }
