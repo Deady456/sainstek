@@ -176,7 +176,8 @@
     "besi-atmosfer-superjupiter-jwst",
     "deteksi-helium-3-eksoplanet-lhs-3844b",
     "nebula-helix-badai-gas-jwst",
-    "besi-atmosfer-wasp-7-8b-jwst"
+    "besi-atmosfer-wasp-7-8b-jwst",
+    "kristal-silikat-wasp-96b"
   ],
   "published": [
     {
@@ -1850,7 +1851,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261013_003155",
+      "topic": "kristal-silikat-wasp-96b",
+      "title": "Awan Kristal Silikat di WASP-96b: Penemuan James Webb yang Mengubah Cara Kita Memahami Eksoplanet",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261013_003155_kristal-silikat-wasp-96b/final.mp4",
+      "video_id": "LCEMMuhP0mc",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 4
+  "_voice_idx": 5
 }
