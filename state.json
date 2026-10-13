@@ -177,7 +177,8 @@
     "deteksi-helium-3-eksoplanet-lhs-3844b",
     "nebula-helix-badai-gas-jwst",
     "besi-atmosfer-wasp-7-8b-jwst",
-    "kristal-silikat-wasp-96b"
+    "kristal-silikat-wasp-96b",
+    "starship-spacecraft-test-mission"
   ],
   "published": [
     {
@@ -1861,7 +1862,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261013_123207",
+      "topic": "starship-spacecraft-test-mission",
+      "title": "Starship SpaceX Lolos Uji Suborbital: Langkah Besar ke Mars dan Artemis",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261013_123207_starship-spacecraft-test-mission/final.mp4",
+      "video_id": "Ny-nYQuTA6c",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 5
+  "_voice_idx": 6
 }
