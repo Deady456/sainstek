@@ -179,7 +179,8 @@
     "besi-atmosfer-wasp-7-8b-jwst",
     "kristal-silikat-wasp-96b",
     "starship-spacecraft-test-mission",
-    "bintang-logam-cair-james-webb"
+    "bintang-logam-cair-james-webb",
+    "metal-clouds-wasp-121b-jwst"
   ],
   "published": [
     {
@@ -1883,7 +1884,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261014_123249",
+      "topic": "metal-clouds-wasp-121b-jwst",
+      "title": "Awan Logam Berkilau di Atmosfer WASP\u2011121b: Penemuan JWST yang Mengubah Astrofisika",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261014_123249_metal-clouds-wasp-121b-jwst/final.mp4",
+      "video_id": "MXvQxxS1L48",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 7
+  "_voice_idx": 8
 }
