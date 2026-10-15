@@ -180,7 +180,8 @@
     "kristal-silikat-wasp-96b",
     "starship-spacecraft-test-mission",
     "bintang-logam-cair-james-webb",
-    "metal-clouds-wasp-121b-jwst"
+    "metal-clouds-wasp-121b-jwst",
+    "lucy-mission-gravitasi-bumi"
   ],
   "published": [
     {
@@ -1894,7 +1895,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261015_003228",
+      "topic": "lucy-mission-gravitasi-bumi",
+      "title": "Flyby Bumi Lucy: Manuver Epik Mengantar Antariksa ke Asteroid Trojan yang Belum Terjamah",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261015_003228_lucy-mission-gravitasi-bumi/final.mp4",
+      "video_id": "r3rea4oyNDA",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 8
+  "_voice_idx": 9
 }
