@@ -183,7 +183,8 @@
     "metal-clouds-wasp-121b-jwst",
     "lucy-mission-gravitasi-bumi",
     "filamen-kosmik-pertama-jwst",
-    "artemis-iii-misi-pendaratan-kutub-selatan-bulan"
+    "artemis-iii-misi-pendaratan-kutub-selatan-bulan",
+    "penemuan-cahaya-bintang-primordial-jwst"
   ],
   "published": [
     {
@@ -1927,7 +1928,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261016_123200",
+      "topic": "penemuan-cahaya-bintang-primordial-jwst",
+      "title": "Cahaya Bintang Primordial Tertua Tertangkap James Webb: Menguak Era Kosmos Awal",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261016_123200_penemuan-cahaya-bintang-primordial-jwst/final.mp4",
+      "video_id": "p6AKdtII62E",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 11
+  "_voice_idx": 12
 }
