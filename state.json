@@ -182,7 +182,8 @@
     "bintang-logam-cair-james-webb",
     "metal-clouds-wasp-121b-jwst",
     "lucy-mission-gravitasi-bumi",
-    "filamen-kosmik-pertama-jwst"
+    "filamen-kosmik-pertama-jwst",
+    "artemis-iii-misi-pendaratan-kutub-selatan-bulan"
   ],
   "published": [
     {
@@ -1916,7 +1917,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261016_003159",
+      "topic": "artemis-iii-misi-pendaratan-kutub-selatan-bulan",
+      "title": "Artemis III: Rencana Pendaratan Manusia di Kutub Selatan Bulan, Apa Tantangannya?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261016_003159_artemis-iii-misi-pendaratan-kutub-selatan-bulan/final.mp4",
+      "video_id": "G7K04-IAaOM",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 10
+  "_voice_idx": 11
 }
