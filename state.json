@@ -185,7 +185,8 @@
     "filamen-kosmik-pertama-jwst",
     "artemis-iii-misi-pendaratan-kutub-selatan-bulan",
     "penemuan-cahaya-bintang-primordial-jwst",
-    "deteksi-metana-eksoplanet-k2-18b"
+    "deteksi-metana-eksoplanet-k2-18b",
+    "awan-silikat-kelt-9b-jwst"
   ],
   "published": [
     {
@@ -1949,7 +1950,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261017_123203",
+      "topic": "awan-silikat-kelt-9b-jwst",
+      "title": "Terungkap! Awan Kristal Silikat Mengapung di Bintang Terpanas KELT\u20119b oleh JWST",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261017_123203_awan-silikat-kelt-9b-jwst/final.mp4",
+      "video_id": "1OA_PDKMmIg",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 13
+  "_voice_idx": 14
 }
