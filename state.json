@@ -188,7 +188,8 @@
     "deteksi-metana-eksoplanet-k2-18b",
     "awan-silikat-kelt-9b-jwst",
     "jwst-venus-sulfur-dioxide",
-    "magma-ocean-55-cancri-e"
+    "magma-ocean-55-cancri-e",
+    "deteksi-es-metana-gj-1214b-jwst"
   ],
   "published": [
     {
@@ -1982,7 +1983,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261019_003201",
+      "topic": "deteksi-es-metana-gj-1214b-jwst",
+      "title": "James Webb Temukan Es Metana di Atmosfer Eksoplanet GJ 1214b \u2013 Penemuan Pertama!",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261019_003201_deteksi-es-metana-gj-1214b-jwst/final.mp4",
+      "video_id": "BAbfd27j-io",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 16
+  "_voice_idx": 17
 }
