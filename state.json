@@ -189,7 +189,8 @@
     "awan-silikat-kelt-9b-jwst",
     "jwst-venus-sulfur-dioxide",
     "magma-ocean-55-cancri-e",
-    "deteksi-es-metana-gj-1214b-jwst"
+    "deteksi-es-metana-gj-1214b-jwst",
+    "super-earth-lyra-jwst"
   ],
   "published": [
     {
@@ -1993,7 +1994,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261019_123157",
+      "topic": "super-earth-lyra-jwst",
+      "title": "Eksplorasi Super Earth di Lyra: Apakah Planet Ini Menyimpan Atmosfer Mirip Bumi?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261019_123157_super-earth-lyra-jwst/final.mp4",
+      "video_id": "xBwarMqHTlM",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 17
+  "_voice_idx": 18
 }
