@@ -190,7 +190,8 @@
     "jwst-venus-sulfur-dioxide",
     "magma-ocean-55-cancri-e",
     "deteksi-es-metana-gj-1214b-jwst",
-    "super-earth-lyra-jwst"
+    "super-earth-lyra-jwst",
+    "deteksi-neon-di-atmosfer-wasp-tiga-sembilan-b"
   ],
   "published": [
     {
@@ -2004,7 +2005,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261020_003201",
+      "topic": "deteksi-neon-di-atmosfer-wasp-tiga-sembilan-b",
+      "title": "Misteri Cahaya Biru Terungkap: Neon Tersembunyi di Atmosfer WASP tiga sembilan b oleh James Webb",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261020_003201_deteksi-neon-di-atmosfer-wasp-tiga-sembilan-b/final.mp4",
+      "video_id": "QA--ADc06Mg",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 18
+  "_voice_idx": 19
 }
