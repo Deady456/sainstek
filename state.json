@@ -191,7 +191,8 @@
     "magma-ocean-55-cancri-e",
     "deteksi-es-metana-gj-1214b-jwst",
     "super-earth-lyra-jwst",
-    "deteksi-neon-di-atmosfer-wasp-tiga-sembilan-b"
+    "deteksi-neon-di-atmosfer-wasp-tiga-sembilan-b",
+    "quark-star-cassiopeia-a-discovery"
   ],
   "published": [
     {
@@ -2015,7 +2016,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261020_123200",
+      "topic": "quark-star-cassiopeia-a-discovery",
+      "title": "Benda Langka Lebih Padat dari Neutron Star: Penemuan Quark Star di Cassiopeia A",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261020_123200_quark-star-cassiopeia-a-discovery/final.mp4",
+      "video_id": "VcVXOlQUllE",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 19
+  "_voice_idx": 20
 }
