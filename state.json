@@ -193,7 +193,8 @@
     "super-earth-lyra-jwst",
     "deteksi-neon-di-atmosfer-wasp-tiga-sembilan-b",
     "quark-star-cassiopeia-a-discovery",
-    "galaksi-paling-jauh-jwst"
+    "galaksi-paling-jauh-jwst",
+    "artemis-ii-misi-berawak"
   ],
   "published": [
     {
@@ -2037,7 +2038,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261021_123206",
+      "topic": "artemis-ii-misi-berawak",
+      "title": "Artemis II: Misi Berawak Pertama NASA Kembali ke Bulan, Apa Tantangannya?",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261021_123206_artemis-ii-misi-berawak/final.mp4",
+      "video_id": "t58kTwasf8o",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 21
+  "_voice_idx": 22
 }
