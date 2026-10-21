@@ -192,7 +192,8 @@
     "deteksi-es-metana-gj-1214b-jwst",
     "super-earth-lyra-jwst",
     "deteksi-neon-di-atmosfer-wasp-tiga-sembilan-b",
-    "quark-star-cassiopeia-a-discovery"
+    "quark-star-cassiopeia-a-discovery",
+    "galaksi-paling-jauh-jwst"
   ],
   "published": [
     {
@@ -2026,7 +2027,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261021_003225",
+      "topic": "galaksi-paling-jauh-jwst",
+      "title": "Galaksi Paling Jauh yang Ditemukan JWST: Misteri Kosmik yang Mengguncang Ilmu",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261021_003225_galaksi-paling-jauh-jwst/final.mp4",
+      "video_id": "Dcl5B06LA_M",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 20
+  "_voice_idx": 21
 }
