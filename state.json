@@ -194,7 +194,8 @@
     "deteksi-neon-di-atmosfer-wasp-tiga-sembilan-b",
     "quark-star-cassiopeia-a-discovery",
     "galaksi-paling-jauh-jwst",
-    "artemis-ii-misi-berawak"
+    "artemis-ii-misi-berawak",
+    "pds-70-planet-formation-jwst"
   ],
   "published": [
     {
@@ -2048,7 +2049,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261022_003204",
+      "topic": "pds-70-planet-formation-jwst",
+      "title": "Misteri Pembentukan Planet di PDS\u202ftujuh puluh: Penemuan James Webb yang Mengubah Tata Surya",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261022_003204_pds-70-planet-formation-jwst/final.mp4",
+      "video_id": "rRUC22SjbeU",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 22
+  "_voice_idx": 23
 }
