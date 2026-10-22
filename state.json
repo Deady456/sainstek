@@ -195,7 +195,8 @@
     "quark-star-cassiopeia-a-discovery",
     "galaksi-paling-jauh-jwst",
     "artemis-ii-misi-berawak",
-    "pds-70-planet-formation-jwst"
+    "pds-70-planet-formation-jwst",
+    "supernova-jenis-ia-terjauh-jwst"
   ],
   "published": [
     {
@@ -2059,7 +2060,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261022_123824",
+      "topic": "supernova-jenis-ia-terjauh-jwst",
+      "title": "Supernova Tipe Ia Terjauh: Penemuan JWST yang Mengguncang Kosmos",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261022_123824_supernova-jenis-ia-terjauh-jwst/final.mp4",
+      "video_id": "TlpUxb0GVqI",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 23
+  "_voice_idx": 24
 }
