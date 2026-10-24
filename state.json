@@ -196,7 +196,8 @@
     "galaksi-paling-jauh-jwst",
     "artemis-ii-misi-berawak",
     "pds-70-planet-formation-jwst",
-    "supernova-jenis-ia-terjauh-jwst"
+    "supernova-jenis-ia-terjauh-jwst",
+    "hujan-logam-di-exoplanet"
   ],
   "published": [
     {
@@ -2070,7 +2071,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261024_004317",
+      "topic": "hujan-logam-di-exoplanet",
+      "title": "Hujan Logam di Dunia Jauh: Penemuan Mengejutkan James Webb tentang Eksoplanet HD sembilan ratus lima puluh delapan b",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261024_004317_hujan-logam-di-exoplanet/final.mp4",
+      "video_id": "F0Jm1tCcgYM",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 24
+  "_voice_idx": 25
 }
