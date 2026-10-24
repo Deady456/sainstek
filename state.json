@@ -197,7 +197,8 @@
     "artemis-ii-misi-berawak",
     "pds-70-planet-formation-jwst",
     "supernova-jenis-ia-terjauh-jwst",
-    "hujan-logam-di-exoplanet"
+    "hujan-logam-di-exoplanet",
+    "artemis-iv-kutub-selatan-bulan"
   ],
   "published": [
     {
@@ -2081,7 +2082,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261024_123204",
+      "topic": "artemis-iv-kutub-selatan-bulan",
+      "title": "Artemis IV: Langkah Awal Menapaki Kutub Selatan Bulan dengan Rover Eksplorasi",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261024_123204_artemis-iv-kutub-selatan-bulan/final.mp4",
+      "video_id": "uo__55Qvbiw",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 25
+  "_voice_idx": 26
 }
