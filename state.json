@@ -199,7 +199,8 @@
     "supernova-jenis-ia-terjauh-jwst",
     "hujan-logam-di-exoplanet",
     "artemis-iv-kutub-selatan-bulan",
-    "lubang-hitam-supermasif-awal-universe"
+    "lubang-hitam-supermasif-awal-universe",
+    "new-glenn-orbit-launch"
   ],
   "published": [
     {
@@ -2103,7 +2104,17 @@
       "publish_at": null,
       "format": null,
       "voice": "unknown"
+    },
+    {
+      "ts": "20261025_123206",
+      "topic": "new-glenn-orbit-launch",
+      "title": "New\u202fGlenn Blue Origin Terbang ke Orbit: Langkah Besar Menuju Eksplorasi Antariksa Masa Depan",
+      "path": "/home/runner/work/sainstek/sainstek/output/20261025_123206_new-glenn-orbit-launch/final.mp4",
+      "video_id": "arHbEavBIMs",
+      "publish_at": null,
+      "format": null,
+      "voice": "unknown"
     }
   ],
-  "_voice_idx": 27
+  "_voice_idx": 28
 }
